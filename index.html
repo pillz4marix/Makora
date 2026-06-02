@@ -178,6 +178,18 @@
     .step:hover .step-circle{transform:scale(1.1);background:var(--vc);}
     .step-title{font-family:'Playfair Display',serif;font-size:1.1rem;font-weight:700;color:var(--crema);margin-bottom:0.8rem;}
     .step-desc{font-size:0.82rem;color:#8a9a8a;line-height:1.6;}
+    #mision-vision{padding:7rem 5%;background:var(--crema);}
+    .mv-grid{display:grid;grid-template-columns:1fr 1fr;gap:3px;margin-top:3.5rem;}
+    .mv-card{padding:3rem 2.5rem;position:relative;overflow:hidden;transition:transform 0.3s,box-shadow 0.3s;}
+    .mv-card.mision{background:var(--vo);}
+    .mv-card.vision{background:var(--vm);}
+    .mv-card:hover{transform:translateY(-5px);box-shadow:0 20px 40px rgba(42,74,42,0.18);}
+    .mv-card::before{content:'';position:absolute;top:0;left:0;right:0;height:4px;background:rgba(255,255,255,0.2);}
+    .mv-numero{font-family:'Playfair Display',serif;font-size:8rem;font-weight:900;color:rgba(255,255,255,0.06);position:absolute;top:-1rem;right:1.5rem;line-height:1;pointer-events:none;}
+    .mv-lbl{font-size:0.7rem;font-weight:700;text-transform:uppercase;letter-spacing:0.2em;color:rgba(255,255,255,0.6);margin-bottom:1rem;display:block;}
+    .mv-title{font-family:'Playfair Display',serif;font-size:2rem;font-weight:900;color:#fff;margin-bottom:1.2rem;line-height:1.1;}
+    .mv-title em{font-style:italic;opacity:0.8;}
+    .mv-text{font-size:0.93rem;line-height:1.85;color:rgba(255,255,255,0.85);}
     #resenas{padding:7rem 5%;background:var(--crema);}
     .resenas-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1.5rem;margin-bottom:3rem;}
     .resena-card{background:#fff;padding:1.8rem;border:1.5px solid var(--menta);transition:box-shadow 0.3s;}
@@ -224,6 +236,7 @@
     .toast{position:fixed;bottom:2rem;left:50%;transform:translateX(-50%) translateY(20px);background:var(--vo);color:#fff;padding:0.8rem 1.6rem;font-size:0.85rem;font-weight:700;z-index:999;opacity:0;transition:all 0.3s;pointer-events:none;white-space:nowrap;}
     .toast.show{opacity:1;transform:translateX(-50%) translateY(0);}
     @media(max-width:860px){
+      .mv-grid{grid-template-columns:1fr;}
       nav{padding:0.8rem 4%;}.nav-links{display:none;}
       #hero{grid-template-columns:1fr;padding:90px 4% 3rem;gap:2rem;}.hero-right{display:none;}
       #producto,#nosotros{grid-template-columns:1fr;padding:4rem 4%;gap:3rem;}
@@ -313,7 +326,7 @@
     <p class="hero-desc">Makora es una empresa mexicana comprometida con la reducción del desperdicio alimentario mediante el desarrollo de soluciones naturales para la conservación de frutas y verduras. A través del aprovechamiento de manzanas descartadas por razones estéticas o comerciales, transformamos residuos agrícolas en productos de valor que ayudan a prolongar la vida útil de los alimentos y fortalecer la sostenibilidad del sector agrícola.</p>
     <div class="hero-btns">
       <a href="#producto" class="btn btn-green">Ver producto</a>
-      <a href="#nosotros" class="btn btn-out">Conocer mas</a>
+      <a href="#nosotros" class="btn btn-out">Conocer más</a>
     </div>
   </div>
   <div class="hero-right">
@@ -442,9 +455,30 @@
   <div class="sec-hdr reveal"><span class="sec-lbl" style="color:var(--vc)">Como lo hacemos</span><h2 class="sec-h2" style="color:var(--crema)">De la huerta al frasco: <em style="color:var(--vc)">nuestro proceso</em></h2></div>
   <div class="steps">
     <div class="step reveal"><div class="step-circle">1</div><h3 class="step-title">Cosecha</h3><p class="step-desc">Seleccion de manzanas chihuahuenses de alta calidad, cosechadas en su punto optimo de madurez.</p></div>
-    <div class="step reveal"><div class="step-circle">2</div><h3 class="step-title">Extraccion</h3><p class="step-desc">Proceso controlado para extraer acido malico, polifenoles y pectinas naturales de la manzana.</p></div>
-    <div class="step reveal"><div class="step-circle">3</div><h3 class="step-title">Formulacion</h3><p class="step-desc">Laboratorio escolar: combinacion precisa de extractos para lograr la maxima actividad conservante natural.</p></div>
+    <div class="step reveal"><div class="step-circle">2</div><h3 class="step-title">Extracción</h3><p class="step-desc">Proceso controlado para obtener los compuestos activos de la manzana mediante tecnicas naturales, sin quimicos artificiales.</p></div>
+    <div class="step reveal"><div class="step-circle">3</div><h3 class="step-title">Formulación</h3><p class="step-desc">Combinacion precisa de los extractos obtenidos para lograr la maxima actividad conservante, garantizando un producto natural y efectivo.</p></div>
     <div class="step reveal"><div class="step-circle">4</div><h3 class="step-title">Envasado</h3><p class="step-desc">Envasado en condiciones de higiene y calidad. Cada frasco listo para llegar a tu mesa.</p></div>
+  </div>
+</section>
+
+<section id="mision-vision">
+  <div class="sec-hdr reveal">
+    <span class="sec-lbl">Nuestra razón de ser</span>
+    <h2 class="sec-h2">Misión y <em>Visión</em></h2>
+  </div>
+  <div class="mv-grid">
+    <div class="mv-card mision reveal">
+      <span class="mv-numero">M</span>
+      <span class="mv-lbl">Misión</span>
+      <h3 class="mv-title">Transformar lo que<br><em>se descarta.</em></h3>
+      <p class="mv-text">Transformar manzanas descartadas en soluciones naturales que prolonguen la vida util de frutas y verduras, ayudando a reducir el desperdicio alimentario y generando valor para el campo mexicano.</p>
+    </div>
+    <div class="mv-card vision reveal">
+      <span class="mv-numero">V</span>
+      <span class="mv-lbl">Visión</span>
+      <h3 class="mv-title">Referentes en<br><em>Latinoamerica.</em></h3>
+      <p class="mv-text">Convertirnos en la empresa referente en Latinoamerica en conservacion natural de alimentos, demostrando que la innovacion y la sostenibilidad pueden transformar la manera en que aprovechamos nuestros recursos agricolas.</p>
+    </div>
   </div>
 </section>
 
