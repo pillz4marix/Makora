@@ -752,20 +752,20 @@
     var pedido = cart.map(function(i) { return 'Makora ' + i.pres + ' x' + i.qty; }).join(' | ');
     var intVal = document.getElementById('f-int').value.trim();
     var params = {
-      nombre:   document.getElementById('f-nombre').value.trim(),
-      teléfono: document.getElementById('f-tel').value.trim(),
-      email:    document.getElementById('f-email').value.trim(),
-      dirección: document.getElementById('f-calle').value.trim() + ' ' +
-                 document.getElementById('f-ext').value.trim() +
-                 (intVal ? ' Int. ' + intVal : '') + ', Col. ' +
-                 document.getElementById('f-colonia').value.trim() + ', ' +
-                 document.getElementById('f-ciudad').value.trim() + ', C.P. ' +
-                 document.getElementById('f-cp').value.trim(),
-      presentación: pedido,
-      cantidad: cart.reduce(function(s,i){ return s+i.qty; }, 0),
-      total: 'A consultar',
-      to_email: 'marletsz.z147@gmail.com'
-    };
+      nombre:       document.getElementById('f-nombre').value.trim(),
+      telefono:     document.getElementById('f-tel').value.trim(),
+      email:        document.getElementById('f-email').value.trim(),
+      direccion:    document.getElementById('f-calle').value.trim() + ' ' +
+                document.getElementById('f-ext').value.trim() +
+                (intVal ? ' Int. ' + intVal : '') + ', Col. ' +
+                document.getElementById('f-colonia').value.trim() + ', ' +
+                document.getElementById('f-ciudad').value.trim() + ', C.P. ' +
+                document.getElementById('f-cp').value.trim(),
+      presentacion: pedido,
+      cantidad:     cart.reduce(function(s,i){ return s+i.qty; }, 0),
+      total:        'A consultar',
+      to_email:     'makoramx@gmail.com'
+};
     emailjs.send('service_zznkcnu', 'template_6o9o7d8', params).then(function() {
       showResult('success', 'Pedido recibido, ' + params.nombre + '. Te contactaremos pronto al ' + params.telefono + '.');
       cart = []; updateCartBadge(); renderCart(); saveStorage();
