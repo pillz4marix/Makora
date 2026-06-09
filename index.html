@@ -289,7 +289,7 @@
       <div class="payment-note"><strong>Formas de pago</strong>Aceptamos transferencia bancaria o efectivo.</div>
       <div class="payment-note"><strong>Tiempo de entrega</strong>Te contactaremos para coordinar la entrega.</div>
       <button class="btn-full" id="submit-btn" onclick="submitOrder()">
-        <span id="btn-txt">Enviar pedido</span>
+        <span id="btn-txt">Enviar pedido y pagar</span>
         <span class="btn-spinner" id="btn-spin"></span>
       </button>
       <div id="order-result"></div>
@@ -376,32 +376,32 @@
   <div class="reveal">
     <div class="product-card">
       <p class="card-title">Makora</p>
-      <p class="card-sub">Conservador Natural de Manzana — Selecciona tu presentacion</p>
+      <p class="card-sub">Conservador Natural de Manzana — Selecciona tu presentación</p>
       <span class="pres-label">Presentación</span>
       <div class="pres-grid">
-        <button class="pres-btn active" data-pres="250 ml" onclick="selectPres(this)">
-          <img src="250ml.png" alt="250 ml" />
-          <span class="pres-size">250 ml</span>
-          <span class="pres-price">A consultar</span>
-        </button>
-        <button class="pres-btn" data-pres="500 ml" onclick="selectPres(this)">
-          <img src="500ml.png" alt="500 ml" />
-          <span class="pres-size">500 ml</span>
-          <span class="pres-price">A consultar</span>
+        <button class="pres-btn active" data-pres="100 ml" onclick="selectPres(this)">
+          <img src="100ml.png" alt="100 ml" />
+          <span class="pres-size">100 ml</span>
+          <span class="pres-price">$36</span>
         </button>
         <button class="pres-btn" data-pres="1 Litro" onclick="selectPres(this)">
           <img src="1litro.png" alt="1 Litro" />
           <span class="pres-size">1 Litro</span>
-          <span class="pres-price">A consultar</span>
+          <span class="pres-price">$97</span>
         </button>
         <button class="pres-btn" data-pres="10 Litros" onclick="selectPres(this)">
           <img src="10litros.png" alt="10 Litros" />
           <span class="pres-size">10 Litros</span>
-          <span class="pres-price">A consultar</span>
+          <span class="pres-price">$629</span>
         </button>
         <button class="pres-btn" data-pres="20 Litros" onclick="selectPres(this)">
           <img src="20litros.png" alt="20 Litros" />
           <span class="pres-size">20 Litros</span>
+          <span class="pres-price">$1,124</span>
+        </button>
+        <button class="pres-btn active" data-pres="200 Litros" onclick="selectPres(this)">
+          <img src="200litros.png" alt="200 Litros" />
+          <span class="pres-size">200 Litros</span>
           <span class="pres-price">A consultar</span>
         </button>
       </div>
@@ -516,8 +516,8 @@
 <section id="contacto">
   <div class="cta-bg-circle c1"></div><div class="cta-bg-circle c2"></div>
   <p class="cta-label">Listo para probarlo</p>
-  <h2 class="cta-title">Pide tu frasco de<br><em>Makora hoy</em></h2>
-  <p class="cta-sub">Escribenos directamente por WhatsApp y te atendemos al momento para coordinar tu pedido.</p>
+  <h2 class="cta-title">Puedes pedir más información sobre<br><em>Makora</em></h2>
+  <p class="cta-sub">Escribenos directamente por WhatsApp y te atendemos al momento para atender cualquier duda.</p>
   <div class="contact-form">
     <input type="text" id="cta-nombre" placeholder="Tu nombre"/>
     <button class="btn-white" onclick="handleCTA()">Escribir por WhatsApp</button>
@@ -559,6 +559,12 @@
   var currentPres = '250 ml';
   var currentQty = 1;
   var currentReviewStars = 0;
+  var mpLinks = {
+    '100 ml':    'https://mpago.la/2cscgi2',
+    '1 Litro':   'https://mpago.la/2RG4YjF',
+    '10 Litros': 'https://mpago.la/2qBu9w2',
+    '20 Litros': 'https://mpago.la/25ZQAPh'
+  };
 
   function saveStorage() {
     localStorage.setItem('makora_cart', JSON.stringify(cart));
@@ -770,10 +776,22 @@
       to_email:     'makoramx@gmail.com'
 };
     emailjs.send('service_zznkcnu', 'template_6o9o7d8', params).then(function() {
-      showResult('success', 'Pedido recibido, ' + params.nombre + '. Te contactaremos pronto al ' + params.telefono + '.');
       cart = []; updateCartBadge(); renderCart(); saveStorage();
       ['f-nombre','f-tel','f-email','f-calle','f-ext','f-int','f-colonia','f-ciudad','f-cp'].forEach(function(id) { document.getElementById(id).value = ''; });
       btn.disabled = false; txt.textContent = 'Enviar pedido'; spin.style.display = 'none';
+      // Redirigir a Mercado Pago
+      showResult('success', 'Pedido registrado. Redirigiendo al pago...');
+      setTimeout(function() {
+        window.open('https://link.mercadopago.com.mx/makora', '_blank');
+      }, 1500);
+      // Redirigir a Mercado Pago segun presentacion
+      var mpUrl = mpLinks[currentPres];
+      if (mpUrl) {
+        showResult('success', 'Pedido registrado. Redirigiendo al pago...');
+        setTimeout(function() { window.open(mpUrl, '_blank'); }, 1500);
+      } else {
+        showResult('success', 'Pedido recibido, ' + params.nombre + '. Te contactaremos pronto para coordinar el pago de tu pedido de 200 Litros.');
+      }
     }).catch(function(e) {
       console.error(e);
       showResult('error', 'Ocurrio un error. Por favor intenta de nuevo.');
@@ -838,12 +856,12 @@
       document.getElementById('r-email').value = '';
       currentReviewStars = 0;
       document.querySelectorAll('.star-pick').forEach(function(b) { b.classList.remove('sel'); });
-      res.textContent = 'Gracias por tu opinion, ' + nombre + '. Ya aparece en la sección de reseñas.';
+      res.textContent = 'Gracias por tu opinión, ' + nombre + '. Ya aparece en la sección de reseñas.';
       setTimeout(function() { res.style.display='none'; }, 4000);
       loadReviews();
     }).catch(function(e) {
       console.error(e);
-      res.textContent = 'Ocurrio un error al publicar. Intenta de nuevo.';
+      res.textContent = 'Ocurrió un error al publicar. Intenta de nuevo.';
     });
   }
 
@@ -851,8 +869,8 @@
   function handleCTA() {
     var n = document.getElementById('cta-nombre').value.trim();
     if (!n) { alert('Por favor ingresa tu nombre.'); return; }
-    var texto = encodeURIComponent('Hola, soy ' + n + ' y me interesa pedir un frasco de Makora.');
-    window.open('https://wa.me/526141410529?text=' + texto, '_blank');
+    var texto = encodeURIComponent('Hola, mi nombre es ' + n + ' , me interesa saber más sobre Makora.');
+    window.open('https://wa.me/526141889004?text=' + texto, '_blank');
   }
 
   // TOAST
