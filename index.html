@@ -727,8 +727,12 @@
   // CHECKOUT
   function openCheckout() {
     if (cart.length === 0) return;
+    var precios = { '100 ml': 36, '1 Litro': 97, '10 Litros': 629, '20 Litros': 1124 };
     var summary = cart.map(function(i) { return 'Makora ' + i.pres + ' x' + i.qty; }).join(', ');
-    document.getElementById('modal-summary').innerHTML = '<strong>Resumen de tu pedido</strong><br>' + summary;
+    var total = 0;
+    cart.forEach(function(i) { if (precios[i.pres]) total += precios[i.pres] * i.qty; });
+    var totalTxt = total > 0 ? '<br><br><strong>Total a pagar</strong>$' + total.toLocaleString('es-MX') + ' MXN' : '<br><br><strong>Total a pagar</strong>A consultar — te contactaremos para coordinar el pago.';
+    document.getElementById('modal-summary').innerHTML = '<strong>Resumen de tu pedido</strong><br>' + summary + totalTxt;
     closeAllPanels();
     document.getElementById('modal-overlay').classList.add('open');
     document.body.style.overflow = 'hidden';
