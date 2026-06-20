@@ -1012,6 +1012,8 @@
   // ESTADO
   var cart = JSON.parse(localStorage.getItem('makora_cart') || '[]');
   var wishlist = JSON.parse(localStorage.getItem('makora_wish') || '[]');
+  updateCartBadge();
+  updateWishBadge();
   var currentPres = '10 Litros';
   var currentQty = 1;
   var currentReviewStars = 0;
