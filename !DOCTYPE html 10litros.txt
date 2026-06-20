@@ -944,7 +944,7 @@
       Agregar al carrito
     </button>
 
-    <a class="btn-comprar btn-comprar-ahora" href="https://mpago.la/2cscgi2" target="_blank">
+    <a class="btn-comprar btn-comprar-ahora" href="https://mpago.la/2qBu9w2" target="_blank">
       <svg viewBox="0 0 24 24"><path d="M6 2L3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z"/><line x1="3" y1="6" x2="21" y2="6"/><path d="M16 10a4 4 0 0 1-8 0"/></svg>
       Comprar ahora
     </a>
@@ -1217,17 +1217,30 @@
       cart = []; updateCartBadge(); renderCart(); saveStorage();
       ['f-nombre','f-tel','f-email','f-calle','f-ext','f-int','f-colonia','f-ciudad','f-cp'].forEach(function(id) { document.getElementById(id).value = ''; });
       btn.disabled = false; txt.textContent = 'Enviar pedido'; spin.style.display = 'none';
-      // Redirigir a Mercado Pago
-      showResult('success', 'Pedido registrado. Redirigiendo al pago...');
-      setTimeout(function() {
-        window.open('https://link.mercadopago.com.mx/makora', '_blank');
-      }, 1500);
       // Redirigir a Mercado Pago segun presentación
-      var mpUrl = mpLinks[currentPres];
-      if (mpUrl) {
-        showResult('success', 'Pedido registrado. Redirigiendo al pago...');
-        setTimeout(function() { window.open(mpUrl, '_blank'); }, 1500);
-      }
+      var precios = { '100 ml': 36, '1 Litro': 97, '10 Litros': 629, '20 Litros': 1124 };
+var items = cart.map(function(i) {
+  return {
+    title: 'Makora ' + i.pres,
+    quantity: i.qty,
+    unit_price: precios[i.pres],
+    currency_id: 'MXN'
+  };
+});
+showResult('success', 'Pedido registrado. Redirigiendo al pago...');
+fetch('/api/create-preference', {
+  method: 'POST',
+  headers: { 'Content-Type': 'application/json' },
+  body: JSON.stringify({ items: items })
+})
+.then(function(r) { return r.json(); })
+.then(function(data) {
+  if (data.url) window.open(data.url, '_blank');
+  else showResult('error', 'Error al procesar el pago. Intenta de nuevo.');
+})
+.catch(function() {
+  showResult('error', 'Error al procesar el pago. Intenta de nuevo.');
+});
     }).catch(function(e) {
       console.error(e);
       showResult('error', 'Ocurrio un error. Por favor intenta de nuevo.');
