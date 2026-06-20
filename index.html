@@ -1251,23 +1251,23 @@ async function buscarCP(cp) {
   document.getElementById('cp-error').style.display = 'none';
 
   try {
-    const res = await fetch(`https://sepomex.restapi.com.mx/api/v1/zip_codes?zip_code=${cp}`);
+    const res = await fetch(`https://postali.app/api/v1/cp/${cp}`);
     const data = await res.json();
     document.getElementById('cp-loading').style.display = 'none';
 
-    if (!data.zip_codes || data.zip_codes.length === 0) {
+    if (!data.asentamientos || data.asentamientos.length === 0) {
       document.getElementById('cp-error').style.display = 'block';
       return;
     }
 
-    document.getElementById('f-ciudad').value = data.zip_codes[0].d_mnpio || '';
+    document.getElementById('f-ciudad').value = data.municipio || '';
 
     const select = document.getElementById('f-colonia');
     select.innerHTML = '';
-    data.zip_codes.forEach(z => {
+    data.asentamientos.forEach(z => {
       const opt = document.createElement('option');
-      opt.value = z.d_asenta;
-      opt.textContent = z.d_asenta;
+      opt.value = z.nombre;
+      opt.textContent = z.nombre;
       select.appendChild(opt);
     });
 
