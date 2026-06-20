@@ -1214,7 +1214,6 @@
       to_email:     'makoramx@gmail.com'
 };
     emailjs.send('service_zznkcnu', 'template_6o9o7d8', params).then(function() {
-      cart = []; updateCartBadge(); renderCart(); saveStorage();
       ['f-nombre','f-tel','f-email','f-calle','f-ext','f-int','f-colonia','f-ciudad','f-cp'].forEach(function(id) { document.getElementById(id).value = ''; });
       btn.disabled = false; txt.textContent = 'Enviar pedido'; spin.style.display = 'none';
       // Redirigir a Mercado Pago segun presentación
@@ -1235,7 +1234,10 @@ fetch('/api/create-preference', {
 })
 .then(function(r) { return r.json(); })
 .then(function(data) {
-  if (data.url) window.open(data.url, '_blank');
+  if (data.url) {
+  cart = []; updateCartBadge(); renderCart(); saveStorage();
+  window.open(data.url, '_blank');
+}
   else showResult('error', 'Error al procesar el pago. Intenta de nuevo.');
 })
 .catch(function() {

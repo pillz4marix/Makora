@@ -1648,5 +1648,44 @@ fetch('/api/create-preference', {
     }
 })();
 </script>
+<script>
+// === AUTOCOMPLETAR POR CÓDIGO POSTAL ===
+document.getElementById('f-cp').addEventListener('input', async function() {
+  const cp = this.value.trim();
+  if (cp.length !== 5) return;
+
+  try {
+    const res = await fetch(`https://sepomex.restapi.com.mx/api/v1/zip_codes?zip_code=${cp}`);
+    const data = await res.json();
+
+    if (!data.zip_codes || data.zip_codes.length === 0) return;
+
+    const info = data.zip_codes[0];
+
+    // Llenar ciudad y estado automáticamente
+    document.getElementById('f-ciudad').value = info.d_mnpio || '';
+
+    // Convertir colonia a dropdown con todas las colonias del CP
+    const colonias = data.zip_codes.map(z => z.d_asenta);
+    const coloniaInput = document.getElementById('f-colonia');
+
+    const select = document.createElement('select');
+    select.id = 'f-colonia';
+    select.style.cssText = 'padding:0.75rem 1rem;border:1.5px solid var(--menta);background:var(--crema);font-family:Raleway,sans-serif;font-size:0.9rem;color:var(--go);outline:none;width:100%;';
+
+    colonias.forEach(c => {
+      const opt = document.createElement('option');
+      opt.value = c;
+      opt.textContent = c;
+      select.appendChild(opt);
+    });
+
+    coloniaInput.replaceWith(select);
+
+  } catch(e) {
+    console.error('Error al buscar CP:', e);
+  }
+});
+</script>
 </body>
 </html>
