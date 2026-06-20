@@ -1,0 +1,1650 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Makora 10 Litros — Conservador Natural</title>
+  <link rel="icon" href="favicon.ico" type="image/x-icon">
+  <link rel="preconnect" href="https://fonts.googleapis.com"/>
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,700;0,900;1,700&family=Raleway:wght@300;400;600;700&display=swap" rel="stylesheet"/>
+  <script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
+  <script>
+  emailjs.init("flcVa_wH8VScQbjpP");
+  </script>
+  <style>
+    :root{--vo:#2a4a2a;--vm:#3a6b3a;--vc:#7ab87a;--menta:#e8f5e8;--crema:#f4fbf4;--go:#1a2a1a;--gm:#3a4a3a;--gc:#6a7a6a;}
+    *,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
+    html{scroll-behavior:smooth;}
+    body{font-family:'Raleway',sans-serif;background:var(--crema);color:var(--go);overflow-x:hidden;}
+    #main-nav{display:flex;align-items:center;justify-content:space-between;padding:0.8rem 5%;}
+    nav{position:fixed;top:0;left:0;right:0;z-index:300;display:flex;align-items:center;justify-content:space-between;padding:0.8rem 5%;background:rgba(244,251,244,0.97);backdrop-filter:blur(12px);border-bottom:2px solid var(--vc);transition:box-shadow 0.3s;}
+    nav.scrolled{box-shadow:0 4px 24px rgba(42,74,42,0.10);}
+    .nav-logo img{height:44px;width:auto;object-fit:contain;}
+    .nav-links{display:flex;gap:2rem;list-style:none;}
+    .nav-links a{font-size:0.78rem;font-weight:700;text-transform:uppercase;letter-spacing:0.12em;color:var(--vo);text-decoration:none;position:relative;padding-bottom:2px;}
+    .nav-links a::after{content:'';position:absolute;bottom:0;left:0;width:0;height:2px;background:var(--vm);transition:width 0.25s;}
+    .nav-links a:hover::after{width:100%;}
+    .nav-actions{display:flex;align-items:center;gap:0.5rem;}
+    .nav-icon-btn{position:relative;background:none;border:none;cursor:pointer;padding:0.5rem;color:var(--vo);transition:color 0.2s;display:flex;align-items:center;justify-content:center;}
+    .nav-icon-btn:hover{color:var(--vm);}
+    .nav-icon-btn svg{width:22px;height:22px;stroke:currentColor;fill:none;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round;}
+    .nav-badge{position:absolute;top:2px;right:2px;width:16px;height:16px;background:var(--vm);border-radius:50%;font-size:0.6rem;font-weight:700;color:#fff;display:flex;align-items:center;justify-content:center;opacity:0;transition:opacity 0.2s;pointer-events:none;}
+    .nav-badge.show{opacity:1;}
+    .nav-cta{font-size:0.8rem;font-weight:700;text-transform:uppercase;letter-spacing:0.1em;background:var(--vm);color:#fff;border:none;padding:0.7rem 1.5rem;cursor:pointer;transition:background 0.2s;margin-left:0.5rem;}
+    .nav-cta:hover{background:var(--vo);}
+    .panel-overlay{position:fixed;inset:0;background:rgba(0,0,0,0.45);z-index:400;opacity:0;pointer-events:none;transition:opacity 0.3s;}
+    .panel-overlay.open{opacity:1;pointer-events:all;}
+    .side-panel{position:fixed;top:0;right:0;bottom:0;width:min(420px,100vw);background:#fff;z-index:500;transform:translateX(100%);transition:transform 0.35s cubic-bezier(.4,0,.2,1);display:flex;flex-direction:column;}
+    .side-panel.open{transform:translateX(0);}
+    .panel-head{display:flex;align-items:center;justify-content:space-between;padding:1.4rem 1.6rem;border-bottom:2px solid var(--menta);}
+    .panel-head h3{font-family:'Playfair Display',serif;font-size:1.2rem;font-weight:900;color:var(--vo);}
+    .panel-close{background:none;border:none;cursor:pointer;font-size:1.4rem;color:var(--gc);line-height:1;padding:0.2rem;}
+    .panel-body{flex:1;overflow-y:auto;padding:1.4rem 1.6rem;}
+    .panel-empty{text-align:center;padding:3rem 1rem;color:var(--gc);font-size:0.9rem;line-height:1.7;}
+    .panel-empty span{font-size:2.5rem;display:block;margin-bottom:1rem;opacity:0.4;}
+    .panel-item{display:flex;gap:1rem;align-items:flex-start;padding:1rem 0;border-bottom:1px solid var(--menta);}
+    .panel-item-info{flex:1;}
+    .panel-item-name{font-weight:700;font-size:0.9rem;color:var(--vo);}
+    .panel-item-sub{font-size:0.78rem;color:var(--gc);margin-top:0.2rem;}
+    .panel-item-qty{display:flex;align-items:center;gap:0.5rem;margin-top:0.6rem;}
+    .panel-item-qty button{width:1.6rem;height:1.6rem;background:var(--vo);color:#fff;border:none;cursor:pointer;font-size:0.9rem;font-weight:700;display:flex;align-items:center;justify-content:center;}
+    .panel-item-qty span{font-weight:700;font-size:0.9rem;color:var(--vo);min-width:1.2rem;text-align:center;}
+    .panel-item-remove{background:none;border:none;cursor:pointer;color:var(--gc);font-size:1rem;padding:0.2rem;transition:color 0.2s;}
+    .panel-item-remove:hover{color:#c0392b;}
+    .panel-foot{padding:1.4rem 1.6rem;border-top:2px solid var(--menta);}
+    .panel-checkout-btn{width:100%;padding:1rem;background:var(--vm);color:#fff;border:none;cursor:pointer;font-family:'Raleway',sans-serif;font-size:0.88rem;font-weight:700;text-transform:uppercase;letter-spacing:0.1em;transition:background 0.2s;}
+    .panel-checkout-btn:hover{background:var(--vo);}
+    .modal-overlay{position:fixed;inset:0;background:rgba(0,0,0,0.55);z-index:600;opacity:0;pointer-events:none;transition:opacity 0.3s;display:flex;align-items:center;justify-content:center;padding:1rem;}
+    .modal-overlay.open{opacity:1;pointer-events:all;}
+    .modal{background:#fff;width:min(560px,100%);max-height:90vh;overflow-y:auto;position:relative;}
+    .modal-head{display:flex;align-items:center;justify-content:space-between;padding:1.4rem 1.8rem;border-bottom:2px solid var(--menta);position:sticky;top:0;background:#fff;z-index:1;}
+    .modal-head h3{font-family:'Playfair Display',serif;font-size:1.2rem;font-weight:900;color:var(--vo);}
+    .modal-close{background:none;border:none;cursor:pointer;font-size:1.4rem;color:var(--gc);}
+    .modal-body{padding:1.8rem;}
+    .modal-summary{background:var(--menta);padding:1rem 1.2rem;margin-bottom:1.6rem;font-size:0.85rem;color:var(--vo);line-height:1.7;}
+    .modal-summary strong{display:block;font-size:0.7rem;text-transform:uppercase;letter-spacing:0.1em;margin-bottom:0.4rem;}
+    .form-grid{display:grid;grid-template-columns:1fr 1fr;gap:0.8rem;margin-bottom:0.8rem;}
+    .form-grid.full{grid-template-columns:1fr;}
+    .field{display:flex;flex-direction:column;gap:0.3rem;}
+    .field label{font-size:0.68rem;font-weight:700;text-transform:uppercase;letter-spacing:0.1em;color:var(--go);}
+    .field input,.field textarea{padding:0.75rem 1rem;border:1.5px solid var(--menta);background:var(--crema);font-family:'Raleway',sans-serif;font-size:0.9rem;color:var(--go);outline:none;transition:border-color 0.2s;resize:none;}
+    .field input:focus,.field textarea:focus{border-color:var(--vm);}
+    .field input.error{border-color:#c0392b;}
+    .payment-note{background:var(--menta);padding:0.9rem 1rem;font-size:0.8rem;color:var(--vo);margin-bottom:1rem;border-left:3px solid var(--vm);line-height:1.5;}
+    .payment-note strong{display:block;margin-bottom:0.2rem;font-size:0.7rem;text-transform:uppercase;letter-spacing:0.08em;}
+    .btn-full{width:100%;padding:1.1rem;background:var(--vm);color:#fff;border:none;cursor:pointer;font-family:'Raleway',sans-serif;font-size:0.88rem;font-weight:700;text-transform:uppercase;letter-spacing:0.1em;transition:background 0.2s;display:flex;align-items:center;justify-content:center;gap:0.7rem;margin-top:0.4rem;}
+    .btn-full:hover{background:var(--vo);}
+    .btn-full:disabled{background:#aaa;cursor:not-allowed;}
+    .btn-spinner{width:1.1rem;height:1.1rem;border:2px solid rgba(255,255,255,0.4);border-top-color:#fff;border-radius:50%;animation:spin 0.7s linear infinite;display:none;}
+    @keyframes spin{to{transform:rotate(360deg);}}
+    #order-result{display:none;margin-top:1rem;padding:1rem 1.2rem;font-size:0.88rem;font-weight:600;line-height:1.5;border-left:4px solid;}
+    #order-result.success{background:#f0faf2;border-color:var(--vm);color:#1a4a1a;}
+    #order-result.error{background:#fff5f5;border-color:#c0392b;color:#7a1010;}
+    /* --- HERO SECTION MODIFICADO --- */
+#hero {
+  min-height: 100vh;
+  display: flex; /* Cambiado a flex para que el texto fluya libremente */
+  align-items: center;
+  padding: 140px 5% 4rem;
+  background: linear-gradient(135deg, var(--crema) 55%, #d8efd8 100%);
+  position: relative;
+  overflow: hidden;
+}
+
+.hero-deco {
+  position: absolute;
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(163,215,163,0.3) 0%, rgba(255,255,255,0) 70%);
+  pointer-events: none;
+}
+
+.hero-deco.d1 { width: 600px; height: 600px; top: -200px; left: -200px; }
+.hero-deco.d2 { width: 400px; height: 400px; bottom: -100px; right: 20%; }
+
+.hero-kicker {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.6rem 1.2rem;
+  background: rgba(42, 74, 42, 0.06);
+  border: 1px solid rgba(42, 74, 42, 0.1);
+  border-radius: 100px;
+  color: var(--vo);
+  font-weight: 600;
+  font-size: 0.9rem;
+  letter-spacing: 0.5px;
+  margin-bottom: 1.5rem;
+}
+
+#hero h1 {
+  font-size: clamp(2.5rem, 4vw, 3.8rem);
+  color: var(--vo);
+  line-height: 1.15;
+  font-weight: 800;
+  margin-bottom: 1.5rem;
+}
+
+#hero h1 em {
+  font-style: normal;
+  color: var(--vm);
+  position: relative;
+}
+
+.hero-tagline {
+  font-size: clamp(1.1rem, 1.5vw, 1.35rem);
+  color: var(--vm);
+  font-weight: 600;
+  margin-bottom: 1rem;
+}
+
+.hero-desc {
+  font-size: 1.05rem;
+  color: #556b55;
+  line-height: 1.7;
+  margin-bottom: 2.5rem;
+}
+
+.hero-btns {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1rem;
+}
+
+    .hero-right-fijo {
+  position: relative;
+  margin: 2rem auto;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1.5rem;
+  width: 100%;
+  opacity: 0;
+  animation: fadeUp 0.7s 0.5s ease forwards;
+}
+
+.product-bottle {
+  width: 250px; /* Tamaño más cómodo para celular */
+  max-width: 90%;
+  filter: drop-shadow(0 15px 30px rgba(42,74,42,0.12));
+  animation: float 5s ease-in-out infinite;
+}
+
+.hero-badges {
+  display: flex;
+  flex-direction: row;
+  gap: 0.8rem;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+
+.badge {
+  background: white;
+  padding: 0.5rem 1rem;
+  border-radius: 100px;
+  box-shadow: 0 5px 15px rgba(42,74,42,0.05);
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-size: 0.85rem;
+  font-weight: 600;
+  color: var(--vo);
+  border: 1px solid rgba(163,215,163,0.2);
+}
+
+.badge-dot {
+  width: 6px;
+  height: 6px;
+  background: var(--vm);
+  border-radius: 50%;
+}
+
+@media (min-width: 768px) {
+  #hero {
+    display: flex;
+    align-items: center;
+    padding: 140px 5% 4rem;
+  }
+  
+  .hero-right-fijo {
+    position: fixed;
+    top: 55%;
+    right: 10%;
+    transform: translateY(-50%);
+    width: auto;
+    z-index: 90;
+    gap: 2.5rem;
+    pointer-events: none;
+  }
+
+  .product-bottle {
+    width: 290px;
+    filter: drop-shadow(0 25px 50px rgba(42,74,42,0.18));
+  }
+
+  .hero-badges {
+    flex-direction: column;
+  }
+}
+
+    .badge {background: white;padding: 0.7rem 1.4rem;border-radius: 100px;box-shadow: 0 10px 25px rgba(42,74,42,0.08);display: flex;align-items: center;gap: 0.6rem;font-size: 0.9rem;font-weight: 600;color: var(--vo);border: 1px solid rgba(163,215,163,0.3);width: fit-content;}
+    .badge-dot {width: 8px;height: 8px;background: var(--vm);border-radius: 50%;}
+    .stats-bar{background:var(--vo);padding:1.5rem 5%;display:flex;justify-content:center;gap:5rem;flex-wrap:wrap;}
+    .stat{text-align:center;}
+    .stat-num{font-family:'Playfair Display',serif;font-size:2rem;font-weight:900;color:var(--vc);line-height:1;}
+    .stat-label{font-size:0.7rem;font-weight:700;text-transform:uppercase;letter-spacing:0.12em;color:rgba(255,255,255,0.6);margin-top:0.3rem;}
+    #producto{padding:7rem 5%;display:grid;grid-template-columns:1fr;gap:3rem;max-width:800px;margin:0 auto;}
+    .prod-label{font-size:0.7rem;font-weight:700;text-transform:uppercase;letter-spacing:0.15em;color:var(--vm);margin-bottom:0.7rem;}
+    .prod-title{font-family:'Playfair Display',serif;font-size:clamp(1.8rem,3vw,2.5rem);font-weight:900;line-height:1.1;color:var(--vo);margin-bottom:1.2rem;}
+    .prod-title em{font-style:italic;color:var(--vm);}
+    .prod-desc{font-size:0.95rem;line-height:1.8;color:var(--gm);margin-bottom:2rem;}
+    .features{display:flex;flex-direction:column;gap:1rem;}
+    .feat{display:flex;gap:0.9rem;align-items:flex-start;padding-bottom:1rem;border-bottom:1px solid var(--menta);transition:transform 0.2s;}
+    .feat:hover{transform:translateX(4px);}
+    .feat:last-child{border-bottom:none;}
+    .feat-icon{width:2.2rem;height:2.2rem;min-width:2.2rem;background:var(--vm);display:flex;align-items:center;justify-content:center;font-size:0.85rem;color:#fff;font-weight:900;}
+    .feat-text{font-size:0.88rem;line-height:1.6;color:var(--gm);}
+    .feat-text strong{color:var(--go);display:block;margin-bottom:0.1rem;}
+    .product-card{background:#fff;border:2px solid var(--menta);padding:2.5rem;position:relative;}
+    .product-card::before{content:'';position:absolute;top:0;left:0;right:0;height:4px;background:linear-gradient(90deg,var(--vo),var(--vc));}
+    .card-title{font-family:'Playfair Display',serif;font-size:1.4rem;font-weight:900;color:var(--vo);margin-bottom:0.3rem;}
+    .card-sub{font-size:0.82rem;color:var(--gc);margin-bottom:1.6rem;}
+    .pres-label{font-size:0.7rem;font-weight:700;text-transform:uppercase;letter-spacing:0.12em;color:var(--go);margin-bottom:0.7rem;display:block;}
+    .pres-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:0.8rem;margin-bottom:0;}
+    .pres-card{border:1px solid var(--menta);background:#fff;cursor:pointer;padding:0;text-align:left;transition:all 0.25s;display:flex;flex-direction:column;overflow:hidden;border-radius:12px;position:relative;box-shadow:0 2px 10px rgba(42,74,42,0.04);}
+    .pres-card:hover{box-shadow:0 14px 32px rgba(42,74,42,0.12);transform:translateY(-3px);}
+    .pres-card.active{border-color:var(--vm);box-shadow:0 0 0 2px var(--vm);}
+    .pres-card .img-wrap{position:relative;width:100%;aspect-ratio:3/4;overflow:hidden;background:var(--crema);contain:layout;}
+    .pres-card img.img-default{width:100%;height:100%;object-fit:contain;position:absolute;top:0;left:0;padding:1.6rem;box-sizing:border-box;transition:opacity 0.45s ease, transform 0.45s ease;}
+    .pres-card img.img-hover{width:100%;height:100%;object-fit:cover;position:absolute;top:0;left:0;transition:opacity 0.45s ease, transform 0.6s ease;opacity:0;transform:scale(1.08);}
+    .pres-card:hover img.img-default{opacity:0;transform:scale(1.1);}
+    .pres-card:hover img.img-hover{opacity:1;transform:scale(1);}
+    .pres-card-cart{position:static;width:100%;background:#fff;color:var(--vm);border:1.5px solid var(--vm);border-radius:6px;padding:0.35rem 0.5rem;font-family:'Raleway',sans-serif;font-size:0.6rem;font-weight:700;text-transform:uppercase;letter-spacing:0.06em;cursor:pointer;transition:all 0.3s ease;text-align:center;margin-top:0.4rem;}
+    .pres-card-cart:hover{background:var(--vm);color:#fff;}
+    .pres-card-wish{position:absolute;top:0.8rem;right:0.8rem;width:2.2rem;height:2.2rem;background:rgba(255,255,255,0.92);border:none;border-radius:50%;display:flex;align-items:center;justify-content:center;cursor:pointer;transition:all 0.2s;z-index:2;}
+    .pres-card-wish svg{width:18px;height:18px;stroke:#c0392b;stroke-width:2;stroke-linecap:round;stroke-linejoin:round;}
+    .pres-card-wish.active svg .heart-path{fill:#e57373;}
+    .pres-card-wish:hover{background:#fff;}
+    .pres-card-body{padding:0.5rem 0.7rem 0.8rem;display:flex;flex-direction:column;}
+    .pres-card-name{font-family:'Playfair Display',serif;font-weight:700;font-size:0.82rem;color:var(--vo);margin-bottom:0.2rem;}
+    .pres-card-price{font-size:0.78rem;color:var(--gm);font-weight:600;}
+    .qty-row{display:flex;align-items:center;justify-content:space-between;margin-bottom:1.4rem;}
+    .qty-label{font-size:0.7rem;font-weight:700;text-transform:uppercase;letter-spacing:0.12em;color:var(--go);}
+    .qty-ctrl{display:flex;align-items:center;gap:0.8rem;}
+    .qty-ctrl button{width:2rem;height:2rem;background:var(--vo);color:#fff;border:none;cursor:pointer;font-size:1.1rem;font-weight:700;display:flex;align-items:center;justify-content:center;transition:background 0.2s;}
+    .qty-ctrl button:hover{background:var(--vm);}
+    #qty-val{font-family:'Playfair Display',serif;font-size:1.3rem;font-weight:900;color:var(--vo);min-width:2rem;text-align:center;}
+    .card-actions{display:flex;gap:0.6rem;margin-top:0.2rem;}
+    .card-btn-cart{flex:1;padding:1rem;background:var(--vm);color:#fff;border:none;cursor:pointer;font-family:'Raleway',sans-serif;font-size:0.85rem;font-weight:700;text-transform:uppercase;letter-spacing:0.08em;transition:background 0.2s;display:flex;align-items:center;justify-content:center;gap:0.5rem;}
+    .card-btn-cart:hover{background:var(--vo);}
+    .card-btn-cart svg{width:18px;height:18px;stroke:currentColor;fill:none;stroke-width:2;stroke-linecap:round;stroke-linejoin:round;}
+    .card-btn-wish{width:3rem;height:3rem;background:var(--menta);border:2px solid var(--menta);cursor:pointer;display:flex;align-items:center;justify-content:center;transition:all 0.2s;flex-shrink:0;}
+    .card-btn-wish:hover{border-color:var(--vc);}
+    .card-btn-wish.active{background:#fff0f0;border-color:#e57373;}
+    .card-btn-wish svg{width:20px;height:20px;stroke:#c0392b;fill:none;stroke-width:2;stroke-linecap:round;stroke-linejoin:round;transition:fill 0.2s;}
+    .card-btn-wish.active svg{fill:#e57373;}
+    .card-added-msg{display:none;margin-top:0.8rem;padding:0.7rem 1rem;background:var(--menta);font-size:0.8rem;font-weight:700;color:var(--vo);text-align:center;border-left:3px solid var(--vm);}
+    #nosotros{background:var(--vo);padding:7rem 5%;display:grid;grid-template-columns:1fr 1fr;gap:5rem;align-items:center;}
+    .about-visual{aspect-ratio:4/5;background:#3a5a3a;position:relative;overflow:hidden;}
+    .about-visual svg{width:100%;height:100%;}
+    .about-tag{position:absolute;bottom:0;right:0;background:var(--vm);color:#fff;padding:1.2rem 1.6rem;font-family:'Playfair Display',serif;font-size:1rem;font-style:italic;line-height:1.4;}
+    .about-lbl{font-size:0.7rem;font-weight:700;text-transform:uppercase;letter-spacing:0.15em;color:var(--vc);margin-bottom:0.8rem;}
+    .about-h2{font-family:'Playfair Display',serif;font-size:clamp(1.8rem,2.8vw,2.4rem);font-weight:900;line-height:1.1;color:var(--crema);margin-bottom:1.3rem;}
+    .about-h2 em{font-style:italic;color:var(--vc);}
+    .about-tagline{font-family:'Playfair Display',serif;font-style:italic;font-size:1.1rem;color:var(--vc);margin-bottom:1.5rem;padding-left:1rem;border-left:3px solid var(--vc);}
+    .about-p{font-size:0.93rem;line-height:1.8;color:rgba(232,245,232,0.85);margin-bottom:1rem;}
+    #beneficios{padding:7rem 5%;background:var(--menta);}
+    .sec-hdr{text-align:center;max-width:560px;margin:0 auto 3.5rem;}
+    .sec-lbl{display:block;font-size:0.7rem;font-weight:700;text-transform:uppercase;letter-spacing:0.15em;color:var(--vm);margin-bottom:0.7rem;}
+    .sec-h2{font-family:'Playfair Display',serif;font-size:clamp(1.7rem,2.8vw,2.3rem);font-weight:900;line-height:1.1;color:var(--vo);}
+    .sec-h2 em{font-style:italic;color:var(--vm);}
+    .ben-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:2px;}
+    .ben{background:#fff;padding:2.2rem 1.8rem;position:relative;overflow:hidden;transition:transform 0.3s,box-shadow 0.3s;cursor:default;}
+    .ben::after{content:'';position:absolute;bottom:0;left:0;width:0;height:3px;background:var(--vm);transition:width 0.35s;}
+    .ben:hover{transform:translateY(-6px);box-shadow:0 16px 32px rgba(42,74,42,0.10);}
+    .ben:hover::after{width:100%;}
+    .ben-num{font-family:'Playfair Display',serif;font-size:3rem;font-weight:900;color:var(--menta);position:absolute;top:0.5rem;right:1rem;line-height:1;}
+    .ben-bar{width:2rem;height:3px;background:var(--vm);margin-bottom:1rem;transition:width 0.3s;}
+    .ben:hover .ben-bar{width:3.5rem;}
+    .ben-h3{font-family:'Playfair Display',serif;font-size:1.1rem;font-weight:700;color:var(--vo);margin-bottom:0.6rem;}
+    .ben-p{font-size:0.85rem;line-height:1.65;color:var(--gm);}
+    #proceso{padding:7rem 5%;background:var(--go);}
+    .steps{display:grid;grid-template-columns:repeat(4,1fr);gap:0;margin-top:4rem;position:relative;}
+    .steps::before{content:'';position:absolute;top:2.2rem;left:12%;right:12%;height:2px;background:var(--vm);opacity:0.4;z-index:0;}
+    .step{text-align:center;padding:0 1.5rem;position:relative;z-index:1;}
+    .step-circle{width:4.5rem;height:4.5rem;background:var(--vm);border-radius:50%;display:flex;align-items:center;justify-content:center;margin:0 auto 1.5rem;font-family:'Playfair Display',serif;font-size:1.4rem;font-weight:900;color:#fff;border:3px solid var(--vo);transition:transform 0.3s,background 0.3s;}
+    .step:hover .step-circle{transform:scale(1.1);background:var(--vc);}
+    .step-title{font-family:'Playfair Display',serif;font-size:1.1rem;font-weight:700;color:var(--crema);margin-bottom:0.8rem;}
+    .step-desc{font-size:0.82rem;color:#8a9a8a;line-height:1.6;}
+    #mision-vision{padding:7rem 5%;background:var(--crema);}
+    .mv-grid{display:grid;grid-template-columns:1fr 1fr;gap:3px;margin-top:3.5rem;}
+    .mv-card{padding:3rem 2.5rem;position:relative;overflow:hidden;transition:transform 0.3s,box-shadow 0.3s;}
+    .mv-card.mision{background:var(--vo);}
+    .mv-card.vision{background:var(--vm);}
+    .mv-card:hover{transform:translateY(-5px);box-shadow:0 20px 40px rgba(42,74,42,0.18);}
+    .mv-card::before{content:'';position:absolute;top:0;left:0;right:0;height:4px;background:rgba(255,255,255,0.2);}
+    .mv-numero{font-family:'Playfair Display',serif;font-size:8rem;font-weight:900;color:rgba(255,255,255,0.06);position:absolute;top:-1rem;right:1.5rem;line-height:1;pointer-events:none;}
+    .mv-lbl{font-size:0.7rem;font-weight:700;text-transform:uppercase;letter-spacing:0.2em;color:rgba(255,255,255,0.6);margin-bottom:1rem;display:block;}
+    .mv-title{font-family:'Playfair Display',serif;font-size:2rem;font-weight:900;color:#fff;margin-bottom:1.2rem;line-height:1.1;}
+    .mv-title em{font-style:italic;opacity:0.8;}
+    .mv-text{font-size:0.93rem;line-height:1.85;color:rgba(255,255,255,0.85);}
+    #resenas{padding:7rem 5%;background:var(--crema);}
+    .resenas-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1.5rem;margin-bottom:3rem;}
+    .resena-card{background:#fff;padding:1.8rem;border:1.5px solid var(--menta);transition:box-shadow 0.3s;}
+    .resena-card:hover{box-shadow:0 8px 24px rgba(42,74,42,0.08);}
+    .resena-stars{display:flex;gap:0.2rem;margin-bottom:0.8rem;}
+    .apple-star{font-size:1.2rem;opacity:0.25;}
+    .apple-star.filled{opacity:1;}
+    .resena-text{font-size:0.88rem;line-height:1.7;color:var(--gm);margin-bottom:1rem;font-style:italic;}
+    .resena-author{font-size:0.78rem;font-weight:700;color:var(--vo);text-transform:uppercase;letter-spacing:0.08em;}
+    .resena-date{font-size:0.72rem;color:var(--gc);margin-top:0.1rem;}
+    .review-form-box{background:#fff;border:2px solid var(--menta);padding:2.2rem;max-width:600px;margin:0 auto;position:relative;}
+    .review-form-box::before{content:'';position:absolute;top:0;left:0;right:0;height:4px;background:linear-gradient(90deg,var(--vo),var(--vc));}
+    .review-form-title{font-family:'Playfair Display',serif;font-size:1.2rem;font-weight:900;color:var(--vo);margin-bottom:0.3rem;}
+    .review-form-sub{font-size:0.82rem;color:var(--gc);margin-bottom:1.4rem;}
+    .star-selector{display:flex;gap:0.4rem;margin-bottom:1.2rem;}
+    .star-pick{font-size:1.8rem;cursor:pointer;opacity:0.3;transition:opacity 0.15s,transform 0.15s;background:none;border:none;padding:0;line-height:1;}
+    .star-pick:hover,.star-pick.sel{opacity:1;transform:scale(1.15);}
+    #contacto{padding:7rem 5%;background:var(--vm);text-align:center;position:relative;overflow:hidden;}
+    .cta-bg-circle{position:absolute;border-radius:50%;opacity:0.08;background:#fff;pointer-events:none;}
+    .cta-bg-circle.c1{width:400px;height:400px;top:-150px;left:-100px;}
+    .cta-bg-circle.c2{width:300px;height:300px;bottom:-100px;right:-80px;}
+    .cta-label{font-size:0.7rem;font-weight:700;text-transform:uppercase;letter-spacing:0.15em;color:rgba(255,255,255,0.7);margin-bottom:1rem;}
+    .cta-title{font-family:'Playfair Display',serif;font-size:clamp(1.8rem,3.5vw,3rem);font-weight:900;color:#fff;line-height:1.1;margin-bottom:1.5rem;}
+    .cta-title em{font-style:italic;}
+    .cta-sub{font-size:0.97rem;color:rgba(255,255,255,0.85);max-width:480px;margin:0 auto 2.5rem;line-height:1.75;}
+    .contact-form{display:flex;gap:0.8rem;max-width:500px;margin:0 auto;flex-wrap:wrap;justify-content:center;}
+    .contact-form input{flex:1;min-width:210px;padding:1rem 1.2rem;border:2px solid rgba(255,255,255,0.5);background:rgba(255,255,255,0.15);color:#fff;font-family:'Raleway',sans-serif;font-size:0.88rem;outline:none;transition:border-color 0.2s;}
+    .contact-form input::placeholder{color:rgba(255,255,255,0.6);}
+    .contact-form input:focus{border-color:#fff;}
+    .btn-white{font-family:'Raleway',sans-serif;font-size:0.85rem;font-weight:700;text-transform:uppercase;letter-spacing:0.1em;background:#fff;color:var(--vm);border:2px solid #fff;padding:1rem 2rem;cursor:pointer;transition:all 0.22s;white-space:nowrap;}
+    .btn-white:hover{background:var(--vo);color:#fff;border-color:var(--vo);}
+    footer{background:var(--go);padding:2.5rem 5%;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:1rem;}
+    .footer-logo img{height:38px;width:auto;opacity:0.9;}
+    .footer-copy{font-size:0.75rem;color:#5a6a5a;}
+    .footer-links{display:flex;gap:1.8rem;list-style:none;align-items:center;}
+    .footer-links a{font-size:0.75rem;color:#5a6a5a;text-decoration:none;transition:color 0.2s;}
+    .footer-links a:hover{color:var(--vc);}
+    .ig-link{display:flex;align-items:center;gap:0.4rem;font-size:0.75rem;color:#5a6a5a;text-decoration:none;transition:color 0.2s;}
+    .ig-link:hover{color:var(--vc);}
+    .ig-icon{width:16px;height:16px;fill:currentColor;}
+    .reveal{opacity:0;transform:translateY(24px);transition:opacity 0.65s ease,transform 0.65s ease;}
+    .reveal.visible{opacity:1;transform:none;}
+    @keyframes fadeUp{from{opacity:0;transform:translateY(20px);}to{opacity:1;transform:none;}}
+    .toast{position:fixed;bottom:2rem;left:50%;transform:translateX(-50%) translateY(20px);background:var(--vo);color:#fff;padding:0.8rem 1.6rem;font-size:0.85rem;font-weight:700;z-index:999;opacity:0;transition:all 0.3s;pointer-events:none;white-space:nowrap;}
+    .toast.show{opacity:1;transform:translateX(-50%) translateY(0);}
+    @media(max-width:860px){
+      .mv-grid{grid-template-columns:1fr;}
+      nav{padding:0.8rem 4%;}.nav-links{display:none;}.nav-actions{display:flex;}
+      #hero{grid-template-columns:1fr;padding:90px 4% 3rem;gap:2rem;}.hero-right{display:none;}
+      #producto,#nosotros{grid-template-columns:1fr;padding:4rem 4%;gap:3rem;}
+      #beneficios,#proceso,#resenas,#contacto,footer{padding:4rem 4%;}
+      .ben-grid,.resenas-grid{grid-template-columns:1fr;gap:1rem;}
+      .steps{grid-template-columns:1fr 1fr;gap:2rem;}.steps::before{display:none;}
+      .pres-grid{grid-template-columns:repeat(2,1fr);gap:0.5rem;}
+      .stats-bar{gap:2.5rem;}
+      .card-actions{flex-direction:column;}.card-btn-wish{width:100%;}
+    }
+
+  </style>
+
+  <style>
+    /* BREADCRUMB */
+    .breadcrumb{
+      padding:100px 5% 0;
+      font-size:0.75rem;color:var(--gc);
+      display:flex;align-items:center;gap:0.5rem;
+    }
+    .breadcrumb a{color:var(--vm);text-decoration:none;}
+    .breadcrumb a:hover{text-decoration:underline;}
+
+    /* PRODUCT LAYOUT */
+    .product-wrap{
+      max-width:1100px;margin:0 auto;
+      padding:2rem 5% 5rem;
+      display:grid;grid-template-columns:1fr 1fr;
+    }
+    .product-wrap {
+      display: grid !important;
+      grid-template-columns: 1fr 1fr !important;
+      gap: 5rem !important;
+      padding: 120px 5% 5rem !important;
+    }
+
+    .gallery {
+      position: -webkit-sticky;
+      position: sticky;
+      top: 120px;
+      align-self: start;
+      width: 100%;
+    }
+    
+    .galeria-scroll {
+      display: grid !important;
+      grid-template-columns: repeat(2, 1fr) !important;
+      gap: 1.5rem !important;
+      background: transparent !important;
+      padding: 0 !important;
+      height: auto !important;
+      overflow-x: visible !important;
+    }
+    
+    .product-bottle {
+      max-width: 100% !important;
+      width: 100% !important;
+      flex-shrink: 1 !important;
+      background: var(--menta) !important; 
+      padding: 0 !important;
+      aspect-ratio: 1 !important;
+      object-fit: cover !important;
+      filter: drop-shadow(0 15px 35px rgba(42,74,42,0.06)) !important;
+      transition: transform 0.3s ease;
+      border-radius: 12px !important;
+    }
+
+    .product-bottle:hover {
+      transform: scale(1.02);
+    }
+
+    .product-bottle:nth-of-type(1) {
+      grid-column: span 2 !important;
+      object-fit: contain !important;
+      padding: 2.5rem !important;
+    }
+    
+    .product-bottle:nth-of-type(4) {
+      grid-column: span 2 !important;
+    }
+
+    .product-wrap {
+  display: grid !important;
+  grid-template-columns: 1fr 1fr !important;
+  gap: 5rem !important;
+  padding: 20px 5% 5rem !important;
+  align-items: start !important;
+}
+
+.gallery {
+  position: -webkit-sticky;
+  position: sticky;
+  top: 120px;
+  align-self: start;
+  width: 100%;
+}
+
+.galeria-scroll {
+  display: grid !important;
+  grid-template-columns: repeat(2, 1fr) !important;
+  gap: 1.5rem !important;
+  background: transparent !important;
+  padding: 0 !important;
+  height: auto !important;
+  overflow-x: visible !important;
+}
+
+.product-bottle {
+  max-width: 100% !important;
+  width: 100% !important;
+  flex-shrink: 1 !important;
+  background: var(--menta) !important; 
+  padding: 0 !important;
+  aspect-ratio: 1 !important;
+  object-fit: cover !important;
+  filter: drop-shadow(0 15px 35px rgba(42,74,42,0.06)) !important;
+  transition: transform 0.3s ease;
+  border-radius: 12px !important;
+}
+
+.product-bottle:hover {
+  transform: scale(1.02);
+}
+
+.product-bottle:nth-of-type(1) {
+  grid-column: span 2 !important;
+  object-fit: contain !important;
+  padding: 1rem !important;
+  height: 400px !important;
+}
+
+.product-bottle:nth-of-type(4) {
+  grid-column: span 2 !important;
+}
+
+@media (max-width: 700px) {
+  .product-wrap {
+    display: flex !important;
+    flex-direction: column !important;
+    padding: 0 !important;
+    gap: 0 !important;
+    height: auto !important;
+    overflow: visible !important;
+  }
+  .gallery {
+    position: relative !important;
+    top: 0 !important;
+    width: 100% !important;
+    margin-bottom: 2.5rem !important;
+  }
+  .galeria-scroll {
+    display: flex !important;
+    overflow-x: auto !important;
+    scroll-snap-type: x mandatory !important;
+    background: var(--menta) !important;
+    padding: 1.5rem !important;
+    gap: 1.5rem !important;
+    height: auto !important;
+    align-items: center !important;
+    -webkit-overflow-scrolling: touch;
+  }
+  .product-bottle {
+    width: 260px !important;
+    min-width: 260px !important;
+    max-width: 260px !important;
+    scroll-snap-align: center !important;
+    aspect-ratio: 1 / 1 !important;
+    object-fit: cover !important;
+    background: transparent !important;
+    padding: 0 !important;
+    flex-shrink: 0 !important;
+  }
+  .product-bottle:nth-of-type(1) {
+    width: 260px !important;
+    min-width: 260px !important;
+    max-width: 260px !important;
+    height: 260px !important;
+    padding: 0 !important;
+    object-fit: contain !important;
+    margin: 0 auto !important;
+    background-color: var(--menta) !important;
+  }
+  .product-bottle:nth-of-type(1),
+  .product-bottle:nth-of-type(4) {
+    grid-column: auto !important;
+  }
+}
+
+    @media (min-width: 700px) {
+      .galeria-scroll {
+        display: flex;
+        flex-direction: column;
+        overflow-x: visible;
+        background: transparent;
+        padding: 0;
+        gap: 2rem;
+        height: auto;
+      }
+      
+      .product-bottle {
+        max-width: 100%;
+        width: 100%;
+        flex-shrink: 1;
+        background: var(--menta);
+        padding: 3rem;
+        aspect-ratio: 1;
+        filter: drop-shadow(0 20px 45px rgba(42,74,42,0.15));
+      }
+    }
+
+    .product-kicker {
+      font-size: 0.68rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.2em;
+      color: var(--vm);
+      margin-bottom: 0.6rem;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+    
+    .product-kicker::before {
+      content: '';
+      display: block;
+      width: 1.5rem;
+      height: 2px;
+      background: var(--vm);
+    }
+    
+    .product-name {
+      font-family: 'Playfair Display', serif;
+      font-size: clamp(2rem, 3.5vw, 2.8rem);
+      font-weight: 900;
+      color: var(--vo);
+      line-height: 1.1;
+      margin-bottom: 0.6rem;
+    }
+    
+    .product-price {
+      font-size: 1.9rem;
+      font-weight: 700;
+      color: var(--vm);
+      margin-bottom: 1.2rem;
+    }
+    
+    .product-desc {
+      font-size: 0.97rem;
+      line-height: 1.85;
+      color: var(--gm);
+      margin-bottom: 1.4rem;
+      border-left: 3px solid var(--vc);
+      padding-left: 1rem;
+    }
+    
+    .modo-empleo {
+      background: var(--menta);
+      padding: 1.2rem 1.4rem;
+      margin-bottom: 1.6rem;
+      border-left: 3px solid var(--vm);
+    }
+    
+    .modo-titulo {
+      font-size: 0.7rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.12em;
+      color: var(--vm);
+      margin-bottom: 0.8rem;
+    }
+    
+    .modo-pasos {
+      padding-left: 1.2rem;
+      font-size: 0.87rem;
+      line-height: 1.8;
+      color: var(--gm);
+    }
+    
+    .modo-pasos li {
+      margin-bottom: 0.3rem;
+    }
+    
+    .modo-nota {
+      margin-top: 0.8rem;
+      font-size: 0.82rem;
+      color: var(--gc);
+      font-style: italic;
+    }
+    
+    .product-meta {
+      display: flex;
+      flex-direction: column;
+      gap: 0.6rem;
+      margin-bottom: 2rem;
+      background: var(--menta);
+      padding: 1rem 1.2rem;
+    }
+    
+    .product-meta-row {
+      display: flex;
+      justify-content: space-between;
+      font-size: 0.82rem;
+    }
+    
+    .product-meta-label {
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      color: var(--gc);
+    }
+    
+    .product-meta-val {
+      color: var(--go);
+      font-weight: 600;
+    }
+    
+    .stock-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      font-size: 0.8rem;
+      color: var(--vm);
+      font-weight: 700;
+      margin-bottom: 1.6rem;
+    }
+    
+    .stock-badge::before {
+      content: '';
+      display: block;
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      background: var(--vm);
+      animation: pulse 1.8s infinite;
+    }
+    
+    @keyframes pulse {
+      0%, 100% { opacity: 1; transform: scale(1); }
+      50% { opacity: 0.5; transform: scale(1.3); }
+    }
+    
+    .btn-comprar {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 0.7rem;
+      width: 100%;
+      padding: 1.1rem;
+      border: none;
+      cursor: pointer;
+      font-family: 'Raleway', sans-serif;
+      font-size: 0.95rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.12em;
+      text-decoration: none;
+      transition: background 0.2s;
+      margin-bottom: 0.8rem;
+    }
+    
+    .btn-carrito-prod {
+      background: var(--menta);
+      color: var(--vo);
+      border: 2px solid var(--vo);
+    }
+    
+    .btn-carrito-prod:hover {
+      background: var(--vo);
+      color: #fff;
+    }
+    
+    .btn-comprar-ahora {
+      background: var(--vm);
+      color: #fff;
+    }
+    
+    .btn-comprar-ahora:hover {
+      background: var(--vo);
+    }
+    
+    .btn-comprar svg {
+      width: 18px;
+      height: 18px;
+      stroke: currentColor;
+      fill: none;
+      stroke-width: 2;
+      stroke-linecap: round;
+      stroke-linejoin: round;
+    }
+
+    .btn-volver{
+      display:flex;align-items:center;justify-content:center;gap:0.5rem;
+      width:100%;padding:0.9rem;
+      background:transparent;color:var(--vo);
+      border:2px solid var(--vo);
+      font-family:'Raleway',sans-serif;
+      font-size:0.82rem;font-weight:700;
+      text-transform:uppercase;letter-spacing:0.1em;
+      text-decoration:none;
+      transition:all 0.2s;
+      margin-bottom:1.6rem;
+    }
+    .btn-volver:hover{background:var(--vo);color:#fff;}
+
+    /* CARACTERÍSTICAS */
+    .features-prod{
+      display:grid;grid-template-columns:1fr 1fr;gap:0.8rem;
+      margin-top:0.5rem;
+    }
+    .feature-item{
+      display:flex;align-items:center;gap:0.5rem;
+      font-size:0.78rem;color:var(--gm);
+    }
+    .feature-icon{
+      width:32px;height:32px;flex-shrink:0;
+      background:var(--menta);border-radius:50%;
+      display:flex;align-items:center;justify-content:center;
+      font-size:1rem;
+    }
+
+    /* FOOTER LINE */
+    .footer-line{
+      text-align:center;padding:2rem;
+      font-size:0.75rem;color:var(--gc);
+      border-top:1px solid var(--menta);
+    }
+  </style>
+
+</head>
+<body>
+<!-- TOAST + PANELS + NAV -->
+<div class="toast" id="toast"></div>
+<div class="panel-overlay" id="panel-overlay" onclick="closeAllPanels()"></div>
+
+<div class="side-panel" id="panel-cart">
+  <div class="panel-head"><h3>Mi carrito</h3><button class="panel-close" onclick="closeAllPanels()">&#x2715;</button></div>
+  <div class="panel-body" id="cart-body"></div>
+  <div class="panel-foot" id="cart-foot" style="display:none;"><button class="panel-checkout-btn" onclick="openCheckout()">Proceder al pedido</button></div>
+</div>
+
+<div class="side-panel" id="panel-wish">
+  <div class="panel-head"><h3>Lista de deseos</h3><button class="panel-close" onclick="closeAllPanels()">&#x2715;</button></div>
+  <div class="panel-body" id="wish-body"></div>
+</div>
+
+<div class="modal-overlay" id="modal-overlay" onclick="if(event.target===this)closeModal()">
+  <div class="modal">
+    <div class="modal-head"><h3>Confirmar pedido</h3><button class="modal-close" onclick="closeModal()">&#x2715;</button></div>
+    <div class="modal-body">
+      <div class="modal-summary" id="modal-summary"></div>
+      <div class="form-grid">
+        <div class="field"><label for="f-nombre">Nombre completo *</label><input type="text" id="f-nombre" placeholder="Ana Martinez"/></div>
+        <div class="field"><label for="f-tel">Teléfono *</label><input type="tel" id="f-tel" placeholder="614 000 0000"/></div>
+      </div>
+      <div class="form-grid full"><div class="field"><label for="f-email">Correo electrónico *</label><input type="email" id="f-email" placeholder="tu@correo.com"/></div></div>
+      <div class="form-grid full"><div class="field"><label for="f-calle">Calle *</label><input type="text" id="f-calle" placeholder="Av. Juarez"/></div></div>
+      <div class="form-grid">
+        <div class="field"><label for="f-ext">Número exterior *</label><input type="text" id="f-ext" placeholder="123"/></div>
+        <div class="field"><label for="f-int">Número interior (opcional)</label><input type="text" id="f-int" placeholder="4B"/></div>
+      </div>
+      <div class="form-grid">
+        <div class="field"><label for="f-colonia">Colonia *</label><input type="text" id="f-colonia" placeholder="Centro"/></div>
+        <div class="field"><label for="f-ciudad">Ciudad *</label><input type="text" id="f-ciudad" placeholder="Chihuahua"/></div>
+      </div>
+      <div class="form-grid full" style="margin-bottom:1rem;"><div class="field"><label for="f-cp">Código postal *</label><input type="text" id="f-cp" placeholder="31000"/></div></div>
+      <div class="payment-note"><strong>Tiempo de entrega</strong>Te contactaremos para coordinar la entrega.</div>
+      <button class="btn-full" id="submit-btn" onclick="submitOrder()">
+        <span id="btn-txt">Enviar pedido y pagar</span>
+        <span class="btn-spinner" id="btn-spin"></span>
+      </button>
+      <div id="order-result"></div>
+    </div>
+  </div>
+</div>
+
+<nav id="main-nav">
+  <div class="nav-logo"><a href="/" style="text-decoration:none;"><span style="font-family:'Playfair Display',serif;font-size:1.6rem;font-weight:900;color:var(--vo);letter-spacing:0.08em;">MAKORA</span></a></div>
+  <ul class="nav-links">
+    <li><a href="/">Inicio</a></li>
+    <li><a href="/#nosotros">Nosotros</a></li>
+    <li><a href="/#beneficios">Beneficios</a></li>
+    <li><a href="/#resenas">Reseñas</a></li>
+  </ul>
+  <div class="nav-actions">
+    <button class="nav-icon-btn" onclick="openPanel('wish')" title="Lista de deseos">
+      <svg viewBox="0 0 24 24"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"></path></svg>
+      <span class="nav-badge" id="wish-badge">0</span>
+    </button>
+    <button class="nav-icon-btn" onclick="openPanel('cart')" title="Carrito">
+      <svg viewBox="0 0 24 24"><circle cx="9" cy="21" r="1"></circle><circle cx="20" cy="21" r="1"></circle><path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"></path></svg>
+      <span class="nav-badge" id="cart-badge">0</span>
+    </button>
+    <button class="nav-cta" onclick="openPanel('cart')">Hacer pedido</button>
+  </div>
+</nav>
+
+<!-- BREADCRUMB -->
+<div class="breadcrumb">
+  <a href="index.html">Inicio</a>
+  <span>›</span>
+  <a href="index.html#presentaciones-grid">Presentaciones</a>
+  <span>›</span>
+  <span>10 Litros</span>
+</div>
+
+<!-- PRODUCT -->
+<div class="product-wrap">
+
+  <!-- GALERÍA -->
+  <div class="gallery">
+    <div class="galeria-scroll">
+      
+      <img src="10litros.png" alt="Makora — Vista Grande 1" class="product-bottle"/>
+      <img src="10litros2.png"  alt="Makora — Chica Izquierda 1" class="product-bottle"/>
+      <img src="10litros-persona.png"  alt="Makora — Chica Derecha 1" class="product-bottle"/>
+      
+      <img src="10litros3.png"  alt="Makora — Vista Grande 2" class="product-bottle"/>
+      <img src="10litros4.png"  alt="Makora — Chica Izquierda 2" class="product-bottle"/>
+      <img src="10litros5.png"  alt="Makora — Chica Derecha 2" class="product-bottle"/>
+      
+    </div>
+  </div>
+
+  <!-- INFO -->
+  <div class="product-info">
+    <p class="product-kicker">Conservador Natural</p>
+    <h1 class="product-name">Makora 10 Litros</h1>
+    <p class="product-price">$629 MXN</p>
+
+    <p class="product-desc">
+      Ideal para distribuidores y comercializadores. Alta rentabilidad por
+      volumen. Sin conservadores artificiales.
+    </p>
+
+    <!-- MODO DE EMPLEO -->
+    <div class="modo-empleo">
+      <p class="modo-titulo">Modo de empleo</p>
+      <ol class="modo-pasos">
+        <li><strong>Preparación:</strong> Vierta el producto directamente del galón en un atomizador o sistema de rociado limpio y seco. No requiere dilución.</li>
+        <li><strong>Sanitización:</strong> Lave previamente las frutas o verduras con agua limpia para eliminar excesos de tierra o suciedad.</li>
+        <li><strong>Aplicación uniforme:</strong> Rocíe el producto de manera homogénea sobre toda la superficie de los alimentos, asegurándose de cubrir cada área.</li>
+        <li><strong>Conservación:</strong> Deje secar unos instantes. Puede almacenar sus alimentos a temperatura ambiente o en refrigeración para maximizar su frescura y vida útil.</li>
+      </ol>
+      <p class="modo-nota">Uso recomendado en frutas y verduras frescas.</p>
+    </div>
+
+    <div class="product-meta">
+      <div class="product-meta-row">
+        <span class="product-meta-label">Contenido neto</span>
+        <span class="product-meta-val">10 Litros</span>
+      </div>
+      <div class="product-meta-row">
+        <span class="product-meta-label">Fórmula</span>
+        <span class="product-meta-val">100% Natural</span>
+      </div>
+      <div class="product-meta-row">
+        <span class="product-meta-label">Origen</span>
+        <span class="product-meta-val">Chihuahua, México</span>
+      </div>
+    </div>
+
+    <div class="stock-badge">En stock</div>
+
+    <!-- BOTONES: AGREGAR AL CARRITO + COMPRAR AHORA -->
+    <button class="btn-comprar btn-carrito-prod" onclick="quickAddToCart('10 Litros');openPanel('cart');">
+      <svg viewBox="0 0 24 24"><circle cx="9" cy="21" r="1"/><circle cx="20" cy="21" r="1"/><path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"/></svg>
+      Agregar al carrito
+    </button>
+
+    <a class="btn-comprar btn-comprar-ahora" href="https://mpago.la/2qBu9w2" target="_blank">
+      <svg viewBox="0 0 24 24"><path d="M6 2L3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z"/><line x1="3" y1="6" x2="21" y2="6"/><path d="M16 10a4 4 0 0 1-8 0"/></svg>
+      Comprar ahora
+    </a>
+
+    <a class="btn-volver" href="index.html">
+      ← Ver todas las presentaciones
+    </a>
+
+    <!-- CARACTERÍSTICAS -->
+    <div class="features-prod">
+      <div class="feature-item">
+        <div class="feature-icon">✓</div>
+        <span>Sin conservadores artificiales</span>
+      </div>
+      <div class="feature-item">
+        <div class="feature-icon">✓</div>
+        <span>Base de manzana natural</span>
+      </div>
+      <div class="feature-item">
+        <div class="feature-icon">✓</div>
+        <span>Sin gluten</span>
+      </div>
+      <div class="feature-item">
+        <div class="feature-icon">✓</div>
+        <span>Vegano</span>
+      </div>
+    </div>
+  </div>
+
+</div>
+
+<div class="footer-line">© 2026 Makora — Conservador Natural de Manzana · Chihuahua, México</div>
+
+<script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-app-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-firestore-compat.js"></script>
+
+<script>
+  //FIREBASE
+  firebase.initializeApp({
+    apiKey: "AIzaSyBRzkTAfGCMjiSxjdTT5wZ6Q_AVK2_8Oik",
+    authDomain: "makora-b4b62.firebaseapp.com",
+    projectId: "makora-b4b62",
+    storageBucket: "makora-b4b62.firebasestorage.app",
+    messagingSenderId: "612772913736",
+    appId: "1:612772913736:web:7c9814440fd7ffb3656e7d"
+  });
+  var db = firebase.firestore();
+
+  // ESTADO
+  var cart = JSON.parse(localStorage.getItem('makora_cart') || '[]');
+  var wishlist = JSON.parse(localStorage.getItem('makora_wish') || '[]');
+  var currentPres = '10 Litros';
+  var currentQty = 1;
+  var currentReviewStars = 0;
+  var mpLinks = {
+    '100 ml':    'https://mpago.la/2cscgi2',
+    '1 Litro':   'https://mpago.la/2RG4YjF',
+    '10 Litros': 'https://mpago.la/2qBu9w2',
+    '20 Litros': 'https://mpago.la/25ZQAPh'
+  };
+
+  function saveStorage() {
+    localStorage.setItem('makora_cart', JSON.stringify(cart));
+    localStorage.setItem('makora_wish', JSON.stringify(wishlist));
+  }
+
+  // NAV SCROLL
+  window.addEventListener('scroll', function() {
+    document.getElementById('main-nav').classList.toggle('scrolled', window.scrollY > 40);
+    const navH = document.getElementById('main-nav').offsetHeight;
+    document.documentElement.style.setProperty('--nav-h', navH + 'px');
+  });
+
+  //PRODUCTO
+  function selectPresCard(card) {
+    document.querySelectorAll('.pres-card').forEach(function(c) { c.classList.remove('active'); });
+    card.classList.add('active');
+    currentPres = card.dataset.pres;
+    updateWishIcons();
+  }
+  function updateWishIcons() {
+    document.querySelectorAll('.pres-card-wish').forEach(function(b) {
+      var pres = b.closest('.pres-card').dataset.pres;
+      b.classList.toggle('active', wishlist.indexOf(pres) !== -1);
+    });
+  }
+
+  //CARRITO
+  function quickAddToCart(pres) {
+    var existing = null;
+    for (var i = 0; i < cart.length; i++) { if (cart[i].pres === pres) { existing = cart[i]; break; } }
+    if (existing) { existing.qty += 1; } else { cart.push({ pres: pres, qty: 1 }); }
+    updateCartBadge();
+    renderCart();
+    saveStorage();
+    showToast('Agregado al carrito: Makora ' + pres);
+  }
+  function toggleWishCard(pres, btn) {
+    var idx = wishlist.indexOf(pres);
+    if (idx === -1) {
+      wishlist.push(pres);
+      showToast('Makora ' + pres + ' agregado a lista de deseos');
+    } else {
+      wishlist.splice(idx, 1);
+      showToast('Makora ' + pres + ' removido de lista de deseos');
+    }
+    btn.classList.toggle('active', wishlist.indexOf(pres) !== -1);
+    updateWishBadge();
+    renderWish();
+    saveStorage();
+  }
+  function updateCartBadge() {
+    var total = cart.reduce(function(s, i) { return s + i.qty; }, 0);
+    var badge = document.getElementById('cart-badge');
+    badge.textContent = total;
+    if (total > 0) { badge.classList.add('show'); } else { badge.classList.remove('show'); }
+  }
+  function renderCart() {
+    var body = document.getElementById('cart-body');
+    var foot = document.getElementById('cart-foot');
+    if (cart.length === 0) {
+      body.innerHTML = '<div class="panel-empty"><span>&#128722;</span>Tu carrito esta vacio.<br>Agrega un producto para comenzar.</div>';
+      foot.style.display = 'none'; return;
+    }
+    foot.style.display = 'block';
+    var html = '';
+    for (var i = 0; i < cart.length; i++) {
+      var item = cart[i];
+      html += '<div class="panel-item">' +
+        '<div class="panel-item-info">' +
+          '<div class="panel-item-name">Makora</div>' +
+          '<div class="panel-item-sub">Presentacion: ' + item.pres + '</div>' +
+          '<div class="panel-item-qty">' +
+            '<button onclick="cartQty(' + i + ',-1)">-</button>' +
+            '<span>' + item.qty + '</span>' +
+            '<button onclick="cartQty(' + i + ',1)">+</button>' +
+          '</div>' +
+        '</div>' +
+        '<button class="panel-item-remove" onclick="removeFromCart(' + i + ')">&#x2715;</button>' +
+      '</div>';
+    }
+    body.innerHTML = html;
+  }
+  function cartQty(i, d) { cart[i].qty = Math.max(1, cart[i].qty + d); updateCartBadge(); renderCart(); saveStorage(); }
+  function removeFromCart(i) { cart.splice(i, 1); updateCartBadge(); renderCart(); saveStorage(); }
+
+  //LISTA DE DESEOS
+  function updateWishBadge() {
+    var badge = document.getElementById('wish-badge');
+    badge.textContent = wishlist.length;
+    if (wishlist.length > 0) { badge.classList.add('show'); } else { badge.classList.remove('show'); }
+  }
+  function renderWish() {
+    var body = document.getElementById('wish-body');
+    if (wishlist.length === 0) {
+      body.innerHTML = '<div class="panel-empty"><span>&#9825;</span>Tu lista de deseos esta vacia.</div>';
+      return;
+    }
+    var html = '';
+    wishlist.forEach(function(pres) {
+      html += '<div class="panel-item">' +
+        '<div class="panel-item-info">' +
+          '<div class="panel-item-name">Makora</div>' +
+          '<div class="panel-item-sub">Presentación: ' + pres + '</div>' +
+          '<div class="panel-item-qty" style="margin-top:0.8rem;">' +
+            '<button onclick="moveToCartFrom(&quot;' + pres + '&quot;)" style="padding:0.4rem 1rem;width:auto;font-size:0.78rem;">Agregar al carrito</button>' +
+          '</div>' +
+        '</div>' +
+        '<button class="panel-item-remove" onclick="removeFromWish(&quot;' + pres + '&quot;)">&#x2715;</button>' +
+      '</div>';
+    });
+    body.innerHTML = html;
+  }
+  function removeFromWish(pres) {
+    var idx = wishlist.indexOf(pres);
+    if (idx !== -1) wishlist.splice(idx, 1);
+    updateWishIcons();
+    updateWishBadge();
+    renderWish();
+    saveStorage();
+  }
+  function moveToCartFrom(pres) {
+    var found = false;
+    for (var i = 0; i < cart.length; i++) { if (cart[i].pres === pres) { found = true; break; } }
+    if (!found) cart.push({ pres: pres, qty: 1 });
+    updateCartBadge(); renderCart();
+    // Borrar de lista de deseos
+    var idx = wishlist.indexOf(pres);
+    if (idx !== -1) wishlist.splice(idx, 1);
+    updateWishIcons();
+    updateWishBadge();
+    saveStorage();
+    closeAllPanels();
+    setTimeout(function() { openPanel('cart'); }, 100);
+    showToast('Makora ' + pres + ' movido al carrito');
+  }
+
+  // PANELES
+  function openPanel(type) {
+    closeAllPanels();
+    if (type === 'cart') renderCart();
+    if (type === 'wish') renderWish();
+    document.getElementById('panel-overlay').classList.add('open');
+    document.getElementById('panel-' + type).classList.add('open');
+    document.body.style.overflow = 'hidden';
+  }
+  function closeAllPanels() {
+    document.getElementById('panel-overlay').classList.remove('open');
+    document.getElementById('panel-cart').classList.remove('open');
+    document.getElementById('panel-wish').classList.remove('open');
+    document.body.style.overflow = '';
+  }
+
+  // CHECKOUT
+  function openCheckout() {
+    if (cart.length === 0) return;
+    var precios = { '100 ml': 36, '1 Litro': 97, '10 Litros': 629, '20 Litros': 1124 };
+    var summary = cart.map(function(i) { return 'Makora ' + i.pres + ' x' + i.qty; }).join(', ');
+    var total = 0;
+    cart.forEach(function(i) { if (precios[i.pres]) total += precios[i.pres] * i.qty; });
+    var totalTxt = total > 0 ? '<br><br><strong>Total a pagar</strong>$' + total.toLocaleString('es-MX') + ' MXN' : '<br><br><strong>Total a pagar</strong>A consultar — te contactaremos para coordinar el pago.';
+    document.getElementById('modal-summary').innerHTML = '<strong>Resumen de tu pedido</strong><br>' + summary + totalTxt;
+    closeAllPanels();
+    document.getElementById('modal-overlay').classList.add('open');
+    document.body.style.overflow = 'hidden';
+  }
+  function closeModal() {
+    document.getElementById('modal-overlay').classList.remove('open');
+    document.body.style.overflow = '';
+  }
+
+  // EMAILJS
+  function validate() {
+    var ids = ['f-nombre','f-tel','f-email','f-calle','f-ext','f-colonia','f-ciudad','f-cp'];
+    var ok = true;
+    ids.forEach(function(id) {
+      var el = document.getElementById(id);
+      el.classList.remove('error');
+      if (!el.value.trim()) { el.classList.add('error'); ok = false; }
+    });
+    var em = document.getElementById('f-email');
+    if (em.value && !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(em.value)) { em.classList.add('error'); ok = false; }
+    return ok;
+  }
+  function submitOrder() {
+    if (!validate()) { showResult('error', 'Por favor completa todos los campos correctamente.'); return; }
+    var btn = document.getElementById('submit-btn');
+    var txt = document.getElementById('btn-txt');
+    var spin = document.getElementById('btn-spin');
+    btn.disabled = true; txt.textContent = 'Enviando...'; spin.style.display = 'block';
+    document.getElementById('order-result').style.display = 'none';
+    var pedido = cart.map(function(i) { return 'Makora ' + i.pres + ' x' + i.qty; }).join(' | ');
+    var intVal = document.getElementById('f-int').value.trim();
+    var params = {
+      nombre:       document.getElementById('f-nombre').value.trim(),
+      telefono:     document.getElementById('f-tel').value.trim(),
+      email:        document.getElementById('f-email').value.trim(),
+      direccion:    document.getElementById('f-calle').value.trim() + ' ' +
+                document.getElementById('f-ext').value.trim() +
+                (intVal ? ' Int. ' + intVal : '') + ', Col. ' +
+                document.getElementById('f-colonia').value.trim() + ', ' +
+                document.getElementById('f-ciudad').value.trim() + ', C.P. ' +
+                document.getElementById('f-cp').value.trim(),
+      presentacion: pedido,
+      cantidad:     cart.reduce(function(s,i){ return s+i.qty; }, 0),
+      total:        'A consultar',
+      to_email:     'makoramx@gmail.com'
+};
+    emailjs.send('service_zznkcnu', 'template_6o9o7d8', params).then(function() {
+      cart = []; updateCartBadge(); renderCart(); saveStorage();
+      ['f-nombre','f-tel','f-email','f-calle','f-ext','f-int','f-colonia','f-ciudad','f-cp'].forEach(function(id) { document.getElementById(id).value = ''; });
+      btn.disabled = false; txt.textContent = 'Enviar pedido'; spin.style.display = 'none';
+      // Redirigir a Mercado Pago segun presentación
+      var precios = { '100 ml': 36, '1 Litro': 97, '10 Litros': 629, '20 Litros': 1124 };
+var items = cart.map(function(i) {
+  return {
+    title: 'Makora ' + i.pres,
+    quantity: i.qty,
+    unit_price: precios[i.pres],
+    currency_id: 'MXN'
+  };
+});
+showResult('success', 'Pedido registrado. Redirigiendo al pago...');
+fetch('/api/create-preference', {
+  method: 'POST',
+  headers: { 'Content-Type': 'application/json' },
+  body: JSON.stringify({ items: items })
+})
+.then(function(r) { return r.json(); })
+.then(function(data) {
+  if (data.url) window.open(data.url, '_blank');
+  else showResult('error', 'Error al procesar el pago. Intenta de nuevo.');
+})
+.catch(function() {
+  showResult('error', 'Error al procesar el pago. Intenta de nuevo.');
+});
+    }).catch(function(e) {
+      console.error(e);
+      showResult('error', 'Ocurrio un error. Por favor intenta de nuevo.');
+      btn.disabled = false; txt.textContent = 'Enviar pedido'; spin.style.display = 'none';
+    });
+  }
+  function showResult(t, m) { var el = document.getElementById('order-result'); el.className=t; el.textContent=m; el.style.display='block'; }
+
+  // RESEÑAS FIREBASE
+  function pickStar(n) {
+    currentReviewStars = n;
+    document.querySelectorAll('.star-pick').forEach(function(btn, i) { btn.classList.toggle('sel', i < n); });
+  }
+  function loadReviews() {
+    var grid = document.getElementById('resenas-grid');
+    grid.innerHTML = '<p style="grid-column:1/-1;text-align:center;color:var(--gc);font-size:0.9rem;padding:2rem;">Cargando opiniones...</p>';
+    db.collection('resenas').orderBy('timestamp','desc').get().then(function(snap) {
+      var data = [];
+      snap.forEach(function(doc) { data.push(doc.data()); });
+      renderReviews(data);
+    }).catch(function(e) {
+      console.error(e);
+      renderReviews([]);
+    });
+  }
+  function renderReviews(data) {
+    var grid = document.getElementById('resenas-grid');
+    if (!data || data.length === 0) {
+      grid.innerHTML = '<p style="grid-column:1/-1;text-align:center;color:var(--gc);font-size:0.9rem;padding:2rem;">Aun no hay opiniones. Se el primero en dejar la tuya.</p>';
+      return;
+    }
+    var html = '';
+    data.forEach(function(r) {
+      var stars = '';
+      for (var i = 1; i <= 5; i++) { stars += '<span class="apple-star ' + (i<=r.estrellas?'filled':'') + '">&#127822;</span>'; }
+      html += '<div class="resena-card reveal"><div class="resena-stars">' + stars + '</div><p class="resena-text">"' + r.texto + '"</p><p class="resena-author">' + r.nombre + '</p><p class="resena-date">' + (r.ciudad ? r.ciudad + ' — ' : '') + r.fecha + '</p></div>';
+    });
+    grid.innerHTML = html;
+    document.querySelectorAll('#resenas-grid .reveal').forEach(function(el) { el.classList.remove('visible'); obs.observe(el); });
+  }
+  function submitReview() {
+    var nombre = document.getElementById('r-nombre').value.trim();
+    var texto  = document.getElementById('r-texto').value.trim();
+    var ciudad = document.getElementById('r-ciudad').value.trim();
+    var email  = document.getElementById('r-email').value.trim();
+    var res    = document.getElementById('review-result');
+    if (!nombre || !texto || !email) { res.style.display='block'; res.textContent='Por favor completa nombre, correo y comentario.'; return; }
+    if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) { res.style.display='block'; res.textContent='Por favor ingresa un correo valido.'; return; }
+    if (!currentReviewStars) { res.style.display='block'; res.textContent='Por favor selecciona una calificación.'; return; }
+    res.style.display='block'; res.textContent='Publicando...';
+    var now = new Date();
+    var meses = ['Enero','Febrero','Marzo','Abril','Mayo','Junio','Julio','Agosto','Septiembre','Octubre','Noviembre','Diciembre'];
+    db.collection('resenas').add({
+      nombre: nombre, ciudad: ciudad, email: email, texto: texto,
+      estrellas: currentReviewStars,
+      fecha: meses[now.getMonth()] + ' ' + now.getFullYear(),
+      timestamp: now.getTime()
+    }).then(function() {
+      document.getElementById('r-nombre').value = '';
+      document.getElementById('r-texto').value = '';
+      document.getElementById('r-ciudad').value = '';
+      document.getElementById('r-email').value = '';
+      currentReviewStars = 0;
+      document.querySelectorAll('.star-pick').forEach(function(b) { b.classList.remove('sel'); });
+      res.textContent = 'Gracias por tu opinión, ' + nombre + '. Ya aparece en la sección de reseñas.';
+      setTimeout(function() { res.style.display='none'; }, 4000);
+      loadReviews();
+    }).catch(function(e) {
+      console.error(e);
+      res.textContent = 'Ocurrió un error al publicar. Intenta de nuevo.';
+    });
+  }
+
+  // CTA WHATSAPP
+  function handleCTA() {
+    var n = document.getElementById('cta-nombre').value.trim();
+    if (!n) { alert('Por favor ingresa tu nombre.'); return; }
+    var texto = encodeURIComponent('Hola, mi nombre es ' + n + ', me interesa saber más sobre Makora.');
+    window.open('https://wa.me/526141889004?text=' + texto, '_blank');
+  }
+
+  // TOAST
+  function showToast(msg) {
+    var t = document.getElementById('toast');
+    t.textContent = msg; t.classList.add('show');
+    setTimeout(function() { t.classList.remove('show'); }, 2500);
+  }
+
+  // REVEAL
+  var obs = new IntersectionObserver(function(entries) {
+    entries.forEach(function(e, i) {
+      if (e.isIntersecting) { setTimeout(function() { e.target.classList.add('visible'); }, i * 80); obs.unobserve(e.target); }
+    });
+  }, { threshold: 0.1 });
+  document.querySelectorAll('.reveal').forEach(function(el) { obs.observe(el); });
+
+  // HEART FILL ANIMATION
+  function animateHeart(btn, fillIn) {
+    clearInterval(btn._heartInterval);
+    var fills = btn.querySelectorAll('.hg-fill');
+    var edges = btn.querySelectorAll('.hg-edge');
+    var pct = fillIn ? 0 : 100;
+    btn._heartInterval = setInterval(function() {
+      pct = fillIn ? Math.min(pct + 5, 100) : Math.max(pct - 5, 0);
+      fills.forEach(function(s) { s.setAttribute('offset', pct + '%'); });
+      edges.forEach(function(s) { s.setAttribute('offset', pct + '%'); });
+      if ((fillIn && pct >= 100) || (!fillIn && pct <= 0)) clearInterval(btn._heartInterval);
+    }, 12);
+  }
+  document.querySelectorAll('.pres-card-wish').forEach(function(btn) {
+    btn.addEventListener('mouseenter', function() {
+      if (!btn.classList.contains('active')) animateHeart(btn, true);
+    });
+    btn.addEventListener('mouseleave', function() {
+      if (!btn.classList.contains('active')) animateHeart(btn, false);
+    });
+  });
+
+
+  // MODAL DETALLE PRODUCTO
+  var pmPres = '';
+  var pmQtyVal = 1;
+  var pmData = {
+    '100 ml':    { name:'Makora 100 ml',    price:'$36 MXN',    cont:'100 ml',    img:'100ml.png',    desc:'Presentacion ideal para uso domestico. Conserva tus frutas y verduras de forma natural con nuestra formula elaborada a partir de manzanas chihuahuenses.' },
+    '1 Litro':   { name:'Makora 1 Litro',   price:'$97 MXN',    cont:'1 Litro',   img:'1litro.png',   desc:'Para hogares con mayor consumo o pequenos negocios. Mayor rendimiento y ahorro. Formulado con ingredientes 100% naturales.' },
+    '10 Litros': { name:'Makora 10 Litros', price:'$629 MXN',   cont:'10 Litros', img:'10litros.png', desc:'Ideal para distribuidores y comercializadores. Alta rentabilidad por volumen. Sin conservadores artificiales.' },
+    '20 Litros': { name:'Makora 20 Litros', price:'$1,124 MXN', cont:'20 Litros', img:'20litros.png', desc:'La presentacion mas completa para produccion a gran escala. Maximo rendimiento y sostenibilidad.' }
+  };
+  function openPM(pres) {
+    pmPres = pres; pmQtyVal = 1;
+    var d = pmData[pres];
+    document.getElementById('pm-img').src = d.img;
+    document.getElementById('pm-img').alt = d.name;
+    document.getElementById('pm-name').textContent = d.name;
+    document.getElementById('pm-price').textContent = d.price;
+    document.getElementById('pm-desc').textContent = d.desc;
+    document.getElementById('pm-cont').textContent = d.cont;
+    document.getElementById('pm-qty').textContent = 1;
+    var inWish = wishlist.indexOf(pres) !== -1;
+    var wb = document.getElementById('pm-wish-btn');
+    wb.textContent = inWish ? 'En lista de deseos' : 'Lista de deseos';
+    wb.style.borderColor = inWish ? '#e57373' : 'var(--menta)';
+    wb.style.color = inWish ? '#e57373' : 'var(--gc)';
+    var ov = document.getElementById('pm-overlay');
+    ov.style.display = 'flex';
+    document.body.style.overflow = 'hidden';
+  }
+  function closePM() {
+    document.getElementById('pm-overlay').style.display = 'none';
+    document.body.style.overflow = '';
+  }
+  function pmQty(d) {
+    pmQtyVal = Math.max(1, pmQtyVal + d);
+    document.getElementById('pm-qty').textContent = pmQtyVal;
+  }
+  function pmAddToCart() {
+    for (var i = 0; i < pmQtyVal; i++) quickAddToCart(pmPres);
+    closePM();
+  }
+  function pmToggleWish() {
+    var idx = wishlist.indexOf(pmPres);
+    var wb = document.getElementById('pm-wish-btn');
+    if (idx === -1) {
+      wishlist.push(pmPres);
+      wb.textContent = 'En lista de deseos';
+      wb.style.borderColor = '#e57373';
+      wb.style.color = '#e57373';
+      showToast('Makora ' + pmPres + ' agregado a lista de deseos');
+    } else {
+      wishlist.splice(idx, 1);
+      wb.textContent = 'Lista de deseos';
+      wb.style.borderColor = 'var(--menta)';
+      wb.style.color = 'var(--gc)';
+      showToast('Makora ' + pmPres + ' removido de lista de deseos');
+    }
+    updateWishBadge(); renderWish(); saveStorage();
+  }
+
+  // INIT
+  renderCart(); renderWish(); updateWishBadge(); updateWishIcons(); loadReviews();
+
+</script>
+
+<!-- MODAL DETALLE PRODUCTO -->
+<style>
+  #pm-overlay { display:none;position:fixed;inset:0;background:rgba(0,0,0,0.55);z-index:700;align-items:center;justify-content:center;padding:1rem; }
+  #pm-inner { background:#fff;max-width:820px;width:100%;display:flex;flex-wrap:wrap;gap:2rem;padding:2rem;position:relative;max-height:90vh;overflow-y:auto;border-radius:4px; }
+  #pm-img-wrap { flex:0 0 240px;background:var(--crema);border:1.5px solid var(--menta);display:flex;align-items:center;justify-content:center;min-height:240px; }
+  #pm-img { max-width:100%;max-height:260px;object-fit:contain;padding:1.2rem; }
+  #pm-info { flex:1;min-width:220px;display:flex;flex-direction:column;gap:0.75rem; }
+  @media(max-width:560px){
+    #pm-inner { flex-direction:column;gap:1rem;padding:1.2rem; }
+    #pm-img-wrap { flex:none;width:100%;min-height:180px; }
+    #pm-img { max-height:180px; }
+  }
+  .lightbox-modal {
+    display: none;
+    position: fixed;
+    z-index: 9999;
+    left: 0; top: 0;
+    width: 100%; height: 100%;
+    overflow: auto;
+    background-color: rgba(0, 0, 0, 0.85);
+    backdrop-filter: blur(5px);
+}
+
+.lightbox-content {
+    display: block;
+    margin: 80px auto 0;
+    max-width: 85%;
+    max-height: 75vh;
+    object-fit: contain;
+    border-radius: 8px;
+    animation: lb-zoom 0.3s ease;
+}
+@keyframes lb-zoom {
+    from { transform: scale(0.7); opacity: 0; }
+    to   { transform: scale(1);   opacity: 1; }
+}
+
+/* Contador píldora - arriba al centro */
+.lightbox-counter {
+    position: absolute;
+    top: 20px;
+    left: 50%;
+    transform: translateX(-50%);
+    z-index: 10010;
+    display: flex;
+    align-items: center;
+    gap: 7px;
+    background: rgba(99, 153, 34, 0.18);
+    border: 1.5px solid rgba(99, 153, 34, 0.5);
+    border-radius: 999px;
+    padding: 6px 20px;
+    font-size: 15px;
+    font-weight: 600;
+    color: #c0dd97;
+    font-family: sans-serif;
+    letter-spacing: 0.05em;
+    white-space: nowrap;
+}
+/* Botón cerrar - arriba a la derecha */
+.lightbox-close {
+    position: absolute;
+    top: 16px;
+    right: 24px;
+    z-index: 10010;
+    width: 42px; height: 42px;
+    border-radius: 50%;
+    border: 1.5px solid rgba(255,255,255,0.25);
+    background: rgba(255,255,255,0.08);
+    color: #fff;
+    font-size: 22px;
+    line-height: 1;
+    display: flex; align-items: center; justify-content: center;
+    cursor: pointer;
+    transition: background 0.2s, border-color 0.2s, transform 0.15s;
+}
+.lightbox-close:hover {
+    background: #639922;
+    border-color: #639922;
+    transform: scale(1.08);
+}
+
+/* Flechas prev / next */
+.lightbox-prev,
+.lightbox-next {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 52px; height: 52px;
+    border-radius: 50%;
+    border: 1.5px solid rgba(99, 153, 34, 0.6);
+    background: rgba(99, 153, 34, 0.12);
+    color: #c0dd97;
+    font-size: 24px;
+    display: flex; align-items: center; justify-content: center;
+    cursor: pointer;
+    transition: background 0.2s, color 0.2s, border-color 0.2s, transform 0.15s;
+    user-select: none;
+    z-index: 10000;
+}
+.lightbox-prev { left: 3%; }
+.lightbox-next { right: 3%; }
+
+.lightbox-prev:hover,
+.lightbox-next:hover {
+    background: #639922;
+    border-color: #639922;
+    color: #fff;
+    transform: translateY(-50%) scale(1.1);
+}
+
+@media (max-width: 768px) {
+    .lightbox-prev, .lightbox-next {
+        width: 40px; height: 40px;
+        font-size: 18px;
+    }
+    .lightbox-prev { left: 1.5%; }
+    .lightbox-next { right: 1.5%; }
+}
+</style>
+<div id="pm-overlay" onclick="if(event.target===this)closePM()">
+  <div id="pm-inner">
+    <button onclick="closePM()" style="position:absolute;top:1rem;right:1.2rem;background:none;border:none;font-size:1.4rem;cursor:pointer;color:var(--gc);line-height:1;">&#x2715;</button>
+    <div id="pm-img-wrap">
+      <img id="pm-img" src="" alt="">
+    </div>
+    <div style="flex:1;display:flex;flex-direction:column;gap:0.75rem;">
+      <p style="font-size:0.68rem;font-weight:700;text-transform:uppercase;letter-spacing:0.15em;color:var(--vm);margin:0;">Conservador Natural</p>
+      <h2 id="pm-name" style="font-family:'Playfair Display',serif;font-size:1.5rem;font-weight:900;color:var(--vo);margin:0;line-height:1.1;"></h2>
+      <p id="pm-price" style="font-size:1.7rem;font-weight:800;color:var(--vo);margin:0;"></p>
+      <p id="pm-desc" style="font-size:0.88rem;color:var(--gm);line-height:1.75;margin:0;"></p>
+      <p style="font-size:0.8rem;color:var(--gc);margin:0;"><strong style="color:var(--go);">Contenido neto:</strong> <span id="pm-cont"></span></p>
+      <div style="display:flex;align-items:center;gap:1rem;border:1.5px solid var(--menta);width:fit-content;padding:0.4rem 1rem;margin-top:0.2rem;">
+        <button onclick="pmQty(-1)" style="background:none;border:none;font-size:1.3rem;cursor:pointer;color:var(--go);font-weight:700;line-height:1;">&#8722;</button>
+        <span id="pm-qty" style="font-weight:700;font-size:1rem;min-width:1.5rem;text-align:center;color:var(--vo);">1</span>
+        <button onclick="pmQty(1)" style="background:none;border:none;font-size:1.3rem;cursor:pointer;color:var(--go);font-weight:700;line-height:1;">+</button>
+      </div>
+      <button class="btn-full" onclick="pmAddToCart()" style="margin-top:0.3rem;"><span>Agregar al carrito</span></button>
+      <button id="pm-wish-btn" onclick="pmToggleWish()" style="background:none;border:1.5px solid var(--menta);padding:0.85rem;font-family:'Raleway',sans-serif;font-size:0.85rem;font-weight:600;cursor:pointer;color:var(--gc);transition:all 0.2s;letter-spacing:0.04em;">Lista de deseos</button>
+      <p style="color:var(--vm);font-size:0.82rem;font-weight:600;margin:0;">&#11044; En stock y listo para envio</p>
+    </div>
+  </div>
+</div>
+<div id="custom-lightbox" class="lightbox-modal">
+    <span class="lightbox-close">&times;</span>
+    <div id="lightbox-counter" class="lightbox-counter"></div>
+    <span class="lightbox-prev">&#10094;</span>
+    <img class="lightbox-content" id="lightbox-img" alt="Vista ampliada">
+    <span class="lightbox-next">&#10095;</span>
+</div>
+<script>
+(function() {
+    function inicializarLightbox() {
+        const lightbox = document.getElementById("custom-lightbox");
+        const lightboxImg = document.getElementById("lightbox-img");
+        const closeBtn = document.querySelector(".lightbox-close");
+        const prevBtn = document.querySelector(".lightbox-prev");
+        const nextBtn = document.querySelector(".lightbox-next");
+        const counter = document.getElementById("lightbox-counter");
+        
+        const imagenes = Array.from(document.querySelectorAll("img")).filter(img => img.id !== "lightbox-img" && img.offsetParent !== null);
+        let indiceActual = 0;
+
+        if (!lightbox || !lightboxImg) return;
+
+        imagenes.forEach(function (imagen, indice) {
+            imagen.style.cursor = "zoom-in";
+            imagen.addEventListener("click", function () {
+                indiceActual = indice;
+                actualizarImagen();
+                lightbox.style.display = "block";
+                document.body.style.overflow = "hidden";
+            });
+        });
+
+        function actualizarImagen() {
+            if (imagenes[indiceActual]) {
+                lightboxImg.src = imagenes[indiceActual].src;
+                if (counter) {
+                    counter.textContent = (indiceActual + 1) + " / " + imagenes.length;
+                }
+            }
+        }
+
+        function mostrarSiguiente() {
+            indiceActual = (indiceActual + 1) % imagenes.length;
+            actualizarImagen();
+        }
+
+        function mostrarAnterior() {
+            indiceActual = (indiceActual - 1 + imagenes.length) % imagenes.length;
+            actualizarImagen();
+        }
+
+        function cerrarModal() {
+            lightbox.style.display = "none";
+            document.body.style.overflow = "auto";
+        }
+
+        if (closeBtn) closeBtn.addEventListener("click", cerrarModal);
+        if (nextBtn) nextBtn.addEventListener("click", mostrarSiguiente);
+        if (prevBtn) prevBtn.addEventListener("click", mostrarAnterior);
+        
+        lightbox.addEventListener("click", function (evento) {
+            if (evento.target === lightbox) cerrarModal();
+        });
+
+        document.addEventListener("keydown", function (evento) {
+            if (lightbox.style.display === "block") {
+                if (evento.key === "ArrowRight") mostrarSiguiente();
+                if (evento.key === "ArrowLeft") mostrarAnterior();
+                if (evento.key === "Escape") cerrarModal();
+            }
+        });
+    }
+
+    if (document.readyState === "loading") {
+        document.addEventListener("DOMContentLoaded", inicializarLightbox);
+    } else {
+        inicializarLightbox();
+    }
+})();
+</script>
+</body>
+</html>
