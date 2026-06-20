@@ -1648,9 +1648,9 @@ fetch('/api/create-preference', {
 })();
 </script>
 <script>
-// === AUTOCOMPLETAR POR CÓDIGO POSTAL ===
-document.getElementById('f-cp').addEventListener('input', async function() {
-  const cp = this.value.trim();
+document.addEventListener('input', async function(e) {
+  if (e.target.id !== 'f-cp') return;
+  const cp = e.target.value.trim();
   if (cp.length !== 5) return;
 
   try {
@@ -1660,11 +1660,8 @@ document.getElementById('f-cp').addEventListener('input', async function() {
     if (!data.zip_codes || data.zip_codes.length === 0) return;
 
     const info = data.zip_codes[0];
-
-    // Llenar ciudad y estado automáticamente
     document.getElementById('f-ciudad').value = info.d_mnpio || '';
 
-    // Convertir colonia a dropdown con todas las colonias del CP
     const colonias = data.zip_codes.map(z => z.d_asenta);
     const coloniaInput = document.getElementById('f-colonia');
 
