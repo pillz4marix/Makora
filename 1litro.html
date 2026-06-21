@@ -1722,11 +1722,11 @@ async function buscarCP(cp) {
   }
 }
 function addToCartAndCheckout(pres) {
-  var found = false;
-  for (var i = 0; i < cart.length; i++) { if (cart[i].pres === pres) { found = true; break; } }
-  if (!found) cart.push({ pres: pres, qty: 1 });
+  cart = [];
+  cart.push({ pres: pres, qty: 1 });
   updateCartBadge();
   saveStorage();
+  openCheckout();
 }
 </script>
 </body>
