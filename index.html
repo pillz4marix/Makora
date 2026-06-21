@@ -1001,7 +1001,6 @@ var totalStr = totalNum > 0 ? '$' + totalNum.toLocaleString('es-MX') + ' MXN' : 
 });
 
       // Redirigir a Mercado Pago segun presentación
-      var precios = { '100 ml': 36, '1 Litro': 97, '10 Litros': 629, '20 Litros': 1124 };
 var items = cart.map(function(i) {
   return {
     title: 'Makora ' + i.pres,
