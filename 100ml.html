@@ -960,10 +960,10 @@
       Agregar al carrito
     </button>
 
-    <a class="btn-comprar btn-comprar-ahora" href="https://mpago.la/2cscgi2" target="_blank">
+    <button class="btn-comprar btn-comprar-ahora" onclick="addToCartAndCheckout('100 ml'); openCheckout();">
       <svg viewBox="0 0 24 24"><path d="M6 2L3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z"/><line x1="3" y1="6" x2="21" y2="6"/><path d="M16 10a4 4 0 0 1-8 0"/></svg>
       Comprar ahora
-    </a>
+    </button>
 
     <a class="btn-volver" href="index.html">
       ← Ver todas las presentaciones
@@ -1720,6 +1720,13 @@ async function buscarCP(cp) {
     document.getElementById('cp-loading').style.display = 'none';
     document.getElementById('cp-error').style.display = 'block';
   }
+}
+function addToCartAndCheckout(pres) {
+  var found = false;
+  for (var i = 0; i < cart.length; i++) { if (cart[i].pres === pres) { found = true; break; } }
+  if (!found) cart.push({ pres: pres, qty: 1 });
+  updateCartBadge();
+  saveStorage();
 }
 </script>
 </body>
