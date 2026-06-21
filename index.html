@@ -984,6 +984,7 @@
       ['f-nombre','f-tel','f-email','f-calle','f-ext','f-int','f-colonia','f-ciudad','f-cp'].forEach(function(id) { document.getElementById(id).value = ''; });
       btn.disabled = false; txt.textContent = 'Enviar pedido'; spin.style.display = 'none';
 
+      var precios = { '100 ml': 36, '1 Litro': 97, '10 Litros': 629, '20 Litros': 1124 };
       var totalNum = 0;
 cart.forEach(function(i) { if (precios[i.pres]) totalNum += precios[i.pres] * i.qty; });
 var totalStr = totalNum > 0 ? '$' + totalNum.toLocaleString('es-MX') + ' MXN' : 'A confirmar';
