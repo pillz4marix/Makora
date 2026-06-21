@@ -953,6 +953,10 @@
     });
     var em = document.getElementById('f-email');
     if (em.value && !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(em.value)) { em.classList.add('error'); ok = false; }
+    if (document.getElementById('cp-fields').style.display === 'none') {
+      document.getElementById('f-cp').classList.add('error');
+      ok = false;
+    }
     return ok;
   }
   function submitOrder() {

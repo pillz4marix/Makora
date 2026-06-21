@@ -959,10 +959,10 @@
       Agregar al carrito
     </button>
 
-    <a class="btn-comprar btn-comprar-ahora" href="https://mpago.la/2RG4YjF" target="_blank">
+    <button class="btn-comprar btn-comprar-ahora" onclick="addToCartAndCheckout('100 ml'); openCheckout();">
       <svg viewBox="0 0 24 24"><path d="M6 2L3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z"/><line x1="3" y1="6" x2="21" y2="6"/><path d="M16 10a4 4 0 0 1-8 0"/></svg>
       Comprar ahora
-    </a>
+    </button>
 
     <a class="btn-volver" href="index.html">
       ← Ver todas las presentaciones
@@ -1207,6 +1207,7 @@
     return ok;
   }
   function submitOrder() {
+    var precios = { '100 ml': 36, '1 Litro': 97, '10 Litros': 629, '20 Litros': 1124 };
     if (!validate()) { showResult('error', 'Por favor completa todos los campos correctamente.'); return; }
     var btn = document.getElementById('submit-btn');
     var txt = document.getElementById('btn-txt');
@@ -1234,18 +1235,23 @@
       ['f-nombre','f-tel','f-email','f-calle','f-ext','f-int','f-colonia','f-ciudad','f-cp'].forEach(function(id) { document.getElementById(id).value = ''; });
       btn.disabled = false; txt.textContent = 'Enviar pedido'; spin.style.display = 'none';
 
-      emailjs.send('service_zznkcnu', 'template_mnzy8af', {
-        nombre: params.nombre,
-        telefono: params.telefono,
-        email: params.email,
-        direccion: params.direccion,
-        presentacion: params.presentacion,
-        cantidad: params.cantidad,
-        to_email: params.email
-      });
+      var precios = { '100 ml': 36, '1 Litro': 97, '10 Litros': 629, '20 Litros': 1124 };
+      var totalNum = 0;
+cart.forEach(function(i) { if (precios[i.pres]) totalNum += precios[i.pres] * i.qty; });
+var totalStr = totalNum > 0 ? '$' + totalNum.toLocaleString('es-MX') + ' MXN' : 'A confirmar';
+
+    emailjs.send('service_zznkcnu', 'template_mnzy8af', {
+      nombre: params.nombre,
+      telefono: params.telefono,
+      email: params.email,
+      direccion: params.direccion,
+      presentacion: params.presentacion,
+      cantidad: params.cantidad,
+      total: totalStr,
+      to_email: params.email
+});
 
       // Redirigir a Mercado Pago segun presentación
-      var precios = { '100 ml': 36, '1 Litro': 97, '10 Litros': 629, '20 Litros': 1124 };
 var items = cart.map(function(i) {
   return {
     title: 'Makora ' + i.pres,
@@ -1714,6 +1720,13 @@ async function buscarCP(cp) {
     document.getElementById('cp-loading').style.display = 'none';
     document.getElementById('cp-error').style.display = 'block';
   }
+}
+function addToCartAndCheckout(pres) {
+  cart = [];
+  cart.push({ pres: pres, qty: 1 });
+  updateCartBadge();
+  saveStorage();
+  openCheckout();
 }
 </script>
 </body>

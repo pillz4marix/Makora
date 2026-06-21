@@ -959,7 +959,7 @@
       Agregar al carrito
     </button>
 
-    <button class="btn-comprar btn-comprar-ahora" onclick="addToCartAndCheckout('100 ml'); openCheckout();">
+    <button class="btn-comprar btn-comprar-ahora" onclick="addToCartAndCheckout('1 Litro');">
       <svg viewBox="0 0 24 24"><path d="M6 2L3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z"/><line x1="3" y1="6" x2="21" y2="6"/><path d="M16 10a4 4 0 0 1-8 0"/></svg>
       Comprar ahora
     </button>
@@ -1204,6 +1204,10 @@
     });
     var em = document.getElementById('f-email');
     if (em.value && !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(em.value)) { em.classList.add('error'); ok = false; }
+    if (document.getElementById('cp-fields').style.display === 'none') {
+      document.getElementById('f-cp').classList.add('error');
+      ok = false;
+    }
     return ok;
   }
   function submitOrder() {
