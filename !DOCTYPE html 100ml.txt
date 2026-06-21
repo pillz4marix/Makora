@@ -825,6 +825,7 @@
     <div class="modal-head"><h3>Confirmar pedido</h3><button class="modal-close" onclick="closeModal()">&#x2715;</button></div>
     <div class="modal-body">
       <div class="modal-summary" id="modal-summary"></div>
+
       <div class="form-grid">
         <div class="field"><label for="f-nombre">Nombre completo *</label><input type="text" id="f-nombre" placeholder="Ana Martinez"/></div>
         <div class="field"><label for="f-tel">Teléfono *</label><input type="tel" id="f-tel" placeholder="614 000 0000"/></div>
@@ -835,15 +836,30 @@
         <div class="field"><label for="f-ext">Número exterior *</label><input type="text" id="f-ext" placeholder="123"/></div>
         <div class="field"><label for="f-int">Número interior (opcional)</label><input type="text" id="f-int" placeholder="4B"/></div>
       </div>
-      <div class="form-grid">
-        <div class="field"><label for="f-colonia">Colonia *</label><input type="text" id="f-colonia" placeholder="Centro"/></div>
-        <div class="field"><label for="f-ciudad">Ciudad *</label><input type="text" id="f-ciudad" placeholder="Chihuahua"/></div>
+
+      <div class="form-grid full" style="margin-bottom:0.8rem;">
+        <div class="field">
+          <label for="f-cp">Código postal *</label>
+          <input type="text" id="f-cp" placeholder="31000" maxlength="5" oninput="buscarCP(this.value)"/>
+        </div>
       </div>
-      <div class="form-grid full" style="margin-bottom:1rem;"><div class="field"><label for="f-cp">Código postal *</label><input type="text" id="f-cp" placeholder="31000"/></div></div>
+
+      <div class="form-grid" id="cp-fields" style="display:none;">
+        <div class="field">
+          <label for="f-colonia">Colonia *</label>
+          <select id="f-colonia" style="padding:0.75rem 1rem;border:1.5px solid var(--menta);background:var(--crema);font-family:Raleway,sans-serif;font-size:0.9rem;color:var(--go);outline:none;width:100%;"></select>
+        </div>
+        <div class="field">
+          <label for="f-ciudad">Ciudad *</label>
+          <input type="text" id="f-ciudad" placeholder="Chihuahua" readonly style="background:#f0f0f0;"/>
+        </div>
+      </div>
+      <div id="cp-loading" style="display:none;font-size:0.8rem;color:var(--gc);margin-bottom:0.8rem;">Buscando código postal...</div>
+      <div id="cp-error" style="display:none;font-size:0.8rem;color:#c0392b;margin-bottom:0.8rem;">Código postal no encontrado.</div>
+
       <div class="payment-note"><strong>Tiempo de entrega</strong>Te contactaremos para coordinar la entrega.</div>
       <button class="btn-full" id="submit-btn" onclick="submitOrder()">
-        <span id="btn-txt">Enviar pedido y pagar</span>
-        <span class="btn-spinner" id="btn-spin"></span>
+        <span>Enviar pedido</span><div class="btn-spinner" id="btn-spinner"></div>
       </button>
       <div id="order-result"></div>
     </div>
@@ -996,6 +1012,8 @@
   // ESTADO
   var cart = JSON.parse(localStorage.getItem('makora_cart') || '[]');
   var wishlist = JSON.parse(localStorage.getItem('makora_wish') || '[]');
+  updateCartBadge();
+  updateWishBadge();
   var currentPres = '100 ml';
   var currentQty = 1;
   var currentReviewStars = 0;
@@ -1216,6 +1234,7 @@
     emailjs.send('service_zznkcnu', 'template_6o9o7d8', params).then(function() {
       ['f-nombre','f-tel','f-email','f-calle','f-ext','f-int','f-colonia','f-ciudad','f-cp'].forEach(function(id) { document.getElementById(id).value = ''; });
       btn.disabled = false; txt.textContent = 'Enviar pedido'; spin.style.display = 'none';
+      
       // Redirigir a Mercado Pago segun presentación
       var precios = { '100 ml': 36, '1 Litro': 97, '10 Litros': 629, '20 Litros': 1124 };
 var items = cart.map(function(i) {
@@ -1649,40 +1668,44 @@ fetch('/api/create-preference', {
 })();
 </script>
 <script>
-document.addEventListener('input', async function(e) {
-  if (e.target.id !== 'f-cp') return;
-  const cp = e.target.value.trim();
-  if (cp.length !== 5) return;
+async function buscarCP(cp) {
+  if (cp.length !== 5) {
+    document.getElementById('cp-fields').style.display = 'none';
+    document.getElementById('cp-error').style.display = 'none';
+    return;
+  }
+  document.getElementById('cp-loading').style.display = 'block';
+  document.getElementById('cp-fields').style.display = 'none';
+  document.getElementById('cp-error').style.display = 'none';
 
   try {
-    const res = await fetch(`https://sepomex.restapi.com.mx/api/v1/zip_codes?zip_code=${cp}`);
+    const res = await fetch(`https://postali.app/api/v1/cp/${cp}`);
     const data = await res.json();
+    document.getElementById('cp-loading').style.display = 'none';
 
-    if (!data.zip_codes || data.zip_codes.length === 0) return;
+    if (!data.asentamientos || data.asentamientos.length === 0) {
+      document.getElementById('cp-error').style.display = 'block';
+      return;
+    }
 
-    const info = data.zip_codes[0];
-    document.getElementById('f-ciudad').value = info.d_mnpio || '';
+    document.getElementById('f-ciudad').value = data.municipio || '';
 
-    const colonias = data.zip_codes.map(z => z.d_asenta);
-    const coloniaInput = document.getElementById('f-colonia');
-
-    const select = document.createElement('select');
-    select.id = 'f-colonia';
-    select.style.cssText = 'padding:0.75rem 1rem;border:1.5px solid var(--menta);background:var(--crema);font-family:Raleway,sans-serif;font-size:0.9rem;color:var(--go);outline:none;width:100%;';
-
-    colonias.forEach(c => {
+    const select = document.getElementById('f-colonia');
+    select.innerHTML = '';
+    data.asentamientos.forEach(z => {
       const opt = document.createElement('option');
-      opt.value = c;
-      opt.textContent = c;
+      opt.value = z.nombre;
+      opt.textContent = z.nombre;
       select.appendChild(opt);
     });
 
-    coloniaInput.replaceWith(select);
+    document.getElementById('cp-fields').style.display = 'grid';
 
   } catch(e) {
-    console.error('Error al buscar CP:', e);
+    document.getElementById('cp-loading').style.display = 'none';
+    document.getElementById('cp-error').style.display = 'block';
   }
-});
+}
 </script>
 </body>
 </html>
