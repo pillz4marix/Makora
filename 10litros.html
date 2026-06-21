@@ -1234,6 +1234,10 @@
     emailjs.send('service_zznkcnu', 'template_6o9o7d8', params).then(function() {
       ['f-nombre','f-tel','f-email','f-calle','f-ext','f-int','f-colonia','f-ciudad','f-cp'].forEach(function(id) { document.getElementById(id).value = ''; });
       btn.disabled = false; txt.textContent = 'Enviar pedido'; spin.style.display = 'none';
+      emailjs.send('service_zznkcnu', 'template_mnzy8af', {
+  ...params,
+  to_email: params.email
+});
       // Redirigir a Mercado Pago segun presentación
       var precios = { '100 ml': 36, '1 Litro': 97, '10 Litros': 629, '20 Litros': 1124 };
 var items = cart.map(function(i) {
