@@ -1208,6 +1208,7 @@
     return ok;
   }
   function submitOrder() {
+    var precios = { '100 ml': 36, '1 Litro': 97, '10 Litros': 629, '20 Litros': 1124 };
     if (!validate()) { showResult('error', 'Por favor completa todos los campos correctamente.'); return; }
     var btn = document.getElementById('submit-btn');
     var txt = document.getElementById('btn-txt');
