@@ -18,8 +18,8 @@
     html{scroll-behavior:smooth;}
     body{font-family:'Raleway',sans-serif;background:var(--crema);color:var(--go);overflow-x:hidden;}
     #main-nav{display:flex;align-items:center;justify-content:space-between;padding:0.8rem 5%;}
-    nav{position:fixed;top:0;left:0;right:0;z-index:300;display:flex;align-items:center;justify-content:space-between;padding:0.8rem 5%;background:rgba(244,251,244,0.97);backdrop-filter:blur(12px);border-bottom:2px solid var(--vc);transition:box-shadow 0.3s;}
-    nav.scrolled{box-shadow:0 4px 24px rgba(42,74,42,0.10);}
+    nav{position:fixed;top:0;left:0;right:0;z-index:300;display:flex;align-items:center;justify-content:space-between;padding:0.8rem 5%;background:#f4fbf4f7;backdrop-filter:blur(12px);border-bottom:2px solid var(--vc);transition:box-shadow 0.3s;}
+    nav.scrolled{box-shadow:0 4px 24px #2a4a2a1a;}
     .nav-logo img{height:44px;width:auto;object-fit:contain;}
     .nav-links{display:flex;gap:2rem;list-style:none;}
     .nav-links a{font-size:0.78rem;font-weight:700;text-transform:uppercase;letter-spacing:0.12em;color:var(--vo);text-decoration:none;position:relative;padding-bottom:2px;}
