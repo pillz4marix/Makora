@@ -18,8 +18,8 @@
     html{scroll-behavior:smooth;}
     body{font-family:'Raleway',sans-serif;background:var(--crema);color:var(--go);overflow-x:hidden;}
     #main-nav{display:flex;align-items:center;justify-content:space-between;padding:0.8rem 5%;}
-    nav{position:fixed;top:0;left:0;right:0;z-index:300;display:flex;align-items:center;justify-content:space-between;padding:0.8rem 5%;background:rgba(244,251,244,0.97);backdrop-filter:blur(12px);border-bottom:2px solid var(--vc);transition:box-shadow 0.3s;}
-    nav.scrolled{box-shadow:0 4px 24px rgba(42,74,42,0.10);}
+    nav{position:fixed;top:0;left:0;right:0;z-index:300;display:flex;align-items:center;justify-content:space-between;padding:0.8rem 5%;background:#f4fbf4f7;backdrop-filter:blur(12px);border-bottom:2px solid var(--vc);transition:box-shadow 0.3s;}
+    nav.scrolled{box-shadow:0 4px 24px #2a4a2a1a;}
     .nav-logo img{height:44px;width:auto;object-fit:contain;}
     .nav-links{display:flex;gap:2rem;list-style:none;}
     .nav-links a{font-size:0.78rem;font-weight:700;text-transform:uppercase;letter-spacing:0.12em;color:var(--vo);text-decoration:none;position:relative;padding-bottom:2px;}
@@ -502,14 +502,41 @@
       w.style.cssText='left:'+(5+Math.random()*90)+'%;animation-duration:'+(11+Math.random()*12)+'s;animation-delay:'+Math.random()*10+'s;';
       lc.appendChild(w);
     }
-    window.addEventListener('scroll',function(){
+    // Nav oculto al inicio
+    var nav=document.getElementById('main-nav');
+    if(nav){nav.style.opacity='0';nav.style.pointerEvents='none';nav.style.transition='opacity 0.4s ease';}
+
+    function onScroll(){
       var intro=document.getElementById('mk-intro');
+      var nav=document.getElementById('main-nav');
+      var nameEl=document.getElementById('mk-name');
       var scrollY=window.scrollY;
       var h=window.innerHeight;
-      var progress=Math.min(scrollY/(h*0.4),1);
+
+      // Intro: fade + leve scale
+      var progress=Math.min(scrollY/(h*0.45),1);
       intro.style.opacity=1-progress;
-      intro.style.transform='scale('+(1-progress*0.04)+') translateY('+(-scrollY*0.25)+'px)';
-    });
+      intro.style.transform='scale('+(1-progress*0.03)+') translateY('+(-scrollY*0.2)+'px)';
+
+      // MAKORA grande: se achica y sube hacia el nav
+      if(nameEl){
+        var nameScale=1-progress*0.7;
+        var nameUp=-scrollY*0.35;
+        nameEl.style.transform='scale('+nameScale+') translateY('+nameUp+'px)';
+        nameEl.style.transformOrigin='center top';
+        nameEl.style.opacity=1-progress*1.5;
+      }
+
+      // Nav: aparece cuando las letras llegan arriba
+      if(nav){
+        var navProgress=Math.max(0,Math.min((scrollY-h*0.3)/(h*0.15),1));
+        nav.style.opacity=navProgress;
+        nav.style.pointerEvents=navProgress>0.5?'all':'none';
+      }
+    }
+    window.addEventListener('scroll', onScroll);
+    onScroll();
+    setTimeout(onScroll, 100);
   })();
 </script>
 
