@@ -326,8 +326,193 @@
 @keyframes ticker{0%{transform:translateX(0);}100%{transform:translateX(-50%);}}
 
   </style>
+  <style>
+    /* ── INTRO MAKORA ── */
+    #mk-intro{
+      font-family:'Raleway',sans-serif;
+      background:linear-gradient(160deg,#f4fbf4 0%,#e8f5e8 60%,#d0ebd0 100%);
+      min-height:100vh;height:100vh;
+      display:flex;flex-direction:column;
+      align-items:center;justify-content:center;
+      position:relative;overflow:hidden;
+      padding:3rem 2rem 5rem;
+      will-change:opacity,transform;
+    }
+    #mk-intro .mk-particles{position:absolute;inset:0;pointer-events:none;}
+    #mk-intro .mk-particle{
+      position:absolute;border-radius:50%;
+      background:radial-gradient(circle,rgba(58,107,58,0.15),transparent 70%);
+      animation:mkFloatP linear infinite;
+    }
+    @keyframes mkFloatP{
+      0%{transform:translateY(110%) scale(0.6);opacity:0;}
+      10%{opacity:1;}90%{opacity:0.6;}
+      100%{transform:translateY(-20%) scale(1.1);opacity:0;}
+    }
+    #mk-intro .mk-leaves{position:absolute;inset:0;pointer-events:none;}
+    #mk-intro .mk-leaf{position:absolute;opacity:0;animation:mkLeafFall linear infinite;}
+    @keyframes mkLeafFall{
+      0%{transform:translateY(-5%) rotate(0deg);opacity:0;}
+      10%{opacity:0.6;}90%{opacity:0.3;}
+      100%{transform:translateY(110%) rotate(360deg);opacity:0;}
+    }
+    #mk-intro .mk-ring{
+      position:absolute;border-radius:50%;
+      border:1.5px solid rgba(58,107,58,0.10);
+      animation:mkExpandRing 4s ease-out infinite;
+    }
+    @keyframes mkExpandRing{
+      0%{transform:scale(0.3);opacity:0.7;}
+      100%{transform:scale(2.5);opacity:0;}
+    }
+    #mk-intro .mk-logo-wrap{
+      display:flex;align-items:center;gap:0.8rem;
+      margin-bottom:2.8rem;
+      opacity:0;animation:mkFadeDown 0.8s 0.3s ease forwards;
+    }
+    #mk-intro .mk-logo-text{
+      font-family:'Playfair Display',serif;font-size:1rem;
+      font-weight:700;color:#2a4a2a;
+      letter-spacing:0.1em;text-transform:uppercase;
+    }
+    #mk-intro .mk-pre{
+      display:block;font-size:0.65rem;font-weight:700;
+      text-transform:uppercase;letter-spacing:0.3em;color:#3a6b3a;
+      margin-bottom:1rem;opacity:0;
+      animation:mkFadeDown 0.7s 0.5s ease forwards;
+    }
+    #mk-intro .mk-name{
+      font-family:'Playfair Display',serif;
+      font-size:clamp(3.2rem,14vw,6.5rem);
+      font-weight:900;color:#2a4a2a;
+      line-height:1;letter-spacing:-0.01em;
+      display:flex;justify-content:center;overflow:hidden;
+      margin-bottom:1.2rem;
+    }
+    #mk-intro .mk-letter{
+      display:inline-block;opacity:0;
+      transform:translateY(60px) rotateX(40deg);
+      animation:mkLetterUp 0.5s ease forwards;
+    }
+    @keyframes mkLetterUp{
+      to{opacity:1;transform:translateY(0) rotateX(0deg);}
+    }
+    #mk-intro .mk-tagline{
+      font-family:'Playfair Display',serif;font-style:italic;
+      font-size:clamp(0.9rem,3vw,1.25rem);color:#3a6b3a;
+      opacity:0;animation:mkFadeDown 0.7s 1.4s ease forwards;
+      letter-spacing:0.02em;text-align:center;
+      margin-bottom:0;padding:0 1rem;
+    }
+    #mk-intro .mk-cta{
+      margin-top:3.2rem;
+      opacity:0;animation:mkFadeDown 0.7s 1.8s ease forwards;
+      display:flex;flex-direction:column;align-items:center;gap:0.6rem;
+      cursor:pointer;
+    }
+    #mk-intro .mk-cta-text{
+      font-size:0.68rem;font-weight:700;
+      text-transform:uppercase;letter-spacing:0.18em;color:#3a6b3a;
+    }
+    #mk-intro .mk-arrow{
+      width:30px;height:30px;border:1.5px solid #3a6b3a;
+      border-radius:50%;display:flex;align-items:center;justify-content:center;
+      animation:mkBounceArrow 1.5s 2.3s ease-in-out infinite;
+    }
+    #mk-intro .mk-arrow svg{width:13px;height:13px;stroke:#3a6b3a;fill:none;stroke-width:2.5;}
+    @keyframes mkBounceArrow{
+      0%,100%{transform:translateY(0);}50%{transform:translateY(6px);}
+    }
+    @keyframes mkFadeDown{
+      from{opacity:0;transform:translateY(-16px);}
+      to{opacity:1;transform:translateY(0);}
+    }
+    #mk-intro .mk-wave{
+      position:absolute;bottom:-1px;left:0;right:0;height:90px;overflow:hidden;
+    }
+    #mk-intro .mk-wave svg{width:100%;height:100%;}
+    @media(max-width:480px){
+      #mk-intro .mk-ring{display:none;}
+      #mk-intro .mk-logo-wrap{margin-bottom:2rem;}
+      #mk-intro .mk-pre{letter-spacing:0.15em;}
+      #mk-intro .mk-cta{margin-top:2.5rem;}
+      #mk-intro .mk-wave{height:60px;}
+    }
+  </style>
 </head>
 <body>
+
+<!-- ── INTRO MAKORA ── -->
+<div id="mk-intro">
+  <div class="mk-particles" id="mk-particles"></div>
+  <div class="mk-leaves" id="mk-leaves"></div>
+  <div style="position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);width:min(420px,90vw);height:min(420px,90vw);pointer-events:none;">
+    <div class="mk-ring" style="width:100%;height:100%;top:0;left:0;animation-delay:0s;"></div>
+    <div class="mk-ring" style="width:100%;height:100%;top:0;left:0;animation-delay:1.4s;"></div>
+    <div class="mk-ring" style="width:100%;height:100%;top:0;left:0;animation-delay:2.8s;"></div>
+  </div>
+  <div class="mk-logo-wrap">
+    <svg width="36" height="36" viewBox="0 0 42 42" fill="none">
+      <circle cx="21" cy="21" r="20" fill="#2a4a2a" opacity="0.08"/>
+      <path d="M21 8 C21 8 14 14 14 21 C14 28 17.5 32 21 34 C24.5 32 28 28 28 21 C28 14 21 8 21 8Z" fill="#2a4a2a" opacity="0.85"/>
+      <path d="M21 8 C21 8 26 12 26 19 C26 25 23 30 21 34 C21 34 21 20 21 8Z" fill="#3a6b3a"/>
+      <path d="M21 10 C23 8 27 7 28 9" stroke="#3a6b3a" stroke-width="1.5" stroke-linecap="round" fill="none"/>
+    </svg>
+    <span class="mk-logo-text">Grupo Makora</span>
+  </div>
+  <span class="mk-pre">Conservador Natural de Manzana</span>
+  <div class="mk-name" id="mk-name"></div>
+  <p class="mk-tagline">La naturaleza al servicio de la frescura</p>
+  <div class="mk-cta" onclick="window.scrollTo({top:window.innerHeight,behavior:'smooth'})">
+    <span class="mk-cta-text">Descubrir</span>
+    <div class="mk-arrow">
+      <svg viewBox="0 0 14 14"><polyline points="2 4 7 10 12 4"/></svg>
+    </div>
+  </div>
+  <div class="mk-wave">
+    <svg viewBox="0 0 1200 90" preserveAspectRatio="none">
+      <path d="M0,45 C200,90 400,0 600,45 C800,90 1000,0 1200,45 L1200,90 L0,90 Z" fill="#f4fbf4"/>
+    </svg>
+  </div>
+</div>
+<script>
+  (function(){
+    "MAKORA".split('').forEach(function(ch,i){
+      var s=document.createElement('span');
+      s.className='mk-letter';
+      s.textContent=ch;
+      s.style.animationDelay=(0.7+i*0.1)+'s';
+      document.getElementById('mk-name').appendChild(s);
+    });
+    var pc=document.getElementById('mk-particles');
+    for(var i=0;i<12;i++){
+      var p=document.createElement('div');
+      p.className='mk-particle';
+      var sz=60+Math.random()*130;
+      p.style.cssText='width:'+sz+'px;height:'+sz+'px;left:'+Math.random()*100+'%;animation-duration:'+(9+Math.random()*10)+'s;animation-delay:'+Math.random()*9+'s;';
+      pc.appendChild(p);
+    }
+    var lc=document.getElementById('mk-leaves');
+    for(var j=0;j<8;j++){
+      var svg=document.createElementNS('http://www.w3.org/2000/svg','svg');
+      svg.setAttribute('viewBox','0 0 20 28');svg.setAttribute('width','16');svg.setAttribute('height','22');
+      svg.innerHTML='<path d="M10 2 C10 2 3 8 3 16 C3 22 6.5 26 10 27 C13.5 26 17 22 17 16 C17 8 10 2 10 2Z" fill="#3a6b3a" opacity="0.35"/>';
+      var w=document.createElement('div');
+      w.className='mk-leaf';w.appendChild(svg);
+      w.style.cssText='left:'+(5+Math.random()*90)+'%;animation-duration:'+(11+Math.random()*12)+'s;animation-delay:'+Math.random()*10+'s;';
+      lc.appendChild(w);
+    }
+    window.addEventListener('scroll',function(){
+      var intro=document.getElementById('mk-intro');
+      var scrollY=window.scrollY;
+      var h=window.innerHeight;
+      var progress=Math.min(scrollY/(h*0.4),1);
+      intro.style.opacity=1-progress;
+      intro.style.transform='scale('+(1-progress*0.04)+') translateY('+(-scrollY*0.25)+'px)';
+    });
+  })();
+</script>
+
 <div class="toast" id="toast"></div>
 <div class="panel-overlay" id="panel-overlay" onclick="closeAllPanels()"></div>
 
