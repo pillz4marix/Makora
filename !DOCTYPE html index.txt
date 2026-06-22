@@ -4,7 +4,7 @@
   <meta charset="UTF-8"/>
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>GrupoMakora — Conservador Natural de Manzana</title>
-  <link rel="icon" type="image/png" href="favicon.ico">
+  <link rel="icon" type="image/x-icon" href="favicon.ico">
   <link rel="preconnect" href="https://fonts.googleapis.com"/>
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
   <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,700;0,900;1,700&family=Raleway:wght@300;400;600;700&display=swap" rel="stylesheet"/>
@@ -328,7 +328,6 @@
   </style>
 </head>
 <body>
-
 <div class="toast" id="toast"></div>
 <div class="panel-overlay" id="panel-overlay" onclick="closeAllPanels()"></div>
 
@@ -953,9 +952,14 @@
     });
     var em = document.getElementById('f-email');
     if (em.value && !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(em.value)) { em.classList.add('error'); ok = false; }
+    if (document.getElementById('cp-fields').style.display === 'none') {
+      document.getElementById('f-cp').classList.add('error');
+      ok = false;
+    }
     return ok;
   }
   function submitOrder() {
+    var precios = { '100 ml': 36, '1 Litro': 97, '10 Litros': 629, '20 Litros': 1124 };
     if (!validate()) { showResult('error', 'Por favor completa todos los campos correctamente.'); return; }
     var btn = document.getElementById('submit-btn');
     var txt = document.getElementById('btn-txt');
@@ -983,18 +987,23 @@
       ['f-nombre','f-tel','f-email','f-calle','f-ext','f-int','f-colonia','f-ciudad','f-cp'].forEach(function(id) { document.getElementById(id).value = ''; });
       btn.disabled = false; txt.textContent = 'Enviar pedido'; spin.style.display = 'none';
 
-      emailjs.send('service_zznkcnu', 'template_mnzy8af', {
-        nombre: params.nombre,
-        telefono: params.telefono,
-        email: params.email,
-        direccion: params.direccion,
-        presentacion: params.presentacion,
-        cantidad: params.cantidad,
-        to_email: params.email
-      });
+      var precios = { '100 ml': 36, '1 Litro': 97, '10 Litros': 629, '20 Litros': 1124 };
+      var totalNum = 0;
+cart.forEach(function(i) { if (precios[i.pres]) totalNum += precios[i.pres] * i.qty; });
+var totalStr = totalNum > 0 ? '$' + totalNum.toLocaleString('es-MX') + ' MXN' : 'A confirmar';
+
+    emailjs.send('service_zznkcnu', 'template_mnzy8af', {
+      nombre: params.nombre,
+      telefono: params.telefono,
+      email: params.email,
+      direccion: params.direccion,
+      presentacion: params.presentacion,
+      cantidad: params.cantidad,
+      total: totalStr,
+      to_email: params.email
+});
 
       // Redirigir a Mercado Pago segun presentación
-      var precios = { '100 ml': 36, '1 Litro': 97, '10 Litros': 629, '20 Litros': 1124 };
 var items = cart.map(function(i) {
   return {
     title: 'Makora ' + i.pres,
