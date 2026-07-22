@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8"/>
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Makora 100 ml — Conservador Natural</title>
+  <title>Makora 1 Litro — Conservador Natural</title>
   <link rel="icon" type="image/x-icon" href="favicon.ico">
   <link rel="preconnect" href="https://fonts.googleapis.com"/>
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
@@ -908,7 +908,7 @@
   <span>›</span>
   <a href="index.html#presentaciones-grid">Presentaciones</a>
   <span>›</span>
-  <span>100 ml</span>
+  <span>1 Litro</span>
 </div>
 
 <!-- PRODUCT -->
@@ -918,13 +918,13 @@
   <div class="gallery">
     <div class="galeria-scroll">
       
-      <img src="100ml.png" alt="Makora — Vista Grande 1" class="product-bottle"/>
-      <img src="100ml2.png"  alt="Makora — Chica Izquierda 1" class="product-bottle"/>
-      <img src="100ml-persona.png"  alt="Makora — Chica Derecha 1" class="product-bottle"/>
+      <img src="1litro.png" alt="Makora — Vista Grande 1" class="product-bottle"/>
+      <img src="1litro2.png"  alt="Makora — Chica Izquierda 1" class="product-bottle"/>
+      <img src="1litro-persona.png"  alt="Makora — Chica Derecha 1" class="product-bottle"/>
       
-      <img src="100ml3.png"  alt="Makora — Vista Grande 2" class="product-bottle"/>
-      <img src="100ml4.png"  alt="Makora — Chica Izquierda 2" class="product-bottle"/>
-      <img src="100ml5.png"  alt="Makora — Chica Derecha 2" class="product-bottle"/>
+      <img src="1litro3.png"  alt="Makora — Vista Grande 2" class="product-bottle"/>
+      <img src="1litro4.png"  alt="Makora — Chica Izquierda 2" class="product-bottle"/>
+      <img src="1litro5.png"  alt="Makora — Chica Derecha 2" class="product-bottle"/>
       
     </div>
   </div>
@@ -932,13 +932,12 @@
   <!-- INFO -->
   <div class="product-info">
     <p class="product-kicker">Conservador Natural</p>
-    <h1 class="product-name">Makora 100 ml</h1>
-    <p class="product-price">$36 MXN</p>
+    <h1 class="product-name">Makora 1 Litro</h1>
+    <p class="product-price">$97 MXN</p>
 
     <p class="product-desc">
-      Presentación ideal para uso doméstico. Conserva tus frutas y verduras
-      de forma natural con nuestra fórmula elaborada a partir de manzanas
-      chihuahuenses.
+      Para hogares con mayor consumo o pequenos negocios. Mayor rendimiento
+      y ahorro. Formulado con ingredientes 100% naturales.
     </p>
 
     <!-- MODO DE EMPLEO -->
@@ -955,7 +954,7 @@
     <div class="product-meta">
       <div class="product-meta-row">
         <span class="product-meta-label">Contenido neto</span>
-        <span class="product-meta-val">100 ml</span>
+        <span class="product-meta-val">1 Litro</span>
       </div>
       <div class="product-meta-row">
         <span class="product-meta-label">Fórmula</span>
@@ -970,12 +969,12 @@
     <div class="stock-badge">En stock</div>
 
     <!-- BOTONES: AGREGAR AL CARRITO + COMPRAR AHORA -->
-    <button class="btn-comprar btn-carrito-prod" onclick="quickAddToCart('100 ml');openPanel('cart');">
+    <button class="btn-comprar btn-carrito-prod" onclick="quickAddToCart('1 Litro');openPanel('cart');">
       <svg viewBox="0 0 24 24"><circle cx="9" cy="21" r="1"/><circle cx="20" cy="21" r="1"/><path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"/></svg>
       Agregar al carrito
     </button>
 
-    <button class="btn-comprar btn-comprar-ahora" onclick="addToCartAndCheckout('100 ml'); openCheckout();">
+    <button class="btn-comprar btn-comprar-ahora" onclick="addToCartAndCheckout('1 Litro');">
       <svg viewBox="0 0 24 24"><path d="M6 2L3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z"/><line x1="3" y1="6" x2="21" y2="6"/><path d="M16 10a4 4 0 0 1-8 0"/></svg>
       Comprar ahora
     </button>
@@ -1025,7 +1024,7 @@
   var db = firebase.firestore();
 
   // STOCK DINAMICO (controlado desde admin.html)
-  db.collection('stock').doc('100ml').get().then(function(doc){
+  db.collection('stock').doc('1litro').get().then(function(doc){
     if (doc.exists && doc.data().enStock === false) {
       var badge = document.querySelector('.stock-badge');
       if (badge) { badge.textContent = 'Sin stock'; badge.classList.add('sin-stock'); }
@@ -1041,7 +1040,7 @@
   var wishlist = JSON.parse(localStorage.getItem('makora_wish') || '[]');
   updateCartBadge();
   updateWishBadge();
-  var currentPres = '100 ml';
+  var currentPres = '1 Litro';
   var currentQty = 1;
   var currentReviewStars = 0;
   var mpLinks = {
