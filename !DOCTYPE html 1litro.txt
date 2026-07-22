@@ -816,6 +816,12 @@
       font-size:0.75rem;color:var(--gc);
       border-top:1px solid var(--menta);
     }
+    .legal-links{
+      display:flex;gap:1.4rem;flex-wrap:wrap;justify-content:center;
+      padding:1.6rem 1rem 0;font-size:0.72rem;
+    }
+    .legal-links a{color:var(--gc);text-decoration:none;}
+    .legal-links a:hover{color:var(--vm);}
   </style>
 
 </head>
@@ -1006,6 +1012,11 @@
 
 </div>
 
+<div class="legal-links">
+  <a href="terminos-y-condiciones.html">Términos y Condiciones</a>
+  <a href="avisos-de-privacidad.html">Aviso de Privacidad</a>
+  <a href="politica-de-reembolsos.html">Política de Reembolsos</a>
+</div>
 <div class="footer-line">© 2026 Makora — Conservador Natural de Manzana · Chihuahua, México</div>
 
 <script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-app-compat.js"></script>
@@ -1023,6 +1034,9 @@
   });
   var db = firebase.firestore();
 
+  // PRECIOS (valores por defecto, se sobreescriben con lo guardado en admin.html)
+  window.PRECIOS_ACTUALES = { '1 Litro': 97, '5 Litros': 0, '10 Litros': 629, '20 Litros': 1124 };
+
   // STOCK DINAMICO (controlado desde admin.html)
   db.collection('stock').doc('1litro').get().then(function(doc){
     if (doc.exists && doc.data().enStock === false) {
@@ -1034,6 +1048,30 @@
       });
     }
   }).catch(function(err){ console.error('Error leyendo stock:', err); });
+
+  // PRECIOS DINAMICOS (controlados desde admin.html)
+  var PRECIO_IDS = { '1 Litro':'1litro', '5 Litros':'5litros', '10 Litros':'10litros', '20 Litros':'20litros' };
+  db.collection('precios').get().then(function(snap){
+    snap.forEach(function(doc){
+      var nombre = null;
+      Object.keys(PRECIO_IDS).forEach(function(k){ if (PRECIO_IDS[k] === doc.id) nombre = k; });
+      if (!nombre) return;
+      var data = doc.data();
+      if (typeof data.precio === 'number' && data.precio > 0) {
+        window.PRECIOS_ACTUALES[nombre] = data.precio;
+        var texto = '$' + data.precio.toLocaleString('es-MX') + ' MXN';
+        if (typeof pmData !== 'undefined' && pmData[nombre]) pmData[nombre].price = texto;
+        if (nombre === '1 Litro') {
+          var mp = document.querySelector('.product-price');
+          if (mp) mp.textContent = texto;
+        }
+        if (typeof pmPres !== 'undefined' && pmPres === nombre) {
+          var pmP = document.getElementById('pm-price');
+          if (pmP) pmP.textContent = texto;
+        }
+      }
+    });
+  }).catch(function(err){ console.error('Error leyendo precios:', err); });
 
   // ESTADO
   var cart = JSON.parse(localStorage.getItem('makora_cart') || '[]');
@@ -1224,7 +1262,7 @@
   // CHECKOUT
   function openCheckout() {
     if (cart.length === 0) return;
-    var precios = { '1 Litro': 97, '5 Litros': 0, '10 Litros': 629, '20 Litros': 1124 };
+    var precios = window.PRECIOS_ACTUALES;
     var summary = cart.map(function(i) { return 'Makora ' + i.pres + ' x' + i.qty; }).join(', ');
     var total = 0;
     cart.forEach(function(i) { if (precios[i.pres]) total += precios[i.pres] * i.qty; });
@@ -1257,7 +1295,7 @@
     return ok;
   }
   function submitOrder() {
-    var precios = { '1 Litro': 97, '5 Litros': 0, '10 Litros': 629, '20 Litros': 1124 };
+    var precios = window.PRECIOS_ACTUALES;
     if (!validate()) { showResult('error', 'Por favor completa todos los campos correctamente.'); return; }
     var btn = document.getElementById('submit-btn');
     var txt = document.getElementById('btn-txt');
@@ -1285,7 +1323,7 @@
       ['f-nombre','f-tel','f-email','f-calle','f-ext','f-int','f-colonia','f-ciudad','f-cp'].forEach(function(id) { document.getElementById(id).value = ''; });
       btn.disabled = false; txt.textContent = 'Enviar pedido'; spin.style.display = 'none';
 
-      var precios = { '1 Litro': 97, '5 Litros': 0, '10 Litros': 629, '20 Litros': 1124 };
+      var precios = window.PRECIOS_ACTUALES;
       var totalNum = 0;
 cart.forEach(function(i) { if (precios[i.pres]) totalNum += precios[i.pres] * i.qty; });
 var totalStr = totalNum > 0 ? '$' + totalNum.toLocaleString('es-MX') + ' MXN' : 'A confirmar';
