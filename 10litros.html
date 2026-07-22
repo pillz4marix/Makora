@@ -816,6 +816,12 @@
       font-size:0.75rem;color:var(--gc);
       border-top:1px solid var(--menta);
     }
+    .legal-links{
+      display:flex;gap:1.4rem;flex-wrap:wrap;justify-content:center;
+      padding:1.6rem 1rem 0;font-size:0.72rem;
+    }
+    .legal-links a{color:var(--gc);text-decoration:none;}
+    .legal-links a:hover{color:var(--vm);}
   </style>
 
 </head>
@@ -933,7 +939,7 @@
   <div class="product-info">
     <p class="product-kicker">Conservador Natural</p>
     <h1 class="product-name">Makora 10 Litros</h1>
-    <p class="product-price"></p>
+    <p class="product-price">$629 MXN</p>
 
     <p class="product-desc">
       Ideal para distribuidores y comercializadores. Alta rentabilidad por
@@ -1007,6 +1013,11 @@
 
 </div>
 
+<div class="legal-links">
+  <a href="terminos.html">Términos y Condiciones</a>
+  <a href="privacidad.html">Aviso de Privacidad</a>
+  <a href="reembolsos.html">Política de Reembolsos</a>
+</div>
 <div class="footer-line">© 2026 Makora — Conservador Natural de Manzana · Chihuahua, México</div>
 
 <script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-app-compat.js"></script>
@@ -1478,10 +1489,10 @@ fetch('/api/create-preference', {
   var pmPres = '';
   var pmQtyVal = 1;
   var pmData = {
-    '1 Litro':   { name:'Makora 1 Litro',   price:'',    cont:'1 Litro',   img:'1litro.png',   desc:'Para hogares con mayor consumo o pequenos negocios. Mayor rendimiento y ahorro. Formulado con ingredientes 100% naturales.' },
-    '5 Litros':   { name:'Makora 5 Litros',   price:'',    cont:'5 Litros',   img:'5litros.png',   desc:'Para hogares con mayor consumo o pequenos negocios. Mayor rendimiento y ahorro. Formulado con ingredientes 100% naturales.' },
-    '10 Litros': { name:'Makora 10 Litros', price:'',   cont:'10 Litros', img:'10litros.png', desc:'Ideal para distribuidores y comercializadores. Alta rentabilidad por volumen. Sin conservadores artificiales.' },
-    '20 Litros': { name:'Makora 20 Litros', price:'', cont:'20 Litros', img:'20litros.png', desc:'La presentacion mas completa para produccion a gran escala. Maximo rendimiento y sostenibilidad.' }
+    '1 Litro':   { name:'Makora 1 Litro',   price:'$97 MXN',    cont:'1 Litro',   img:'1litro.png',   desc:'Para hogares con mayor consumo o pequenos negocios. Mayor rendimiento y ahorro. Formulado con ingredientes 100% naturales.' },
+    '5 Litros':   { name:'Makora 5 Litros',   price:'PENDIENTE',    cont:'5 Litros',   img:'5litros.png',   desc:'Para hogares con mayor consumo o pequenos negocios. Mayor rendimiento y ahorro. Formulado con ingredientes 100% naturales.' },
+    '10 Litros': { name:'Makora 10 Litros', price:'$629 MXN',   cont:'10 Litros', img:'10litros.png', desc:'Ideal para distribuidores y comercializadores. Alta rentabilidad por volumen. Sin conservadores artificiales.' },
+    '20 Litros': { name:'Makora 20 Litros', price:'$1,124 MXN', cont:'20 Litros', img:'20litros.png', desc:'La presentacion mas completa para produccion a gran escala. Maximo rendimiento y sostenibilidad.' }
   };
   function openPM(pres) {
     pmPres = pres; pmQtyVal = 1;
