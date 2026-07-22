@@ -1118,6 +1118,7 @@
         }
       }
     });
+    if (typeof renderRelacionados === 'function') renderRelacionados();
   }).catch(function(err){ console.error('Error leyendo precios:', err); });
 
   // ESTADO
