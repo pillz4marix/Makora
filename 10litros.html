@@ -1188,9 +1188,28 @@
   }
 
   // PANELES
+  var STOCK_MAP = { '5 Litros':'5litros', '1 Litro':'1litro', '10 Litros':'10litros', '20 Litros':'20litros' };
+  function verificarStockCarrito() {
+    var promesas = cart.map(function(item){
+      var id = STOCK_MAP[item.pres];
+      if (!id) return Promise.resolve(null);
+      return db.collection('stock').doc(id).get().then(function(doc){
+        return (doc.exists && doc.data().enStock === false) ? item.pres : null;
+      });
+    });
+    return Promise.all(promesas).then(function(agotados){
+      var eliminados = agotados.filter(function(p){ return p !== null; });
+      if (eliminados.length > 0) {
+        cart = cart.filter(function(item){ return eliminados.indexOf(item.pres) === -1; });
+        updateCartBadge();
+        saveStorage();
+        showToast('Se elimino del carrito (sin stock): ' + eliminados.join(', '));
+      }
+    });
+  }
   function openPanel(type) {
     closeAllPanels();
-    if (type === 'cart') renderCart();
+    if (type === 'cart') { renderCart(); verificarStockCarrito().then(renderCart); }
     if (type === 'wish') renderWish();
     document.getElementById('panel-overlay').classList.add('open');
     document.getElementById('panel-' + type).classList.add('open');
@@ -1206,7 +1225,7 @@
   // CHECKOUT
   function openCheckout() {
     if (cart.length === 0) return;
-    var precios = { '1 Litro': 97, '5 Litros': PENDIENTE, '10 Litros': 629, '20 Litros': 1124 };
+    var precios = { '1 Litro': 97, '5 Litros': 0, '10 Litros': 629, '20 Litros': 1124 };
     var summary = cart.map(function(i) { return 'Makora ' + i.pres + ' x' + i.qty; }).join(', ');
     var total = 0;
     cart.forEach(function(i) { if (precios[i.pres]) total += precios[i.pres] * i.qty; });
@@ -1239,7 +1258,7 @@
     return ok;
   }
   function submitOrder() {
-    var precios = { '1 Litro': 97, '5 Litros': PENDIENTE, '10 Litros': 629, '20 Litros': 1124 };
+    var precios = { '1 Litro': 97, '5 Litros': 0, '10 Litros': 629, '20 Litros': 1124 };
     if (!validate()) { showResult('error', 'Por favor completa todos los campos correctamente.'); return; }
     var btn = document.getElementById('submit-btn');
     var txt = document.getElementById('btn-txt');
@@ -1267,7 +1286,7 @@
       ['f-nombre','f-tel','f-email','f-calle','f-ext','f-int','f-colonia','f-ciudad','f-cp'].forEach(function(id) { document.getElementById(id).value = ''; });
       btn.disabled = false; txt.textContent = 'Enviar pedido'; spin.style.display = 'none';
 
-      var precios = { '1 Litro': 97, '5 Litros': PENDIENTE, '10 Litros': 629, '20 Litros': 1124 };
+      var precios = { '1 Litro': 97, '5 Litros': 0, '10 Litros': 629, '20 Litros': 1124 };
       var totalNum = 0;
 cart.forEach(function(i) { if (precios[i.pres]) totalNum += precios[i.pres] * i.qty; });
 var totalStr = totalNum > 0 ? '$' + totalNum.toLocaleString('es-MX') + ' MXN' : 'A confirmar';
