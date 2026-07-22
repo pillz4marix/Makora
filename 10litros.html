@@ -828,7 +828,7 @@
     .relacionado-card{border:1px solid var(--menta);border-radius:12px;background:var(--crema);text-decoration:none;display:flex;flex-direction:column;overflow:hidden;transition:all 0.25s;box-shadow:0 2px 10px rgba(42,74,42,0.04);}
     .relacionado-card:hover{transform:translateY(-4px);box-shadow:0 14px 32px rgba(42,74,42,0.12);border-color:var(--vc);}
     .relacionado-img-wrap{aspect-ratio:3/4;background:#fff;display:flex;align-items:center;justify-content:center;padding:1.4rem;}
-    .relacionado-img-wrap img{width:100%;height:100%;object-fit:contain;}
+    .relacionado-img-wrap img{width:100%;height:100%;object-fit:contain;cursor:pointer;}
     .relacionado-body{padding:0.9rem 1rem 1.2rem;text-align:center;}
     .relacionado-nombre{font-family:'Playfair Display',serif;font-weight:700;font-size:0.92rem;color:var(--vo);margin-bottom:0.3rem;}
     .relacionado-precio{font-size:0.82rem;color:var(--gm);font-weight:600;}
@@ -1817,7 +1817,7 @@ fetch('/api/create-preference', {
         const nextBtn = document.querySelector(".lightbox-next");
         const counter = document.getElementById("lightbox-counter");
         
-        const imagenes = Array.from(document.querySelectorAll("img")).filter(img => img.id !== "lightbox-img" && img.offsetParent !== null);
+        const imagenes = Array.from(document.querySelectorAll("img")).filter(img => img.id !== "lightbox-img" && img.offsetParent !== null && !img.closest(".relacionados"));
         let indiceActual = 0;
 
         if (!lightbox || !lightboxImg) return;
