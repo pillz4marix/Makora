@@ -738,15 +738,6 @@
     <h2 class="sec-h2">Elige tu <em>presentacion</em></h2>
   </div>
   <div class="pres-grid">
-    <div class="pres-card reveal" data-pres="100 ml" data-price="36" onclick="window.location.href='100ml.html'">
-      <div class="img-wrap"><img src="100ml.png" alt="100 ml" class="img-default" /><img src="100ml-persona.png" alt="100 ml" class="img-hover" /></div>
-      <button class="pres-card-wish" onclick="event.stopPropagation();toggleWishCard('100 ml', this)" title="Lista de deseos"><svg viewBox="0 0 24 24"><defs><linearGradient id="hg0" x1="0" x2="0" y1="1" y2="0"><stop class="hg-fill" offset="0%" stop-color="#e57373"/><stop class="hg-edge" offset="0%" stop-color="#e57373" stop-opacity="0"/></linearGradient></defs><path class="heart-path" fill="url(#hg0)" d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg></button>
-      <button class="pres-card-cart" onclick="event.stopPropagation();quickAddToCart('100 ml')">Agregar al carrito</button>
-      <div class="pres-card-body">
-        <p class="pres-card-name">Makora 100 ml</p>
-        <p class="pres-card-price">$36 MXN</p>
-      </div>
-    </div>
     <div class="pres-card reveal" data-pres="1 Litro" data-price="97" onclick="window.location.href='1litro.html'">
       <div class="img-wrap"><img src="1litro.png" alt="1 Litro" class="img-default" /><img src="1litro-persona.png" alt="1 Litro" class="img-hover" /></div>
       <button class="pres-card-wish" onclick="event.stopPropagation();toggleWishCard('1 Litro', this)" title="Lista de deseos"><svg viewBox="0 0 24 24"><defs><linearGradient id="hg1" x1="0" x2="0" y1="1" y2="0"><stop class="hg-fill" offset="0%" stop-color="#e57373"/><stop class="hg-edge" offset="0%" stop-color="#e57373" stop-opacity="0"/></linearGradient></defs><path class="heart-path" fill="url(#hg1)" d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg></button>
@@ -754,6 +745,15 @@
       <div class="pres-card-body">
         <p class="pres-card-name">Makora 1 Litro</p>
         <p class="pres-card-price">$97 MXN</p>
+      </div>
+    </div>
+    <div class="pres-card reveal" data-pres="5 Litros" data-price="PENDIENTE" onclick="window.location.href='5litros.html'">
+      <div class="img-wrap"><img src="5litros.png" alt="5 Litros" class="img-default" /><img src="5litros-persona.jpeg" alt="5 Litros" class="img-hover" /></div>
+      <button class="pres-card-wish" onclick="event.stopPropagation();toggleWishCard('5 Litros', this)" title="Lista de deseos"><svg viewBox="0 0 24 24"><defs><linearGradient id="hg1" x1="0" x2="0" y1="1" y2="0"><stop class="hg-fill" offset="0%" stop-color="#e57373"/><stop class="hg-edge" offset="0%" stop-color="#e57373" stop-opacity="0"/></linearGradient></defs><path class="heart-path" fill="url(#hg1)" d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg></button>
+      <button class="pres-card-cart" onclick="event.stopPropagation();quickAddToCart('5 Litros')">Agregar al carrito</button>
+      <div class="pres-card-body">
+        <p class="pres-card-name">Makora 5 Litros</p>
+        <p class="pres-card-price">PENDIENTE</p>
       </div>
     </div>
     <div class="pres-card reveal" data-pres="10 Litros" data-price="629" onclick="window.location.href='10litros.html'">
@@ -975,12 +975,12 @@
   var wishlist = JSON.parse(localStorage.getItem('makora_wish') || '[]');
   updateCartBadge();
   updateWishBadge();
-  var currentPres = '100 ml';
+  var currentPres = '1 Litro';
   var currentQty = 1;
   var currentReviewStars = 0;
   var mpLinks = {
-    '100 ml':    'https://mpago.la/2cscgi2',
     '1 Litro':   'https://mpago.la/2RG4YjF',
+    '5 Litros':   'PENDIENTE',
     '10 Litros': 'https://mpago.la/2qBu9w2',
     '20 Litros': 'https://mpago.la/25ZQAPh'
   };
@@ -1138,7 +1138,7 @@
   // CHECKOUT
   function openCheckout() {
     if (cart.length === 0) return;
-    var precios = { '100 ml': 36, '1 Litro': 97, '10 Litros': 629, '20 Litros': 1124 };
+    var precios = { '1 Litro': 36, '5 Litros': PENDIENTE, '10 Litros': 629, '20 Litros': 1124 };
     var summary = cart.map(function(i) { return 'Makora ' + i.pres + ' x' + i.qty; }).join(', ');
     var total = 0;
     cart.forEach(function(i) { if (precios[i.pres]) total += precios[i.pres] * i.qty; });
@@ -1171,7 +1171,7 @@
     return ok;
   }
   function submitOrder() {
-    var precios = { '100 ml': 36, '1 Litro': 97, '10 Litros': 629, '20 Litros': 1124 };
+    var precios = { '1 Litro': 97, '5 Litros': PENDIENTE, '10 Litros': 629, '20 Litros': 1124 };
     if (!validate()) { showResult('error', 'Por favor completa todos los campos correctamente.'); return; }
     var btn = document.getElementById('submit-btn');
     var txt = document.getElementById('btn-txt');
@@ -1199,7 +1199,7 @@
       ['f-nombre','f-tel','f-email','f-calle','f-ext','f-int','f-colonia','f-ciudad','f-cp'].forEach(function(id) { document.getElementById(id).value = ''; });
       btn.disabled = false; txt.textContent = 'Enviar pedido'; spin.style.display = 'none';
 
-      var precios = { '100 ml': 36, '1 Litro': 97, '10 Litros': 629, '20 Litros': 1124 };
+      var precios = { '1 Litro': 97, '5 Litros': PENDIENTE, '10 Litros': 629, '20 Litros': 1124 };
       var totalNum = 0;
 cart.forEach(function(i) { if (precios[i.pres]) totalNum += precios[i.pres] * i.qty; });
 var totalStr = totalNum > 0 ? '$' + totalNum.toLocaleString('es-MX') + ' MXN' : 'A confirmar';
@@ -1364,8 +1364,8 @@ fetch('/api/create-preference', {
   var pmPres = '';
   var pmQtyVal = 1;
   var pmData = {
-    '100 ml':    { name:'Makora 100 ml',    price:'$36 MXN',    cont:'100 ml',    img:'100ml.png',    desc:'Presentacion ideal para uso domestico. Conserva tus frutas y verduras de forma natural con nuestra formula elaborada a partir de manzanas chihuahuenses.' },
     '1 Litro':   { name:'Makora 1 Litro',   price:'$97 MXN',    cont:'1 Litro',   img:'1litro.png',   desc:'Para hogares con mayor consumo o pequenos negocios. Mayor rendimiento y ahorro. Formulado con ingredientes 100% naturales.' },
+    '5 Litros':   { name:'Makora 5 Litros',   price:'PENDIENTE',    cont:'5 Litros',   img:'5litros.png',   desc:'Para hogares con mayor consumo o pequenos negocios. Mayor rendimiento y ahorro. Formulado con ingredientes 100% naturales.' },
     '10 Litros': { name:'Makora 10 Litros', price:'$629 MXN',   cont:'10 Litros', img:'10litros.png', desc:'Ideal para distribuidores y comercializadores. Alta rentabilidad por volumen. Sin conservadores artificiales.' },
     '20 Litros': { name:'Makora 20 Litros', price:'$1,124 MXN', cont:'20 Litros', img:'20litros.png', desc:'La presentacion mas completa para produccion a gran escala. Maximo rendimiento y sostenibilidad.' }
   };
