@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8"/>
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Makora 1 Litro — Conservador Natural</title>
+  <title>Makora 5 Litros — Conservador Natural</title>
   <link rel="icon" type="image/x-icon" href="favicon.ico">
   <link rel="preconnect" href="https://fonts.googleapis.com"/>
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
@@ -908,7 +908,7 @@
   <span>›</span>
   <a href="index.html#presentaciones-grid">Presentaciones</a>
   <span>›</span>
-  <span>1 Litro</span>
+  <span>5 Litros</span>
 </div>
 
 <!-- PRODUCT -->
@@ -932,8 +932,8 @@
   <!-- INFO -->
   <div class="product-info">
     <p class="product-kicker">Conservador Natural</p>
-    <h1 class="product-name">Makora 1 Litro</h1>
-    <p class="product-price">$97 MXN</p>
+    <h1 class="product-name">Makora 5 Litros</h1>
+    <p class="product-price">PENDIENTE</p>
 
     <p class="product-desc">
       Para hogares con mayor consumo o pequenos negocios. Mayor rendimiento
@@ -954,7 +954,7 @@
     <div class="product-meta">
       <div class="product-meta-row">
         <span class="product-meta-label">Contenido neto</span>
-        <span class="product-meta-val">1 Litro</span>
+        <span class="product-meta-val">5 Litros</span>
       </div>
       <div class="product-meta-row">
         <span class="product-meta-label">Fórmula</span>
@@ -969,12 +969,12 @@
     <div class="stock-badge">En stock</div>
 
     <!-- BOTONES: AGREGAR AL CARRITO + COMPRAR AHORA -->
-    <button class="btn-comprar btn-carrito-prod" onclick="quickAddToCart('1 Litro');openPanel('cart');">
+    <button class="btn-comprar btn-carrito-prod" onclick="quickAddToCart('5 Litros');openPanel('cart');">
       <svg viewBox="0 0 24 24"><circle cx="9" cy="21" r="1"/><circle cx="20" cy="21" r="1"/><path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"/></svg>
       Agregar al carrito
     </button>
 
-    <button class="btn-comprar btn-comprar-ahora" onclick="addToCartAndCheckout('1 Litro');">
+    <button class="btn-comprar btn-comprar-ahora" onclick="addToCartAndCheckout('5 Litros');">
       <svg viewBox="0 0 24 24"><path d="M6 2L3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z"/><line x1="3" y1="6" x2="21" y2="6"/><path d="M16 10a4 4 0 0 1-8 0"/></svg>
       Comprar ahora
     </button>
@@ -1040,12 +1040,12 @@
   var wishlist = JSON.parse(localStorage.getItem('makora_wish') || '[]');
   updateCartBadge();
   updateWishBadge();
-  var currentPres = '1 Litro';
+  var currentPres = '5 Litros';
   var currentQty = 1;
   var currentReviewStars = 0;
   var mpLinks = {
-    '100 ml':    'https://mpago.la/2cscgi2',
     '1 Litro':   'https://mpago.la/2RG4YjF',
+    '5 Litros':   'PENDIENTE',
     '10 Litros': 'https://mpago.la/2qBu9w2',
     '20 Litros': 'https://mpago.la/25ZQAPh'
   };
@@ -1205,7 +1205,7 @@
   // CHECKOUT
   function openCheckout() {
     if (cart.length === 0) return;
-    var precios = { '100 ml': 36, '1 Litro': 97, '10 Litros': 629, '20 Litros': 1124 };
+    var precios = { '1 Litro': 97, '5 Litros': PENDIENTE, '10 Litros': 629, '20 Litros': 1124 };
     var summary = cart.map(function(i) { return 'Makora ' + i.pres + ' x' + i.qty; }).join(', ');
     var total = 0;
     cart.forEach(function(i) { if (precios[i.pres]) total += precios[i.pres] * i.qty; });
@@ -1238,7 +1238,7 @@
     return ok;
   }
   function submitOrder() {
-    var precios = { '100 ml': 36, '1 Litro': 97, '10 Litros': 629, '20 Litros': 1124 };
+    var precios = { '1 Llitro': 97, '5 Litros': PENDEINTE, '10 Litros': 629, '20 Litros': 1124 };
     if (!validate()) { showResult('error', 'Por favor completa todos los campos correctamente.'); return; }
     var btn = document.getElementById('submit-btn');
     var txt = document.getElementById('btn-txt');
@@ -1266,7 +1266,7 @@
       ['f-nombre','f-tel','f-email','f-calle','f-ext','f-int','f-colonia','f-ciudad','f-cp'].forEach(function(id) { document.getElementById(id).value = ''; });
       btn.disabled = false; txt.textContent = 'Enviar pedido'; spin.style.display = 'none';
 
-      var precios = { '100 ml': 36, '1 Litro': 97, '10 Litros': 629, '20 Litros': 1124 };
+      var precios = { '1 Litro': 97, '5 Litros': PENDIENTE, '10 Litros': 629, '20 Litros': 1124 };
       var totalNum = 0;
 cart.forEach(function(i) { if (precios[i.pres]) totalNum += precios[i.pres] * i.qty; });
 var totalStr = totalNum > 0 ? '$' + totalNum.toLocaleString('es-MX') + ' MXN' : 'A confirmar';

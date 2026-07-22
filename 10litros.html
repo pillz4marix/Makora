@@ -1045,8 +1045,8 @@
   var currentQty = 1;
   var currentReviewStars = 0;
   var mpLinks = {
-    '100 ml':    'https://mpago.la/2cscgi2',
     '1 Litro':   'https://mpago.la/2RG4YjF',
+    '5 Litros':   'PENDIENTE',
     '10 Litros': 'https://mpago.la/2qBu9w2',
     '20 Litros': 'https://mpago.la/25ZQAPh'
   };
@@ -1206,7 +1206,7 @@
   // CHECKOUT
   function openCheckout() {
     if (cart.length === 0) return;
-    var precios = { '100 ml': 36, '1 Litro': 97, '10 Litros': 629, '20 Litros': 1124 };
+    var precios = { '1 Litro': 97, '5 Litros': PENDIENTE, '10 Litros': 629, '20 Litros': 1124 };
     var summary = cart.map(function(i) { return 'Makora ' + i.pres + ' x' + i.qty; }).join(', ');
     var total = 0;
     cart.forEach(function(i) { if (precios[i.pres]) total += precios[i.pres] * i.qty; });
@@ -1239,7 +1239,7 @@
     return ok;
   }
   function submitOrder() {
-    var precios = { '100 ml': 36, '1 Litro': 97, '10 Litros': 629, '20 Litros': 1124 };
+    var precios = { '1 Litro': 97, '5 Litros': PENDIENTE, '10 Litros': 629, '20 Litros': 1124 };
     if (!validate()) { showResult('error', 'Por favor completa todos los campos correctamente.'); return; }
     var btn = document.getElementById('submit-btn');
     var txt = document.getElementById('btn-txt');
@@ -1267,7 +1267,7 @@
       ['f-nombre','f-tel','f-email','f-calle','f-ext','f-int','f-colonia','f-ciudad','f-cp'].forEach(function(id) { document.getElementById(id).value = ''; });
       btn.disabled = false; txt.textContent = 'Enviar pedido'; spin.style.display = 'none';
 
-      var precios = { '100 ml': 36, '1 Litro': 97, '10 Litros': 629, '20 Litros': 1124 };
+      var precios = { '1 Litro': 97, '5 Litros': PENDIENTE, '10 Litros': 629, '20 Litros': 1124 };
       var totalNum = 0;
 cart.forEach(function(i) { if (precios[i.pres]) totalNum += precios[i.pres] * i.qty; });
 var totalStr = totalNum > 0 ? '$' + totalNum.toLocaleString('es-MX') + ' MXN' : 'A confirmar';
