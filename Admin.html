@@ -1,0 +1,278 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="robots" content="noindex, nofollow">
+<title>Makora — Panel de stock</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700;900&family=Raleway:wght@400;600;700&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --vo:#2a4a2a;
+    --vc:#3a6b3a;
+    --menta:#7ab87a;
+    --fondo:#f4fbf4;
+    --rojo:#b33a3a;
+  }
+  *{box-sizing:border-box;margin:0;padding:0;}
+  body{
+    font-family:'Raleway',sans-serif;
+    background:var(--fondo);
+    min-height:100vh;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    padding:1.5rem;
+  }
+  .card{
+    background:#fff;
+    border:2px solid var(--menta);
+    border-radius:6px;
+    padding:2.5rem;
+    width:100%;
+    max-width:420px;
+  }
+  h1{
+    font-family:'Playfair Display',serif;
+    font-size:1.6rem;
+    color:var(--vo);
+    margin-bottom:0.4rem;
+  }
+  .subtitle{
+    font-size:0.85rem;
+    color:#666;
+    margin-bottom:1.8rem;
+  }
+  label{
+    display:block;
+    font-size:0.78rem;
+    font-weight:700;
+    text-transform:uppercase;
+    letter-spacing:0.06em;
+    color:var(--vc);
+    margin-bottom:0.4rem;
+  }
+  input{
+    width:100%;
+    padding:0.75rem;
+    border:1.5px solid var(--menta);
+    border-radius:4px;
+    font-family:'Raleway',sans-serif;
+    font-size:0.95rem;
+    margin-bottom:1.2rem;
+  }
+  button{
+    font-family:'Raleway',sans-serif;
+    cursor:pointer;
+    border:none;
+  }
+  .btn-login{
+    width:100%;
+    background:var(--vo);
+    color:#fff;
+    padding:0.85rem;
+    font-weight:700;
+    font-size:0.9rem;
+    border-radius:4px;
+    letter-spacing:0.03em;
+  }
+  .btn-login:hover{ background:var(--vc); }
+  .error-msg{
+    color:var(--rojo);
+    font-size:0.82rem;
+    margin-top:-0.6rem;
+    margin-bottom:1rem;
+    display:none;
+  }
+  #panel{ display:none; }
+  .producto-row{
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    padding:1rem 0;
+    border-bottom:1px solid #eee;
+  }
+  .producto-row:last-child{ border-bottom:none; }
+  .producto-nombre{
+    font-weight:700;
+    color:var(--vo);
+    font-size:0.95rem;
+  }
+  .toggle{
+    position:relative;
+    width:52px;
+    height:28px;
+    border-radius:999px;
+    background:var(--rojo);
+    transition:background 0.2s;
+  }
+  .toggle.activo{ background:var(--menta); }
+  .toggle::after{
+    content:'';
+    position:absolute;
+    top:3px;
+    left:3px;
+    width:22px;
+    height:22px;
+    border-radius:50%;
+    background:#fff;
+    transition:left 0.2s;
+  }
+  .toggle.activo::after{ left:27px; }
+  .estado-label{
+    font-size:0.72rem;
+    font-weight:700;
+    text-transform:uppercase;
+    letter-spacing:0.04em;
+    margin-top:0.15rem;
+  }
+  .estado-label.si{ color:var(--vc); }
+  .estado-label.no{ color:var(--rojo); }
+  .btn-logout{
+    margin-top:1.8rem;
+    width:100%;
+    background:none;
+    border:1.5px solid var(--menta);
+    color:var(--vc);
+    padding:0.65rem;
+    font-size:0.82rem;
+    font-weight:600;
+    border-radius:4px;
+  }
+  .btn-logout:hover{ background:var(--fondo); }
+  .status-msg{
+    font-size:0.78rem;
+    color:#888;
+    margin-top:1rem;
+    text-align:center;
+    min-height:1rem;
+  }
+</style>
+</head>
+<body>
+
+<div class="card">
+  <h1>Panel de stock</h1>
+  <p class="subtitle">Makora — solo administradores</p>
+
+  <div id="login-form">
+    <label for="email">Correo</label>
+    <input type="email" id="email" autocomplete="username">
+    <label for="password">Contraseña</label>
+    <input type="password" id="password" autocomplete="current-password">
+    <p class="error-msg" id="error-msg"></p>
+    <button class="btn-login" onclick="iniciarSesion()">Entrar</button>
+  </div>
+
+  <div id="panel">
+    <div id="productos-list"></div>
+    <button class="btn-logout" onclick="cerrarSesion()">Cerrar sesión</button>
+    <p class="status-msg" id="status-msg"></p>
+  </div>
+</div>
+
+<script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-app-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-auth-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-firestore-compat.js"></script>
+
+<script>
+  firebase.initializeApp({
+    apiKey: "AIzaSyBRzkTAfGCMjiSxjdTT5wZ6Q_AVK2_8Oik",
+    authDomain: "makora-b4b62.firebaseapp.com",
+    projectId: "makora-b4b62",
+    storageBucket: "makora-b4b62.firebasestorage.app",
+    messagingSenderId: "612772913736",
+    appId: "1:612772913736:web:7c9814440fd7ffb3656e7d"
+  });
+  var auth = firebase.auth();
+  var db = firebase.firestore();
+
+  var PRODUCTOS = [
+    { id: '100ml',    nombre: 'Makora 100 ml' },
+    { id: '1litro',   nombre: 'Makora 1 Litro' },
+    { id: '10litros', nombre: 'Makora 10 Litros' },
+    { id: '20litros', nombre: 'Makora 20 Litros' }
+  ];
+
+  function iniciarSesion() {
+    var email = document.getElementById('email').value.trim();
+    var pass = document.getElementById('password').value;
+    var errorEl = document.getElementById('error-msg');
+    errorEl.style.display = 'none';
+    auth.signInWithEmailAndPassword(email, pass).catch(function(err){
+      errorEl.textContent = 'Correo o contraseña incorrectos.';
+      errorEl.style.display = 'block';
+    });
+  }
+
+  function cerrarSesion() {
+    auth.signOut();
+  }
+
+  auth.onAuthStateChanged(function(user){
+    if (user) {
+      document.getElementById('login-form').style.display = 'none';
+      document.getElementById('panel').style.display = 'block';
+      cargarProductos();
+    } else {
+      document.getElementById('login-form').style.display = 'block';
+      document.getElementById('panel').style.display = 'none';
+    }
+  });
+
+  function cargarProductos() {
+    var list = document.getElementById('productos-list');
+    list.innerHTML = '';
+    PRODUCTOS.forEach(function(p){
+      var row = document.createElement('div');
+      row.className = 'producto-row';
+      row.innerHTML =
+        '<div>' +
+          '<div class="producto-nombre">' + p.nombre + '</div>' +
+          '<div class="estado-label" id="label-' + p.id + '">Cargando...</div>' +
+        '</div>' +
+        '<div class="toggle" id="toggle-' + p.id + '" onclick="cambiarStock(\'' + p.id + '\')"></div>';
+      list.appendChild(row);
+
+      db.collection('stock').doc(p.id).get().then(function(doc){
+        var enStock = !doc.exists || doc.data().enStock !== false;
+        pintarEstado(p.id, enStock);
+      });
+    });
+  }
+
+  function pintarEstado(id, enStock) {
+    var toggle = document.getElementById('toggle-' + id);
+    var label = document.getElementById('label-' + id);
+    if (enStock) {
+      toggle.classList.add('activo');
+      label.textContent = 'En stock';
+      label.className = 'estado-label si';
+    } else {
+      toggle.classList.remove('activo');
+      label.textContent = 'Sin stock';
+      label.className = 'estado-label no';
+    }
+    toggle.dataset.enStock = enStock;
+  }
+
+  function cambiarStock(id) {
+    var toggle = document.getElementById('toggle-' + id);
+    var nuevoEstado = !(toggle.dataset.enStock === 'true');
+    var statusEl = document.getElementById('status-msg');
+    statusEl.textContent = 'Guardando...';
+    db.collection('stock').doc(id).set({ enStock: nuevoEstado }, { merge: true })
+      .then(function(){
+        pintarEstado(id, nuevoEstado);
+        statusEl.textContent = 'Guardado.';
+        setTimeout(function(){ statusEl.textContent = ''; }, 1500);
+      })
+      .catch(function(err){
+        statusEl.textContent = 'Error al guardar: ' + err.message;
+      });
+  }
+</script>
+
+</body>
+</html>
