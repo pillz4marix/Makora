@@ -239,6 +239,29 @@
   }
   .toggle.activo::after{ left:25px; }
 
+  /* ---------- VISIBILIDAD (mostrar / descontinuar producto) ---------- */
+  .producto-row.oculto{ opacity:0.55; }
+  .btn-visibilidad{
+    display:flex;
+    align-items:center;
+    gap:0.35rem;
+    background:var(--fondo);
+    border:1.5px solid var(--linea);
+    border-radius:999px;
+    padding:0.45rem 0.8rem;
+    font-size:0.7rem;
+    font-weight:700;
+    letter-spacing:0.02em;
+    color:#8a9a8a;
+    transition:background 0.15s, border-color 0.15s, color 0.15s;
+    flex-shrink:0;
+  }
+  .btn-visibilidad svg{ width:14px; height:14px; stroke:currentColor; fill:none; stroke-width:1.8; stroke-linecap:round; stroke-linejoin:round; flex-shrink:0; }
+  .btn-visibilidad.visible{ color:var(--vc); border-color:var(--menta); background:#f0faf2; }
+  .btn-visibilidad.oculto{ color:var(--ambar); border-color:#ecd3ac; background:#fdf6ec; }
+  .btn-visibilidad:hover{ filter:brightness(0.97); }
+  .btn-visibilidad:focus-visible{ outline:2px solid var(--ambar); outline-offset:2px; }
+
   .status-msg{
     font-size:0.76rem;
     color:#8a9a8a;
@@ -332,14 +355,46 @@
 
   function cerrarSesion() { auth.signOut(); }
 
+  // ---------- CIERRE DE SESION AUTOMATICO POR INACTIVIDAD ----------
+  var INACTIVIDAD_LIMITE_MS = 10 * 60 * 1000; // 10 minutos
+  var inactividadTimer = null;
+
+  function reiniciarTimerInactividad() {
+    if (inactividadTimer) clearTimeout(inactividadTimer);
+    inactividadTimer = setTimeout(function(){
+      if (auth.currentUser) {
+        auth.signOut().then(function(){
+          var errorEl = document.getElementById('error-msg');
+          if (errorEl) {
+            errorEl.textContent = 'Tu sesión se cerró automáticamente por inactividad.';
+            errorEl.style.display = 'block';
+          }
+        });
+      }
+    }, INACTIVIDAD_LIMITE_MS);
+  }
+
+  function detenerTimerInactividad() {
+    if (inactividadTimer) clearTimeout(inactividadTimer);
+    inactividadTimer = null;
+  }
+
+  ['mousemove', 'mousedown', 'keydown', 'scroll', 'touchstart', 'click'].forEach(function(evt){
+    document.addEventListener(evt, function(){
+      if (auth.currentUser) reiniciarTimerInactividad();
+    }, { passive: true });
+  });
+
   auth.onAuthStateChanged(function(user){
     if (user) {
       document.getElementById('login-form').style.display = 'none';
       document.getElementById('panel').style.display = 'block';
       cargarProductos();
+      reiniciarTimerInactividad();
     } else {
       document.getElementById('login-form').style.display = 'block';
       document.getElementById('panel').style.display = 'none';
+      detenerTimerInactividad();
     }
   });
 
@@ -365,6 +420,7 @@
               'onkeydown="if(event.key===\'Enter\'){this.blur();}">' +
             '<span class="precio-suffix">MXN</span>' +
           '</div>' +
+          '<button type="button" class="btn-visibilidad" id="vis-' + p.id + '" onclick="cambiarVisibilidad(\'' + p.id + '\')" title="Mostrar u ocultar este producto en la tienda"></button>' +
           '<button type="button" class="toggle" id="toggle-' + p.id + '" aria-pressed="false" onclick="cambiarStock(\'' + p.id + '\')"></button>' +
         '</div>';
       list.appendChild(row);
@@ -380,6 +436,11 @@
         if (doc.exists && typeof doc.data().precio === 'number') {
           input.value = doc.data().precio;
         }
+      });
+
+      db.collection('visibilidad').doc(p.id).get().then(function(doc){
+        var visible = !doc.exists || doc.data().visible !== false;
+        pintarVisibilidad(p.id, visible);
       });
     });
   }
@@ -428,6 +489,35 @@
     var circunf = 113;
     var offset = circunf - (circunf * enStockCount / ids.length);
     document.getElementById('gauge-arc').style.strokeDashoffset = offset;
+  }
+
+  function pintarVisibilidad(id, visible) {
+    var btn = document.getElementById('vis-' + id);
+    var row = btn ? btn.closest('.producto-row') : null;
+    if (!btn) return;
+    btn.dataset.visible = visible;
+    btn.classList.toggle('visible', visible);
+    btn.classList.toggle('oculto', !visible);
+    if (row) row.classList.toggle('oculto', !visible);
+    btn.innerHTML = visible
+      ? '<svg viewBox="0 0 24 24"><path d="M1 12s4-7 11-7 11 7 11 7-4 7-11 7-11-7-11-7z"/><circle cx="12" cy="12" r="3"/></svg>Visible'
+      : '<svg viewBox="0 0 24 24"><path d="M17.94 17.94A10.94 10.94 0 0 1 12 20c-7 0-11-8-11-8a20.3 20.3 0 0 1 5.06-6.06M9.9 4.24A10.6 10.6 0 0 1 12 4c7 0 11 8 11 8a20.4 20.4 0 0 1-2.16 3.19M14.12 14.12a3 3 0 1 1-4.24-4.24"/><line x1="1" y1="1" x2="23" y2="23"/></svg>Descontinuado';
+  }
+
+  function cambiarVisibilidad(id) {
+    var btn = document.getElementById('vis-' + id);
+    var nuevoEstado = !(btn.dataset.visible === 'true');
+    var statusEl = document.getElementById('status-msg');
+    statusEl.textContent = 'Guardando...';
+    db.collection('visibilidad').doc(id).set({ visible: nuevoEstado }, { merge: true })
+      .then(function(){
+        pintarVisibilidad(id, nuevoEstado);
+        statusEl.textContent = nuevoEstado ? 'Producto visible en la tienda.' : 'Producto ocultado (descontinuado).';
+        setTimeout(function(){ statusEl.textContent = ''; }, 1800);
+      })
+      .catch(function(err){
+        statusEl.textContent = 'Error al guardar: ' + err.message;
+      });
   }
 
   function cambiarStock(id) {
