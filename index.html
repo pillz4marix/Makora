@@ -1009,6 +1009,20 @@
     });
   }).catch(function(err){ console.error('Error leyendo precios:', err); });
 
+  // VISIBILIDAD DINAMICA (productos descontinuados/ocultados desde admin.html)
+  db.collection('visibilidad').get().then(function(snap){
+    snap.forEach(function(doc){
+      if (doc.data().visible === false) {
+        var nombre = null;
+        Object.keys(PRECIO_IDS).forEach(function(k){ if (PRECIO_IDS[k] === doc.id) nombre = k; });
+        if (!nombre) return;
+        document.querySelectorAll('.pres-card[data-pres="' + nombre + '"]').forEach(function(card){
+          card.style.display = 'none';
+        });
+      }
+    });
+  }).catch(function(err){ console.error('Error leyendo visibilidad:', err); });
+
   // ESTADO
   var cart = JSON.parse(localStorage.getItem('makora_cart') || '[]');
   var wishlist = JSON.parse(localStorage.getItem('makora_wish') || '[]');

@@ -1096,6 +1096,23 @@
     }
   }).catch(function(err){ console.error('Error leyendo stock:', err); });
 
+  // VISIBILIDAD DINAMICA (controlada desde admin.html)
+  window.PRODUCTOS_OCULTOS = {};
+  db.collection('visibilidad').get().then(function(snap){
+    snap.forEach(function(doc){
+      if (doc.data().visible === false) window.PRODUCTOS_OCULTOS[doc.id] = true;
+    });
+    if (window.PRODUCTOS_OCULTOS['1litro']) {
+      var badge = document.querySelector('.stock-badge');
+      if (badge) { badge.textContent = 'Descontinuado'; badge.classList.add('sin-stock'); }
+      document.querySelectorAll('.btn-comprar').forEach(function(btn){
+        btn.disabled = true;
+        btn.classList.add('btn-disabled');
+      });
+    }
+    if (typeof renderRelacionados === 'function') renderRelacionados();
+  }).catch(function(err){ console.error('Error leyendo visibilidad:', err); });
+
   // PRECIOS DINAMICOS (controlados desde admin.html)
   var PRECIO_IDS = { '1 Litro':'1litro', '5 Litros':'5litros', '10 Litros':'10litros', '20 Litros':'20litros', '200 Litros':'200litros' };
   db.collection('precios').get().then(function(snap){
@@ -1592,6 +1609,7 @@ fetch('/api/create-preference', {
     var html = '';
     relOrden.forEach(function(pres) {
       if (pres === CURRENT_PRES) return;
+      if (window.PRODUCTOS_OCULTOS && window.PRODUCTOS_OCULTOS[PRECIO_IDS[pres]]) return;
       var d = pmData[pres];
       html += '<a class="relacionado-card" href="' + relLinks[pres] + '">' +
         '<div class="relacionado-img-wrap"><img src="' + d.img + '" alt="' + d.name + '" loading="lazy"></div>' +
