@@ -2,8 +2,8 @@
 <html lang="es">
 <head>
   <meta charset="UTF-8"/>
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Grupo Makora — Conservador Natural de Manzana</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Makora 200 Litros — Conservador Natural</title>
   <link rel="icon" type="image/x-icon" href="favicon.ico">
   <link rel="preconnect" href="https://fonts.googleapis.com"/>
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
@@ -18,8 +18,8 @@
     html{scroll-behavior:smooth;}
     body{font-family:'Raleway',sans-serif;background:var(--crema);color:var(--go);overflow-x:hidden;}
     #main-nav{display:flex;align-items:center;justify-content:space-between;padding:0.8rem 5%;}
-    nav{position:fixed;top:0;left:0;right:0;z-index:300;display:flex;align-items:center;justify-content:space-between;padding:0.8rem 5%;background:#f4fbf4f7;backdrop-filter:blur(12px);border-bottom:2px solid var(--vc);transition:box-shadow 0.3s;}
-    nav.scrolled{box-shadow:0 4px 24px #2a4a2a1a;}
+    nav{position:fixed;top:0;left:0;right:0;z-index:300;display:flex;align-items:center;justify-content:space-between;padding:0.8rem 5%;background:rgba(244,251,244,0.97);backdrop-filter:blur(12px);border-bottom:2px solid var(--vc);transition:box-shadow 0.3s;}
+    nav.scrolled{box-shadow:0 4px 24px rgba(42,74,42,0.10);}
     .nav-logo img{height:44px;width:auto;object-fit:contain;}
     .nav-links{display:flex;gap:2rem;list-style:none;}
     .nav-links a{font-size:0.78rem;font-weight:700;text-transform:uppercase;letter-spacing:0.12em;color:var(--vo);text-decoration:none;position:relative;padding-bottom:2px;}
@@ -81,29 +81,154 @@
     #order-result{display:none;margin-top:1rem;padding:1rem 1.2rem;font-size:0.88rem;font-weight:600;line-height:1.5;border-left:4px solid;}
     #order-result.success{background:#f0faf2;border-color:var(--vm);color:#1a4a1a;}
     #order-result.error{background:#fff5f5;border-color:#c0392b;color:#7a1010;}
-    #hero{min-height:100vh;display:grid;grid-template-columns:1fr 1fr;align-items:center;padding:100px 5% 4rem;gap:4rem;background:linear-gradient(135deg,var(--crema) 55%,#d8efd8 100%);position:relative;overflow:hidden;}
-    #hero::after{content:'';position:absolute;bottom:0;left:0;right:0;height:5px;background:linear-gradient(90deg,var(--vo),var(--vc),var(--vo));}
-    .hero-deco{position:absolute;border-radius:50%;background:radial-gradient(circle,rgba(122,184,122,0.13),transparent 70%);pointer-events:none;}
-    .hero-deco.d1{width:500px;height:500px;top:-100px;right:-80px;}
-    .hero-deco.d2{width:300px;height:300px;bottom:40px;left:-60px;}
-    .hero-kicker{display:inline-flex;align-items:center;gap:0.6rem;font-size:0.7rem;font-weight:700;text-transform:uppercase;letter-spacing:0.2em;color:var(--vm);margin-bottom:1.2rem;opacity:0;animation:fadeUp 0.6s 0.1s ease forwards;}
-    .hero-kicker::before{content:'';display:block;width:2rem;height:2px;background:var(--vm);}
-    h1{font-family:'Playfair Display',serif;font-size:clamp(2.4rem,4.2vw,3.8rem);font-weight:900;line-height:1.06;color:var(--vo);opacity:0;animation:fadeUp 0.6s 0.2s ease forwards;}
-    h1 em{font-style:italic;color:var(--vm);display:block;}
-    .hero-tagline{margin:1rem 0 0.5rem;font-family:'Playfair Display',serif;font-style:italic;font-size:1rem;color:var(--gc);opacity:0;animation:fadeUp 0.6s 0.3s ease forwards;}
-    .hero-desc{margin:0.8rem 0 2rem;font-size:0.97rem;line-height:1.8;color:var(--gm);max-width:440px;opacity:0;animation:fadeUp 0.6s 0.35s ease forwards;}
-    .hero-btns{display:flex;gap:1rem;flex-wrap:wrap;opacity:0;animation:fadeUp 0.6s 0.4s ease forwards;}
-    .btn{display:inline-block;text-decoration:none;cursor:pointer;font-size:0.82rem;font-weight:700;text-transform:uppercase;letter-spacing:0.1em;padding:0.95rem 2.2rem;border:2px solid transparent;transition:all 0.22s;}
-    .btn-green{background:var(--vm);color:#fff;border-color:var(--vm);}
-    .btn-green:hover{background:var(--vo);border-color:var(--vo);}
-    .btn-out{background:transparent;color:var(--vo);border-color:var(--vo);}
-    .btn-out:hover{background:var(--vo);color:#fff;}
-    .hero-right{display:flex;flex-direction:column;align-items:center;justify-content:center;gap:2rem;opacity:0;animation:fadeUp 0.7s 0.5s ease forwards;}
-    .product-bottle{width:min(280px,80%);filter:drop-shadow(0 28px 56px rgba(42,74,42,0.22));animation:float 5s ease-in-out infinite;}
-    @keyframes float{0%,100%{transform:translateY(0) rotate(-1deg);}50%{transform:translateY(-16px) rotate(1deg);}}
-    .hero-badges{display:flex;gap:0.8rem;flex-wrap:wrap;justify-content:center;}
-    .badge{display:flex;align-items:center;gap:0.4rem;background:rgba(255,255,255,0.85);border:1.5px solid var(--vc);padding:0.45rem 0.9rem;font-size:0.72rem;font-weight:700;color:var(--vo);backdrop-filter:blur(4px);}
-    .badge-dot{width:6px;height:6px;border-radius:50%;background:var(--vm);}
+    /* --- HERO SECTION MODIFICADO --- */
+#hero {
+  min-height: 100vh;
+  display: flex; /* Cambiado a flex para que el texto fluya libremente */
+  align-items: center;
+  padding: 140px 5% 4rem;
+  background: linear-gradient(135deg, var(--crema) 55%, #d8efd8 100%);
+  position: relative;
+  overflow: hidden;
+}
+
+.hero-deco {
+  position: absolute;
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(163,215,163,0.3) 0%, rgba(255,255,255,0) 70%);
+  pointer-events: none;
+}
+
+.hero-deco.d1 { width: 600px; height: 600px; top: -200px; left: -200px; }
+.hero-deco.d2 { width: 400px; height: 400px; bottom: -100px; right: 20%; }
+
+.hero-kicker {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.6rem 1.2rem;
+  background: rgba(42, 74, 42, 0.06);
+  border: 1px solid rgba(42, 74, 42, 0.1);
+  border-radius: 100px;
+  color: var(--vo);
+  font-weight: 600;
+  font-size: 0.9rem;
+  letter-spacing: 0.5px;
+  margin-bottom: 1.5rem;
+}
+
+#hero h1 {
+  font-size: clamp(2.5rem, 4vw, 3.8rem);
+  color: var(--vo);
+  line-height: 1.15;
+  font-weight: 800;
+  margin-bottom: 1.5rem;
+}
+
+#hero h1 em {
+  font-style: normal;
+  color: var(--vm);
+  position: relative;
+}
+
+.hero-tagline {
+  font-size: clamp(1.1rem, 1.5vw, 1.35rem);
+  color: var(--vm);
+  font-weight: 600;
+  margin-bottom: 1rem;
+}
+
+.hero-desc {
+  font-size: 1.05rem;
+  color: #556b55;
+  line-height: 1.7;
+  margin-bottom: 2.5rem;
+}
+
+.hero-btns {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1rem;
+}
+
+    .hero-right-fijo {
+  position: relative;
+  margin: 2rem auto;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1.5rem;
+  width: 100%;
+  opacity: 0;
+  animation: fadeUp 0.7s 0.5s ease forwards;
+}
+
+.product-bottle {
+  width: 250px; /* Tamaño más cómodo para celular */
+  max-width: 90%;
+  filter: drop-shadow(0 15px 30px rgba(42,74,42,0.12));
+  animation: float 5s ease-in-out infinite;
+}
+
+.hero-badges {
+  display: flex;
+  flex-direction: row;
+  gap: 0.8rem;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+
+.badge {
+  background: white;
+  padding: 0.5rem 1rem;
+  border-radius: 100px;
+  box-shadow: 0 5px 15px rgba(42,74,42,0.05);
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-size: 0.85rem;
+  font-weight: 600;
+  color: var(--vo);
+  border: 1px solid rgba(163,215,163,0.2);
+}
+
+.badge-dot {
+  width: 6px;
+  height: 6px;
+  background: var(--vm);
+  border-radius: 50%;
+}
+
+@media (min-width: 768px) {
+  #hero {
+    display: flex;
+    align-items: center;
+    padding: 140px 5% 4rem;
+  }
+  
+  .hero-right-fijo {
+    position: fixed;
+    top: 55%;
+    right: 10%;
+    transform: translateY(-50%);
+    width: auto;
+    z-index: 90;
+    gap: 2.5rem;
+    pointer-events: none;
+  }
+
+  .product-bottle {
+    width: 290px;
+    filter: drop-shadow(0 25px 50px rgba(42,74,42,0.18));
+  }
+
+  .hero-badges {
+    flex-direction: column;
+  }
+}
+
+    .badge {background: white;padding: 0.7rem 1.4rem;border-radius: 100px;box-shadow: 0 10px 25px rgba(42,74,42,0.08);display: flex;align-items: center;gap: 0.6rem;font-size: 0.9rem;font-weight: 600;color: var(--vo);border: 1px solid rgba(163,215,163,0.3);width: fit-content;}
+    .badge-dot {width: 8px;height: 8px;background: var(--vm);border-radius: 50%;}
     .stats-bar{background:var(--vo);padding:1.5rem 5%;display:flex;justify-content:center;gap:5rem;flex-wrap:wrap;}
     .stat{text-align:center;}
     .stat-num{font-family:'Playfair Display',serif;font-size:2rem;font-weight:900;color:var(--vc);line-height:1;}
@@ -204,13 +329,8 @@
     .mv-title em{font-style:italic;opacity:0.8;}
     .mv-text{font-size:0.93rem;line-height:1.85;color:rgba(255,255,255,0.85);}
     #resenas{padding:7rem 5%;background:var(--crema);}
-    #r-ciudad{width:100%;}
     .resenas-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1.5rem;margin-bottom:3rem;}
-    .resena-card{background:#fff;padding:1.8rem;border:1.5px solid var(--menta);transition:box-shadow 0.3s;position:relative;overflow:hidden;}
-    @keyframes shimmer{0%{left:-100%;}100%{left:150%;}}
-    .resena-card.nueva::after{content:'';position:absolute;top:0;left:-100%;width:60%;height:100%;background:linear-gradient(90deg,transparent,rgba(122,184,122,0.35),transparent);animation:shimmer 0.8s ease 2;}
-    @keyframes slideIn{from{opacity:0;transform:translateY(20px);}to{opacity:1;transform:translateY(0);}}
-    .resena-card.nueva{animation:slideIn 0.5s ease forwards;border-color:var(--vm);}
+    .resena-card{background:#fff;padding:1.8rem;border:1.5px solid var(--menta);transition:box-shadow 0.3s;}
     .resena-card:hover{box-shadow:0 8px 24px rgba(42,74,42,0.08);}
     .resena-stars{display:flex;gap:0.2rem;margin-bottom:0.8rem;}
     .apple-star{font-size:1.2rem;opacity:0.25;}
@@ -259,287 +379,476 @@
       #hero{grid-template-columns:1fr;padding:90px 4% 3rem;gap:2rem;}.hero-right{display:none;}
       #producto,#nosotros{grid-template-columns:1fr;padding:4rem 4%;gap:3rem;}
       #beneficios,#proceso,#resenas,#contacto,footer{padding:4rem 4%;}
-      /* Footer responsive */
-      footer {flex-wrap: wrap;}
-      .footer-links {flex-wrap: wrap;gap: 1rem;}
-      .footer-links li {white-space: nowrap;}
-      .ig-link {word-break: break-all;}
-      .ben-grid, .resenas-grid { grid-template-columns: 1fr; gap: 1rem; }
-      .resenas-grid {grid-template-columns: 1fr;width: 100%;overflow-x: hidden;}
-      .resena-card {width: 100%;box-sizing: border-box;}
-      footer {overflow-x: hidden;}
+      .ben-grid,.resenas-grid{grid-template-columns:1fr;gap:1rem;}
       .steps{grid-template-columns:1fr 1fr;gap:2rem;}.steps::before{display:none;}
       .pres-grid{grid-template-columns:repeat(2,1fr);gap:0.5rem;}
       .stats-bar{gap:2.5rem;}
       .card-actions{flex-direction:column;}.card-btn-wish{width:100%;}
-      .form-grid{grid-template-columns:1fr;}
     }
-    /* ── SLIDER ── */
-      .img-slider{position:relative;width:100%;overflow:hidden;background:#000;aspect-ratio:16/6;}
-      .img-slider-track{display:flex;width:100%;height:100%;}
-      .img-slide{position:absolute;inset:0;opacity:0;transition:opacity 0.8s ease;}
-      .img-slide.active{opacity:1;z-index:1;}
-      .img-slide img{width:100%;height:100%;object-fit:cover;display:block;}
-      .img-slider-dots{position:absolute;bottom:1rem;left:50%;transform:translateX(-50%);display:flex;gap:0.5rem;z-index:2;}
-      .img-dot{width:10px;height:10px;border-radius:50%;background:rgba(255,255,255,0.45);cursor:pointer;transition:background 0.3s,transform 0.3s;border:none;}
-      .img-dot.active{background:#fff;transform:scale(1.25);}
-      .img-slider-arrow{position:absolute;top:50%;transform:translateY(-50%);background:rgba(0,0,0,0.35);color:#fff;border:none;font-size:2rem;line-height:1;padding:0.3rem 0.8rem;cursor:pointer;z-index:2;transition:background 0.2s;}
-      .img-slider-arrow:hover{background:rgba(0,0,0,0.6);}
-      .img-slider-arrow.left{left:1rem;}
-      .img-slider-arrow.right{right:1rem;}
-/* ── FEATURE HIGHLIGHT ── */
-.fh-section{padding:6rem 5%;background:var(--vo);position:relative;overflow:hidden;}
-.fh-section::before{content:'';position:absolute;width:600px;height:600px;border-radius:50%;background:radial-gradient(circle,rgba(122,184,122,0.08),transparent 70%);top:-150px;left:-150px;pointer-events:none;}
-.fh-section::after{content:'';position:absolute;width:400px;height:400px;border-radius:50%;background:radial-gradient(circle,rgba(122,184,122,0.06),transparent 70%);bottom:-100px;right:-100px;pointer-events:none;}
-.fh-hdr{text-align:center;margin-bottom:4rem;}
-.fh-lbl{display:block;font-size:0.7rem;font-weight:700;text-transform:uppercase;letter-spacing:0.15em;color:var(--vc);margin-bottom:0.7rem;}
-.fh-title{font-family:'Playfair Display',serif;font-size:clamp(1.7rem,2.8vw,2.3rem);font-weight:900;line-height:1.1;color:var(--crema);}
-.fh-title em{font-style:italic;color:var(--vc);}
-.fh-wrap{display:grid;grid-template-columns:1fr auto 1fr;align-items:center;gap:0.5rem;max-width:1200px;margin:0 auto;padding:0 2rem;}
-.fh-col{display:flex;flex-direction:column;gap:3.5rem;margin-top:-5rem;}
-.fh-item{display:flex;align-items:center;gap:1rem;}
-.fh-left .fh-item{flex-direction:row;}
-.fh-right .fh-item{flex-direction:row-reverse;}
-.fh-card{display:flex;align-items:center;gap:0.8rem;background:rgba(255,255,255,0.06);border:1.5px solid rgba(122,184,122,0.25);padding:0.9rem 1.3rem;border-radius:50px;font-size:0.82rem;font-weight:700;color:var(--crema);white-space:nowrap;transition:all 0.3s;backdrop-filter:blur(4px);}
-.fh-card:hover{background:rgba(122,184,122,0.15);border-color:var(--vc);transform:translateY(-2px);box-shadow:0 8px 24px rgba(0,0,0,0.2);}
-.fh-card svg{width:18px;height:18px;min-width:18px;stroke:var(--vc);}
-.fh-center{display:flex;align-items:center;justify-content:center;}
-.fh-img-wrap{position:relative;width:450px;height:450px;display:flex;align-items:center;justify-content:center;}
-.fh-img{width:100%;height:100%;object-fit:contain;position:relative;z-index:1;filter:drop-shadow(0 20px 60px rgba(0,0,0,0.35));animation:float 5s ease-in-out infinite;}
-.fh-img-glow{position:absolute;inset:10%;border-radius:50%;background:radial-gradient(circle,rgba(122,184,122,0.2),transparent 70%);z-index:0;}
-@media(max-width:860px){
-  .fh-wrap{grid-template-columns:1fr;}
-  .fh-center{order:-1;}
-  .fh-img-wrap{width:260px;height:260px;margin:0 auto;}
-  .fh-col{gap:1rem;}
-  .fh-right .fh-item{flex-direction:row;}
-  .fh-card{white-space:normal;font-size:0.78rem;padding:0.7rem 1rem;}
-  .fh-hdr{margin-bottom:2rem;}
-  .fh-col{margin-top:0;}
-}
-/* ── TICKER ── */
-.ticker-wrap{width:100%;background:var(--vm);overflow:hidden;padding:0.8rem 0;white-space:nowrap;}
-.ticker-track{display:inline-block;animation:ticker 25s linear infinite;}
-.ticker-track span{font-size:0.8rem;font-weight:700;text-transform:uppercase;letter-spacing:0.12em;color:#fff;padding:0 1.2rem;}
-.ticker-dot{color:rgba(255,255,255,0.5)!important;padding:0!important;}
-.ticker-wrap:hover .ticker-track{animation-play-state:paused;}
-@keyframes ticker{0%{transform:translateX(0);}100%{transform:translateX(-50%);}}
 
   </style>
+
   <style>
-    /* ── INTRO MAKORA ── */
-    #mk-intro{
+    /* BREADCRUMB */
+    .breadcrumb{
+      padding:100px 5% 0;
+      font-size:0.75rem;color:var(--gc);
+      display:flex;align-items:center;gap:0.5rem;
+    }
+    .breadcrumb a{color:var(--vm);text-decoration:none;}
+    .breadcrumb a:hover{text-decoration:underline;}
+
+    /* PRODUCT LAYOUT */
+    .product-wrap{
+      max-width:1100px;margin:0 auto;
+      padding:2rem 5% 5rem;
+      display:grid;grid-template-columns:1fr 1fr;
+    }
+    .product-wrap {
+      display: grid !important;
+      grid-template-columns: 1fr 1fr !important;
+      gap: 5rem !important;
+      padding: 120px 5% 5rem !important;
+    }
+
+    .gallery {
+      position: -webkit-sticky;
+      position: sticky;
+      top: 120px;
+      align-self: start;
+      width: 100%;
+    }
+    
+    .galeria-scroll {
+      display: grid !important;
+      grid-template-columns: repeat(2, 1fr) !important;
+      gap: 1.5rem !important;
+      background: transparent !important;
+      padding: 0 !important;
+      height: auto !important;
+      overflow-x: visible !important;
+    }
+    
+    .product-bottle {
+      max-width: 100% !important;
+      width: 100% !important;
+      flex-shrink: 1 !important;
+      background: var(--menta) !important; 
+      padding: 0 !important;
+      aspect-ratio: 1 !important;
+      object-fit: cover !important;
+      filter: drop-shadow(0 15px 35px rgba(42,74,42,0.06)) !important;
+      transition: transform 0.3s ease;
+      border-radius: 12px !important;
+    }
+
+    .product-bottle:hover {
+      transform: scale(1.02);
+    }
+
+    .product-bottle:nth-of-type(1) {
+      grid-column: span 2 !important;
+      object-fit: contain !important;
+      padding: 2.5rem !important;
+    }
+    
+    .product-bottle:nth-of-type(4) {
+      grid-column: span 2 !important;
+    }
+
+    .product-wrap {
+  display: grid !important;
+  grid-template-columns: 1fr 1fr !important;
+  gap: 5rem !important;
+  padding: 20px 5% 5rem !important;
+  align-items: start !important;
+}
+
+.gallery {
+  position: -webkit-sticky;
+  position: sticky;
+  top: 120px;
+  align-self: start;
+  width: 100%;
+}
+
+.galeria-scroll {
+  display: grid !important;
+  grid-template-columns: repeat(2, 1fr) !important;
+  gap: 1.5rem !important;
+  background: transparent !important;
+  padding: 0 !important;
+  height: auto !important;
+  overflow-x: visible !important;
+}
+
+.product-bottle {
+  max-width: 100% !important;
+  width: 100% !important;
+  flex-shrink: 1 !important;
+  background: var(--menta) !important; 
+  padding: 0 !important;
+  aspect-ratio: 1 !important;
+  object-fit: cover !important;
+  filter: drop-shadow(0 15px 35px rgba(42,74,42,0.06)) !important;
+  transition: transform 0.3s ease;
+  border-radius: 12px !important;
+}
+
+.product-bottle:hover {
+  transform: scale(1.02);
+}
+
+.product-bottle:nth-of-type(1) {
+  grid-column: span 2 !important;
+  object-fit: contain !important;
+  padding: 1rem !important;
+  height: 400px !important;
+}
+
+.product-bottle:nth-of-type(4) {
+  grid-column: span 2 !important;
+}
+
+@media (max-width: 700px) {
+  .product-wrap {
+    display: flex !important;
+    flex-direction: column !important;
+    padding: 0 !important;
+    gap: 0 !important;
+    height: auto !important;
+    overflow: visible !important;
+  }
+  .gallery {
+    position: relative !important;
+    top: 0 !important;
+    width: 100% !important;
+    margin-bottom: 2.5rem !important;
+  }
+  .galeria-scroll {
+    display: flex !important;
+    overflow-x: auto !important;
+    scroll-snap-type: x mandatory !important;
+    background: var(--menta) !important;
+    padding: 1.5rem !important;
+    gap: 1.5rem !important;
+    height: auto !important;
+    align-items: center !important;
+    -webkit-overflow-scrolling: touch;
+  }
+  .product-bottle {
+    width: 260px !important;
+    min-width: 260px !important;
+    max-width: 260px !important;
+    scroll-snap-align: center !important;
+    aspect-ratio: 1 / 1 !important;
+    object-fit: cover !important;
+    background: transparent !important;
+    padding: 0 !important;
+    flex-shrink: 0 !important;
+  }
+  .product-bottle:nth-of-type(1) {
+    width: 260px !important;
+    min-width: 260px !important;
+    max-width: 260px !important;
+    height: 260px !important;
+    padding: 0 !important;
+    object-fit: contain !important;
+    margin: 0 auto !important;
+    background-color: var(--menta) !important;
+  }
+  .product-bottle:nth-of-type(1),
+  .product-bottle:nth-of-type(4) {
+    grid-column: auto !important;
+  }
+}
+
+    @media (min-width: 700px) {
+      .galeria-scroll {
+        display: flex;
+        flex-direction: column;
+        overflow-x: visible;
+        background: transparent;
+        padding: 0;
+        gap: 2rem;
+        height: auto;
+      }
+      
+      .product-bottle {
+        max-width: 100%;
+        width: 100%;
+        flex-shrink: 1;
+        background: var(--menta);
+        padding: 3rem;
+        aspect-ratio: 1;
+        filter: drop-shadow(0 20px 45px rgba(42,74,42,0.15));
+      }
+    }
+
+    .product-kicker {
+      font-size: 0.68rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.2em;
+      color: var(--vm);
+      margin-bottom: 0.6rem;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+    
+    .product-kicker::before {
+      content: '';
+      display: block;
+      width: 1.5rem;
+      height: 2px;
+      background: var(--vm);
+    }
+    
+    .product-name {
+      font-family: 'Playfair Display', serif;
+      font-size: clamp(2rem, 3.5vw, 2.8rem);
+      font-weight: 900;
+      color: var(--vo);
+      line-height: 1.1;
+      margin-bottom: 0.6rem;
+    }
+    
+    .product-price {
+      font-size: 1.9rem;
+      font-weight: 700;
+      color: var(--vm);
+      margin-bottom: 1.2rem;
+    }
+    
+    .product-desc {
+      font-size: 0.97rem;
+      line-height: 1.85;
+      color: var(--gm);
+      margin-bottom: 1.4rem;
+      border-left: 3px solid var(--vc);
+      padding-left: 1rem;
+    }
+    
+    .modo-empleo {
+      background: var(--menta);
+      padding: 1.2rem 1.4rem;
+      margin-bottom: 1.6rem;
+      border-left: 3px solid var(--vm);
+    }
+    
+    .modo-titulo {
+      font-size: 0.7rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.12em;
+      color: var(--vm);
+      margin-bottom: 0.8rem;
+    }
+    
+    .modo-pasos {
+      padding-left: 1.2rem;
+      font-size: 0.87rem;
+      line-height: 1.8;
+      color: var(--gm);
+    }
+    
+    .modo-pasos li {
+      margin-bottom: 0.3rem;
+    }
+    
+    .modo-nota {
+      margin-top: 0.8rem;
+      font-size: 0.82rem;
+      color: var(--gc);
+      font-style: italic;
+    }
+    
+    .product-meta {
+      display: flex;
+      flex-direction: column;
+      gap: 0.6rem;
+      margin-bottom: 2rem;
+      background: var(--menta);
+      padding: 1rem 1.2rem;
+    }
+    
+    .product-meta-row {
+      display: flex;
+      justify-content: space-between;
+      font-size: 0.82rem;
+    }
+    
+    .product-meta-label {
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      color: var(--gc);
+    }
+    
+    .product-meta-val {
+      color: var(--go);
+      font-weight: 600;
+    }
+    
+    .stock-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      font-size: 0.8rem;
+      color: var(--vm);
+      font-weight: 700;
+      margin-bottom: 1.6rem;
+    }
+    
+    .stock-badge::before {
+      content: '';
+      display: block;
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      background: var(--vm);
+      animation: pulse 1.8s infinite;
+    }
+    
+    .stock-badge.sin-stock {
+      color: #b33a3a;
+    }
+    
+    .stock-badge.sin-stock::before {
+      background: #b33a3a;
+      animation: none;
+    }
+    
+    .btn-comprar.btn-disabled {
+      opacity: 0.45;
+      cursor: not-allowed;
+      pointer-events: none;
+    }
+    
+    @keyframes pulse {
+      0%, 100% { opacity: 1; transform: scale(1); }
+      50% { opacity: 0.5; transform: scale(1.3); }
+    }
+    
+    .btn-comprar {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 0.7rem;
+      width: 100%;
+      padding: 1.1rem;
+      border: none;
+      cursor: pointer;
+      font-family: 'Raleway', sans-serif;
+      font-size: 0.95rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.12em;
+      text-decoration: none;
+      transition: background 0.2s;
+      margin-bottom: 0.8rem;
+    }
+    
+    .btn-carrito-prod {
+      background: var(--menta);
+      color: var(--vo);
+      border: 2px solid var(--vo);
+    }
+    
+    .btn-carrito-prod:hover {
+      background: var(--vo);
+      color: #fff;
+    }
+    
+    .btn-comprar-ahora {
+      background: var(--vm);
+      color: #fff;
+    }
+    
+    .btn-comprar-ahora:hover {
+      background: var(--vo);
+    }
+    
+    .btn-comprar svg {
+      width: 18px;
+      height: 18px;
+      stroke: currentColor;
+      fill: none;
+      stroke-width: 2;
+      stroke-linecap: round;
+      stroke-linejoin: round;
+    }
+
+    .btn-volver{
+      display:flex;align-items:center;justify-content:center;gap:0.5rem;
+      width:100%;padding:0.9rem;
+      background:transparent;color:var(--vo);
+      border:2px solid var(--vo);
       font-family:'Raleway',sans-serif;
-      background:linear-gradient(160deg,#f4fbf4 0%,#e8f5e8 60%,#d0ebd0 100%);
-      min-height:100vh;height:100vh;
-      display:flex;flex-direction:column;
-      align-items:center;justify-content:center;
-      position:relative;overflow:hidden;
-      padding:3rem 2rem 5rem;
-      will-change:opacity,transform;
+      font-size:0.82rem;font-weight:700;
+      text-transform:uppercase;letter-spacing:0.1em;
+      text-decoration:none;
+      transition:all 0.2s;
+      margin-bottom:1.6rem;
     }
-    #mk-intro .mk-particles{position:absolute;inset:0;pointer-events:none;}
-    #mk-intro .mk-particle{
-      position:absolute;border-radius:50%;
-      background:radial-gradient(circle,rgba(58,107,58,0.15),transparent 70%);
-      animation:mkFloatP linear infinite;
+    .btn-volver:hover{background:var(--vo);color:#fff;}
+
+    /* COMPARTIR */
+    .share-row{display:flex;align-items:center;gap:0.7rem;flex-wrap:wrap;position:relative;margin-bottom:1.6rem;}
+    .share-label{font-size:0.72rem;font-weight:700;text-transform:uppercase;letter-spacing:0.08em;color:var(--gc);}
+    .share-buttons{display:flex;gap:0.55rem;}
+    .share-btn{width:38px;height:38px;border-radius:50%;display:flex;align-items:center;justify-content:center;border:1.5px solid var(--menta);background:#fff;color:var(--vo);cursor:pointer;transition:all 0.2s;padding:0;}
+    .share-btn svg{width:17px;height:17px;stroke:currentColor;fill:none;stroke-width:2;stroke-linecap:round;stroke-linejoin:round;}
+    .share-btn:hover{background:var(--vo);color:#fff;border-color:var(--vo);transform:translateY(-2px);}
+    .share-copiado{position:absolute;left:0;bottom:-1.3rem;font-size:0.72rem;color:var(--vm);font-weight:600;opacity:0;transition:opacity 0.25s;}
+    .share-copiado.activo{opacity:1;}
+
+    /* CARACTERÍSTICAS */
+    .features-prod{
+      display:grid;grid-template-columns:1fr 1fr;gap:0.8rem;
+      margin-top:0.5rem;
     }
-    @keyframes mkFloatP{
-      0%{transform:translateY(110%) scale(0.6);opacity:0;}
-      10%{opacity:1;}90%{opacity:0.6;}
-      100%{transform:translateY(-20%) scale(1.1);opacity:0;}
+    .feature-item{
+      display:flex;align-items:center;gap:0.5rem;
+      font-size:0.78rem;color:var(--gm);
     }
-    #mk-intro .mk-leaves{position:absolute;inset:0;pointer-events:none;}
-    #mk-intro .mk-leaf{position:absolute;opacity:0;animation:mkLeafFall linear infinite;}
-    @keyframes mkLeafFall{
-      0%{transform:translateY(-5%) rotate(0deg);opacity:0;}
-      10%{opacity:0.6;}90%{opacity:0.3;}
-      100%{transform:translateY(110%) rotate(360deg);opacity:0;}
+    .feature-icon{
+      width:32px;height:32px;flex-shrink:0;
+      background:var(--menta);border-radius:50%;
+      display:flex;align-items:center;justify-content:center;
+      font-size:1rem;
     }
-    #mk-intro .mk-ring{
-      position:absolute;border-radius:50%;
-      border:1.5px solid rgba(58,107,58,0.10);
-      animation:mkExpandRing 4s ease-out infinite;
+
+    /* FOOTER LINE */
+    /* TAMBIEN TE PODRIA INTERESAR */
+    .relacionados{padding:4rem 5% 3rem;background:#fff;border-top:2px solid var(--menta);}
+    .relacionados-titulo{font-family:'Playfair Display',serif;font-weight:900;font-size:1.6rem;color:var(--vo);text-align:center;margin-bottom:2rem;}
+    .relacionados-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:1.2rem;max-width:900px;margin:0 auto;}
+    .relacionado-card{border:1px solid var(--menta);border-radius:12px;background:var(--crema);text-decoration:none;display:flex;flex-direction:column;overflow:hidden;transition:all 0.25s;box-shadow:0 2px 10px rgba(42,74,42,0.04);}
+    .relacionado-card:hover{transform:translateY(-4px);box-shadow:0 14px 32px rgba(42,74,42,0.12);border-color:var(--vc);}
+    .relacionado-img-wrap{aspect-ratio:3/4;background:#fff;display:flex;align-items:center;justify-content:center;padding:1.4rem;}
+    .relacionado-img-wrap img{width:100%;height:100%;object-fit:contain;cursor:pointer;}
+    .relacionado-body{padding:0.9rem 1rem 1.2rem;text-align:center;}
+    .relacionado-nombre{font-family:'Playfair Display',serif;font-weight:700;font-size:0.92rem;color:var(--vo);margin-bottom:0.3rem;}
+    .relacionado-precio{font-size:0.82rem;color:var(--gm);font-weight:600;}
+
+    .footer-line{
+      text-align:center;padding:2rem;
+      font-size:0.75rem;color:var(--gc);
+      border-top:1px solid var(--menta);
     }
-    @keyframes mkExpandRing{
-      0%{transform:scale(0.3);opacity:0.7;}
-      100%{transform:scale(2.5);opacity:0;}
+    .legal-links{
+      display:flex;gap:1.4rem;flex-wrap:wrap;justify-content:center;
+      padding:1.6rem 1rem 0;font-size:0.72rem;
     }
-    #mk-intro .mk-logo-wrap{
-      display:flex;align-items:center;gap:0.8rem;
-      margin-bottom:2.8rem;
-      opacity:0;animation:mkFadeDown 0.8s 0.3s ease forwards;
-    }
-    #mk-intro .mk-logo-text{
-      font-family:'Playfair Display',serif;font-size:1rem;
-      font-weight:700;color:#2a4a2a;
-      letter-spacing:0.1em;text-transform:uppercase;
-    }
-    #mk-intro .mk-pre{
-      display:block;font-size:0.65rem;font-weight:700;
-      text-transform:uppercase;letter-spacing:0.3em;color:#3a6b3a;
-      margin-bottom:1rem;opacity:0;
-      animation:mkFadeDown 0.7s 0.5s ease forwards;
-    }
-    #mk-intro .mk-name{
-      font-family:'Playfair Display',serif;
-      font-size:clamp(3.2rem,14vw,6.5rem);
-      font-weight:900;color:#2a4a2a;
-      line-height:1;letter-spacing:-0.01em;
-      display:flex;justify-content:center;overflow:hidden;
-      margin-bottom:1.2rem;
-    }
-    #mk-intro .mk-letter{
-      display:inline-block;opacity:0;
-      transform:translateY(60px) rotateX(40deg);
-      animation:mkLetterUp 0.5s ease forwards;
-    }
-    @keyframes mkLetterUp{
-      to{opacity:1;transform:translateY(0) rotateX(0deg);}
-    }
-    #mk-intro .mk-tagline{
-      font-family:'Playfair Display',serif;font-style:italic;
-      font-size:clamp(0.9rem,3vw,1.25rem);color:#3a6b3a;
-      opacity:0;animation:mkFadeDown 0.7s 1.4s ease forwards;
-      letter-spacing:0.02em;text-align:center;
-      margin-bottom:0;padding:0 1rem;
-    }
-    #mk-intro .mk-cta{
-      margin-top:3.2rem;
-      opacity:0;animation:mkFadeDown 0.7s 1.8s ease forwards;
-      display:flex;flex-direction:column;align-items:center;gap:0.6rem;
-      cursor:pointer;
-    }
-    #mk-intro .mk-cta-text{
-      font-size:0.68rem;font-weight:700;
-      text-transform:uppercase;letter-spacing:0.18em;color:#3a6b3a;
-    }
-    #mk-intro .mk-arrow{
-      width:30px;height:30px;border:1.5px solid #3a6b3a;
-      border-radius:50%;display:flex;align-items:center;justify-content:center;
-      animation:mkBounceArrow 1.5s 2.3s ease-in-out infinite;
-    }
-    #mk-intro .mk-arrow svg{width:13px;height:13px;stroke:#3a6b3a;fill:none;stroke-width:2.5;}
-    @keyframes mkBounceArrow{
-      0%,100%{transform:translateY(0);}50%{transform:translateY(6px);}
-    }
-    @keyframes mkFadeDown{
-      from{opacity:0;transform:translateY(-16px);}
-      to{opacity:1;transform:translateY(0);}
-    }
-    #mk-intro .mk-wave{
-      position:absolute;bottom:-1px;left:0;right:0;height:90px;overflow:hidden;
-    }
-    #mk-intro .mk-wave svg{width:100%;height:100%;}
-    @media(max-width:480px){
-      #mk-intro .mk-ring{display:none;}
-      #mk-intro .mk-logo-wrap{margin-bottom:2rem;}
-      #mk-intro .mk-pre{letter-spacing:0.15em;}
-      #mk-intro .mk-cta{margin-top:2.5rem;}
-      #mk-intro .mk-wave{height:60px;}
-    }
+    .legal-links a{color:var(--gc);text-decoration:none;}
+    .legal-links a:hover{color:var(--vm);}
   </style>
+
 </head>
 <body>
-
-<!-- ── INTRO MAKORA ── -->
-<div id="mk-intro">
-  <div class="mk-particles" id="mk-particles"></div>
-  <div class="mk-leaves" id="mk-leaves"></div>
-  <div style="position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);width:min(420px,90vw);height:min(420px,90vw);pointer-events:none;">
-    <div class="mk-ring" style="width:100%;height:100%;top:0;left:0;animation-delay:0s;"></div>
-    <div class="mk-ring" style="width:100%;height:100%;top:0;left:0;animation-delay:1.4s;"></div>
-    <div class="mk-ring" style="width:100%;height:100%;top:0;left:0;animation-delay:2.8s;"></div>
-  </div>
-  <div class="mk-logo-wrap">
-    <svg width="36" height="36" viewBox="0 0 42 42" fill="none">
-      <circle cx="21" cy="21" r="20" fill="#2a4a2a" opacity="0.08"/>
-      <path d="M21 8 C21 8 14 14 14 21 C14 28 17.5 32 21 34 C24.5 32 28 28 28 21 C28 14 21 8 21 8Z" fill="#2a4a2a" opacity="0.85"/>
-      <path d="M21 8 C21 8 26 12 26 19 C26 25 23 30 21 34 C21 34 21 20 21 8Z" fill="#3a6b3a"/>
-      <path d="M21 10 C23 8 27 7 28 9" stroke="#3a6b3a" stroke-width="1.5" stroke-linecap="round" fill="none"/>
-    </svg>
-    <span class="mk-logo-text">Grupo Makora</span>
-  </div>
-  <span class="mk-pre">Conservador Natural de Manzana</span>
-  <div class="mk-name" id="mk-name"></div>
-  <p class="mk-tagline">Donde el desperdicio se transforma en oportunidad.</p>
-  <div class="mk-cta" onclick="window.scrollTo({top:window.innerHeight,behavior:'smooth'})">
-    <span class="mk-cta-text">Descubrir</span>
-    <div class="mk-arrow">
-      <svg viewBox="0 0 14 14"><polyline points="2 4 7 10 12 4"/></svg>
-    </div>
-  </div>
-  <div class="mk-wave">
-    <svg viewBox="0 0 1200 90" preserveAspectRatio="none">
-      <path d="M0,45 C200,90 400,0 600,45 C800,90 1000,0 1200,45 L1200,90 L0,90 Z" fill="#f4fbf4"/>
-    </svg>
-  </div>
-</div>
-<script>
-  (function(){
-    "MAKORA".split('').forEach(function(ch,i){
-      var s=document.createElement('span');
-      s.className='mk-letter';
-      s.textContent=ch;
-      s.style.animationDelay=(0.7+i*0.1)+'s';
-      document.getElementById('mk-name').appendChild(s);
-    });
-    var pc=document.getElementById('mk-particles');
-    for(var i=0;i<12;i++){
-      var p=document.createElement('div');
-      p.className='mk-particle';
-      var sz=60+Math.random()*130;
-      p.style.cssText='width:'+sz+'px;height:'+sz+'px;left:'+Math.random()*100+'%;animation-duration:'+(9+Math.random()*10)+'s;animation-delay:'+Math.random()*9+'s;';
-      pc.appendChild(p);
-    }
-    var lc=document.getElementById('mk-leaves');
-    for(var j=0;j<8;j++){
-      var svg=document.createElementNS('http://www.w3.org/2000/svg','svg');
-      svg.setAttribute('viewBox','0 0 20 28');svg.setAttribute('width','16');svg.setAttribute('height','22');
-      svg.innerHTML='<path d="M10 2 C10 2 3 8 3 16 C3 22 6.5 26 10 27 C13.5 26 17 22 17 16 C17 8 10 2 10 2Z" fill="#3a6b3a" opacity="0.35"/>';
-      var w=document.createElement('div');
-      w.className='mk-leaf';w.appendChild(svg);
-      w.style.cssText='left:'+(5+Math.random()*90)+'%;animation-duration:'+(11+Math.random()*12)+'s;animation-delay:'+Math.random()*10+'s;';
-      lc.appendChild(w);
-    }
-    // Nav oculto al inicio
-    var nav=document.getElementById('main-nav');
-    if(nav){nav.style.opacity='0';nav.style.pointerEvents='none';nav.style.transition='opacity 0.4s ease';}
-
-    function onScroll(){
-      var intro=document.getElementById('mk-intro');
-      var nav=document.getElementById('main-nav');
-      var nameEl=document.getElementById('mk-name');
-      var scrollY=window.scrollY;
-      var h=window.innerHeight;
-
-      // Intro: fade + leve scale
-      var progress=Math.min(scrollY/(h*0.45),1);
-      intro.style.opacity=1-progress;
-      intro.style.transform='scale('+(1-progress*0.03)+') translateY('+(-scrollY*0.2)+'px)';
-
-      // MAKORA grande: se achica y sube hacia el nav
-      if(nameEl){
-        var nameScale=1-progress*0.7;
-        var nameUp=-scrollY*0.35;
-        nameEl.style.transform='scale('+nameScale+') translateY('+nameUp+'px)';
-        nameEl.style.transformOrigin='center top';
-        nameEl.style.opacity=1-progress*1.5;
-      }
-
-      // Nav: aparece cuando las letras llegan arriba
-      if(nav){
-        var navProgress=Math.max(0,Math.min((scrollY-h*0.3)/(h*0.15),1));
-        nav.style.opacity=navProgress;
-        nav.style.pointerEvents=navProgress>0.5?'all':'none';
-      }
-    }
-    window.addEventListener('scroll', onScroll);
-    onScroll();
-    setTimeout(onScroll, 100);
-  })();
-</script>
-
+<!-- TOAST + PANELS + NAV -->
 <div class="toast" id="toast"></div>
 <div class="panel-overlay" id="panel-overlay" onclick="closeAllPanels()"></div>
 
@@ -603,10 +912,10 @@
 <nav id="main-nav">
   <div class="nav-logo"><a href="/" style="text-decoration:none;"><span style="font-family:'Playfair Display',serif;font-size:1.6rem;font-weight:900;color:var(--vo);letter-spacing:0.08em;">MAKORA</span></a></div>
   <ul class="nav-links">
-    <li><a href="#producto">Producto</a></li>
-    <li><a href="#nosotros">Nosotros</a></li>
-    <li><a href="#beneficios">Beneficios</a></li>
-    <li><a href="#resenas">Reseñas</a></li>
+    <li><a href="/">Inicio</a></li>
+    <li><a href="/#nosotros">Nosotros</a></li>
+    <li><a href="/#beneficios">Beneficios</a></li>
+    <li><a href="/#resenas">Reseñas</a></li>
   </ul>
   <div class="nav-actions">
     <button class="nav-icon-btn" onclick="openPanel('wish')" title="Lista de deseos">
@@ -621,341 +930,143 @@
   </div>
 </nav>
 
-<section id="hero">
-  <div class="hero-deco d1"></div><div class="hero-deco d2"></div>
-  <div>
-    <div class="hero-kicker">Hecho en Chihuahua</div>
-    <h1>Conservador natural<br><em>para frutas y verduras.</em></h1>
-    <p class="hero-tagline">Donde el desperdicio se transforma en oportunidad.</p>
-    <p class="hero-desc">Makora es una empresa mexicana comprometida con la reducción del desperdicio alimentario mediante el desarrollo de soluciones naturales para la conservación de frutas y verduras. A través del aprovechamiento de manzanas descartadas por razones estéticas o comerciales, transformamos residuos agrícolas en productos de valor que ayudan a prolongar la vida útil de los alimentos y fortalecer la sostenibilidad del sector agrícola.</p>
-    <div class="hero-btns">
-      <a href="#producto" class="btn btn-green">Ver producto</a>
-      <a href="#nosotros" class="btn btn-out">Conocer más</a>
-    </div>
-  </div>
-  <div class="hero-right">
-    <img src="logo-sin-fondo.png" alt="Makora Spray" class="product-bottle" />
-      <ellipse cx="140" cy="390" rx="70" ry="10" fill="rgba(42,74,42,0.15)"/>
-      <rect x="100" y="30" width="80" height="28" rx="5" fill="#1a3a1a"/>
-      <rect x="108" y="22" width="64" height="14" rx="4" fill="#2a4a2a"/>
-      <path d="M108 58 Q100 75 95 100 L185 100 Q180 75 172 58Z" fill="#4a7a4a"/>
-      <rect x="75" y="100" width="130" height="230" rx="8" fill="#4a7a4a"/>
-      <rect x="79" y="120" width="122" height="206" rx="6" fill="#3a6b3a" opacity="0.9"/>
-      <rect x="84" y="125" width="18" height="190" rx="4" fill="rgba(255,255,255,0.15)"/>
-      <rect x="88" y="150" width="104" height="140" rx="4" fill="rgba(244,251,244,0.95)"/>
-      <rect x="88" y="150" width="104" height="5" rx="2" fill="#3a6b3a"/>
-      <ellipse cx="140" cy="245" rx="22" ry="22" fill="#3a6b3a"/>
-      <ellipse cx="140" cy="245" rx="16" ry="16" fill="#4a8a4a"/>
-      <path d="M136 232 Q140 226 144 232" stroke="#7ab87a" stroke-width="2" fill="none" stroke-linecap="round"/>
-      <ellipse cx="133" cy="240" rx="5" ry="7" fill="rgba(255,255,255,0.18)" transform="rotate(-20,133,240)"/>
-    </svg>
-    <div class="hero-badges">
-      <div class="badge"><span class="badge-dot"></span>Respaldo cientifico</div>
-      <div class="badge"><span class="badge-dot"></span>Sin conservadores sinteticos</div>
-      <div class="badge"><span class="badge-dot"></span>Manzana chihuahuense</div>
-    </div>
-  </div>
-</section>
-
-<section id="mision-vision">
-  <div class="sec-hdr reveal">
-    <span class="sec-lbl">Nuestra razón de ser</span>
-    <h2 class="sec-h2">Misión y <em>Visión</em></h2>
-  </div>
-  <div class="mv-grid">
-    <div class="mv-card mision reveal">
-      <span class="mv-numero">M</span>
-      <span class="mv-lbl">Misión</span>
-      <h3 class="mv-title">Transformar lo que<br><em>se descarta.</em></h3>
-      <p class="mv-text">Transformar manzanas descartadas en soluciones naturales que prolonguen la vida util de frutas y verduras, ayudando a reducir el desperdicio alimentario y generando valor para el campo mexicano.</p>
-    </div>
-    <div class="mv-card vision reveal">
-      <span class="mv-numero">V</span>
-      <span class="mv-lbl">Visión</span>
-      <h3 class="mv-title">Referentes en<br><em>Latinoamerica.</em></h3>
-      <p class="mv-text">Convertirnos en la empresa referente en Latinoamerica en conservacion natural de alimentos, demostrando que la innovacion y la sostenibilidad pueden transformar la manera en que aprovechamos nuestros recursos agricolas.</p>
-    </div>
-  </div>
-</section>
-
-<div class="stats-bar">
-  <div class="stat"><div class="stat-num">100%</div><div class="stat-label">Natural</div></div>
-  <div class="stat"><div class="stat-num">0</div><div class="stat-label">Quimicos artificiales</div></div>
-  <div class="stat"><div class="stat-num">CUU</div><div class="stat-label">Origen</div></div>
-</div>
-<!-- TICKER -->
-<div class="ticker-wrap">
-  <div class="ticker-track">
-    <span>100% Natural</span>
-    <span class="ticker-dot">·</span>
-    <span>Hecho en Chihuahua</span>
-    <span class="ticker-dot">·</span>
-    <span>Sin químicos artificiales</span>
-    <span class="ticker-dot">·</span>
-    <span>Manzana chihuahuense</span>
-    <span class="ticker-dot">·</span>
-    <span>Prolonga la vida útil</span>
-    <span class="ticker-dot">·</span>
-    <span>Refrigerado o temperatura ambiente</span>
-    <span class="ticker-dot">·</span>
-    <span>100% Natural</span>
-    <span class="ticker-dot">·</span>
-    <span>Hecho en Chihuahua</span>
-    <span class="ticker-dot">·</span>
-    <span>Sin químicos artificiales</span>
-    <span class="ticker-dot">·</span>
-    <span>Manzana chihuahuense</span>
-    <span class="ticker-dot">·</span>
-    <span>Prolonga la vida útil</span>
-    <span class="ticker-dot">·</span>
-    <span>Refrigerado o temperatura ambiente</span>
-    <span class="ticker-dot">·</span>
-  </div>
-</div>
-<!-- SLIDER DE IMAGENES -->
-<div class="img-slider">
-  <div class="img-slider-track">
-    <div class="img-slide active">
-      <img src="slide1.png" alt="Slide 1" />
-    </div>
-    <div class="img-slide">
-      <img src="slide2.png" alt="Slide 2" />
-    </div>
-    <div class="img-slide">
-      <img src="slide3.png" alt="Slide 3" />
-    </div>
-    <div class="img-slide">
-      <img src="slide4.png" alt="Slide 4" />
-    </div>
-  </div>
-  <div class="img-slider-dots">
-    <span class="img-dot active" onclick="goSlide(0)"></span>
-    <span class="img-dot" onclick="goSlide(1)"></span>
-    <span class="img-dot" onclick="goSlide(2)"></span>
-    <span class="img-dot" onclick="goSlide(3)"></span>
-  </div>
-  <button class="img-slider-arrow left" onclick="moveSlide(-1)">&#8249;</button>
-  <button class="img-slider-arrow right" onclick="moveSlide(1)">&#8250;</button>
+<!-- BREADCRUMB -->
+<div class="breadcrumb">
+  <a href="index.html">Inicio</a>
+  <span>›</span>
+  <a href="index.html#presentaciones-grid">Presentaciones</a>
+  <span>›</span>
+  <span>200 Litros</span>
 </div>
 
-<section id="producto">
-  <div class="reveal">
-    <p class="prod-label">Nuestro producto</p>
-    <h2 class="prod-title">Makora —<br><em>la naturaleza que conserva</em></h2>
-    <p class="prod-desc">Makora desarrolla un conservador natural elaborado a partir de manzanas recuperadas y otros ingredientes de origen natural. Nuestra solución está diseñada para ayudar a productores, distribuidores y comercializadores a reducir pérdidas ocasionadas por el deterioro de frutas y verduras, manteniendo una mejor calidad y presentación de los productos.</p>
-    <div class="features">
-      <div class="feat"><div class="feat-icon">CN</div><div class="feat-text"><strong>Conservación Natural</strong>Ayudamos a prolongar la vida útil de frutas y verduras mediante una formulación elaborada con ingredientes de origen natural.</div></div>
-      <div class="feat"><div class="feat-icon">MD</div><div class="feat-text"><strong>Menor Desperdicio</strong> Reducimos las pérdidas generadas durante el almacenamiento, transporte y comercialización de productos frescos.</div></div>
-      <div class="feat"><div class="feat-icon">EC</div><div class="feat-text"><strong>Economía Círcular</strong>Aprovechamos recursos agrícolas que normalmente serían descartados, convirtiéndolos en soluciones de valor.</div></div>
-      <div class="feat"><div class="feat-icon">AC</div><div class="feat-text"><strong>Apoyo al Campo</strong>Generamos nuevas oportunidades para productores y comunidades agrícolas relacionadas con el aprovechamiento de residuos agroalimentarios.</div></div>
-      <div class="feat"><div class="feat-icon">S</div><div class="feat-text"><strong>Sostenibilidad</strong>Contribuimos a disminuir el impacto ambiental asociado al desperdicio de alimentos.</div></div>
+<!-- PRODUCT -->
+<div class="product-wrap">
+
+  <!-- GALERÍA -->
+  <div class="gallery">
+    <div class="galeria-scroll">
+      
+      <img src="200litros.png" alt="Makora — Vista Grande 1" class="product-bottle"/>
+      <img src="200litros2.png"  alt="Makora — Chica Izquierda 1" class="product-bottle"/>
+      <img src="200litros3.png"  alt="Makora — Chica Derecha 1" class="product-bottle"/>
+      
+      <img src="200litros-persona.png"  alt="Makora — Vista Grande 2" class="product-bottle"/>
+      <img src="200litros4.png"  alt="Makora — Chica Izquierda 2" class="product-bottle"/>
+      <img src="200litros5.png"  alt="Makora — Chica Derecha 2" class="product-bottle"/>
+      
     </div>
   </div>
-</section>
 
-<section id="presentaciones-grid" style="padding:0 5% 7rem;">
-  <div class="sec-hdr reveal">
-    <span class="sec-lbl">Presentaciones</span>
-    <h2 class="sec-h2">Elige tu <em>presentacion</em></h2>
-  </div>
-  <div class="pres-grid">
-    <div class="pres-card reveal" data-pres="1 Litro" data-price="97" onclick="window.location.href='1litro.html'">
-      <div class="img-wrap"><img src="1litro.png" alt="1 Litro" class="img-default" /><img src="1litro-persona.png" alt="1 Litro" class="img-hover" /></div>
-      <button class="pres-card-wish" onclick="event.stopPropagation();toggleWishCard('1 Litro', this)" title="Lista de deseos"><svg viewBox="0 0 24 24"><defs><linearGradient id="hg1" x1="0" x2="0" y1="1" y2="0"><stop class="hg-fill" offset="0%" stop-color="#e57373"/><stop class="hg-edge" offset="0%" stop-color="#e57373" stop-opacity="0"/></linearGradient></defs><path class="heart-path" fill="url(#hg1)" d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg></button>
-      <button class="pres-card-cart" onclick="event.stopPropagation();quickAddToCart('1 Litro')">Agregar al carrito</button>
-      <div class="pres-card-body">
-        <p class="pres-card-name">Makora 1 Litro</p>
-        <p class="pres-card-price">$97 MXN</p>
+  <!-- INFO -->
+  <div class="product-info">
+    <p class="product-kicker">Conservador Natural</p>
+    <h1 class="product-name">Makora 200 Litros</h1>
+    <p class="product-price">PENDIENTE</p>
+
+    <p class="product-desc">
+      Presentación industrial en garrafón de 200 litros. Ideal para plantas de
+      producción, distribuidores mayoristas y uso continuo a gran escala.
+      Formulado con ingredientes 100% naturales, sin conservadores artificiales.
+    </p>
+
+    <!-- MODO DE EMPLEO -->
+    <div class="modo-empleo">
+      <p class="modo-titulo">Modo de empleo</p>
+      <ol class="modo-pasos">
+        <li><strong>Preparación:</strong> Vierta el producto directamente del galón en un atomizador o sistema de rociado limpio y seco. No requiere dilución.</li>
+        <li><strong>Sanitización:</strong> Lave previamente las frutas o verduras con agua limpia para eliminar excesos de tierra o suciedad.</li>
+        <li><strong>Aplicación uniforme:</strong> Rocíe el producto de manera homogénea sobre toda la superficie de los alimentos, asegurándose de cubrir cada área.</li>
+        <li><strong>Conservación:</strong> Deje secar unos instantes. Puede almacenar sus alimentos a temperatura ambiente o en refrigeración para maximizar su frescura y vida útil.</li>
+      </ol>
+      <p class="modo-nota">Uso recomendado en frutas y verduras frescas.</p>
+    </div>
+
+    <div class="product-meta">
+      <div class="product-meta-row">
+        <span class="product-meta-label">Contenido neto</span>
+        <span class="product-meta-val">200 Litros</span>
+      </div>
+      <div class="product-meta-row">
+        <span class="product-meta-label">Fórmula</span>
+        <span class="product-meta-val">100% Natural</span>
+      </div>
+      <div class="product-meta-row">
+        <span class="product-meta-label">Origen</span>
+        <span class="product-meta-val">Chihuahua, México</span>
       </div>
     </div>
-    <div class="pres-card reveal" data-pres="5 Litros" data-price="PENDIENTE" onclick="window.location.href='5litros.html'">
-      <div class="img-wrap"><img src="5litros.png" alt="5 Litros" class="img-default" /><img src="5litros-persona.jpeg" alt="5 Litros" class="img-hover" /></div>
-      <button class="pres-card-wish" onclick="event.stopPropagation();toggleWishCard('5 Litros', this)" title="Lista de deseos"><svg viewBox="0 0 24 24"><defs><linearGradient id="hg1" x1="0" x2="0" y1="1" y2="0"><stop class="hg-fill" offset="0%" stop-color="#e57373"/><stop class="hg-edge" offset="0%" stop-color="#e57373" stop-opacity="0"/></linearGradient></defs><path class="heart-path" fill="url(#hg1)" d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg></button>
-      <button class="pres-card-cart" onclick="event.stopPropagation();quickAddToCart('5 Litros')">Agregar al carrito</button>
-      <div class="pres-card-body">
-        <p class="pres-card-name">Makora 5 Litros</p>
-        <p class="pres-card-price">PENDIENTE</p>
+
+    <div class="stock-badge">En stock</div>
+
+    <!-- BOTONES: AGREGAR AL CARRITO + COMPRAR AHORA -->
+    <button class="btn-comprar btn-carrito-prod" onclick="quickAddToCart('200 Litros');openPanel('cart');">
+      <svg viewBox="0 0 24 24"><circle cx="9" cy="21" r="1"/><circle cx="20" cy="21" r="1"/><path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"/></svg>
+      Agregar al carrito
+    </button>
+
+    <button class="btn-comprar btn-comprar-ahora" onclick="addToCartAndCheckout('200 Litros');">
+      <svg viewBox="0 0 24 24"><path d="M6 2L3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z"/><line x1="3" y1="6" x2="21" y2="6"/><path d="M16 10a4 4 0 0 1-8 0"/></svg>
+      Comprar ahora
+    </button>
+
+    <!-- COMPARTIR -->
+    <div class="share-row">
+      <span class="share-label">Compartir</span>
+      <div class="share-buttons">
+        <button type="button" class="share-btn" onclick="compartirProducto('whatsapp')" aria-label="Compartir por WhatsApp">
+          <svg viewBox="0 0 24 24"><path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z"/></svg>
+        </button>
+        <button type="button" class="share-btn" onclick="compartirProducto('facebook')" aria-label="Compartir por Facebook">
+          <svg viewBox="0 0 24 24"><path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"/></svg>
+        </button>
+        <button type="button" class="share-btn" onclick="compartirProducto('instagram')" aria-label="Compartir por Instagram">
+          <svg viewBox="0 0 24 24"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"/><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"/></svg>
+        </button>
+        <button type="button" class="share-btn" onclick="compartirProducto('copiar')" aria-label="Copiar enlace">
+          <svg viewBox="0 0 24 24"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"/><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"/></svg>
+        </button>
+      </div>
+      <span class="share-copiado" id="share-copiado">¡Enlace copiado!</span>
+    </div>
+
+    <a class="btn-volver" href="index.html">
+      ← Ver todas las presentaciones
+    </a>
+
+    <!-- CARACTERÍSTICAS -->
+    <div class="features-prod">
+      <div class="feature-item">
+        <div class="feature-icon">✓</div>
+        <span>Sin conservadores artificiales</span>
+      </div>
+      <div class="feature-item">
+        <div class="feature-icon">✓</div>
+        <span>Base de manzana natural</span>
+      </div>
+      <div class="feature-item">
+        <div class="feature-icon">✓</div>
+        <span>Sin gluten</span>
+      </div>
+      <div class="feature-item">
+        <div class="feature-icon">✓</div>
+        <span>Vegano</span>
       </div>
     </div>
-    <div class="pres-card reveal" data-pres="10 Litros" data-price="629" onclick="window.location.href='10litros.html'">
-      <div class="img-wrap"><img src="10litros.png" alt="10 Litros" class="img-default" /><img src="10litros-persona.jpeg" alt="10 Litros" class="img-hover" /></div>
-      <button class="pres-card-wish" onclick="event.stopPropagation();toggleWishCard('10 Litros', this)" title="Lista de deseos"><svg viewBox="0 0 24 24"><defs><linearGradient id="hg2" x1="0" x2="0" y1="1" y2="0"><stop class="hg-fill" offset="0%" stop-color="#e57373"/><stop class="hg-edge" offset="0%" stop-color="#e57373" stop-opacity="0"/></linearGradient></defs><path class="heart-path" fill="url(#hg2)" d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg></button>
-      <button class="pres-card-cart" onclick="event.stopPropagation();quickAddToCart('10 Litros')">Agregar al carrito</button>
-      <div class="pres-card-body">
-        <p class="pres-card-name">Makora 10 Litros</p>
-        <p class="pres-card-price">$629 MXN</p>
-      </div>
-    </div>
-    <div class="pres-card reveal" data-pres="20 Litros" data-price="1124" onclick="window.location.href='20litros.html'">
-      <div class="img-wrap"><img src="20litros.png" alt="20 Litros" class="img-default" /><img src="20litros-persona.png" alt="20 Litros" class="img-hover" /></div>
-      <button class="pres-card-wish" onclick="event.stopPropagation();toggleWishCard('20 Litros', this)" title="Lista de deseos"><svg viewBox="0 0 24 24"><defs><linearGradient id="hg3" x1="0" x2="0" y1="1" y2="0"><stop class="hg-fill" offset="0%" stop-color="#e57373"/><stop class="hg-edge" offset="0%" stop-color="#e57373" stop-opacity="0"/></linearGradient></defs><path class="heart-path" fill="url(#hg3)" d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg></button>
-      <button class="pres-card-cart" onclick="event.stopPropagation();quickAddToCart('20 Litros')">Agregar al carrito</button>
-      <div class="pres-card-body">
-        <p class="pres-card-name">Makora 20 Litros</p>
-        <p class="pres-card-price">$1,124 MXN</p>
-      </div>
-    </div>
   </div>
-</section>
 
-<section id="nosotros">
-  <div class="about-visual reveal">
-    <img src="nosotros.png" alt="Makora en Chihuahua" style="width:100%;height:100%;object-fit:cover;" />
-    <div class="about-tag">Hecho en<br>Chihuahua</div>
-  </div>
-  <div class="reveal">
-    <p class="about-lbl">Nuestra Historia</p>
-    <h2 class="about-h2">Un proyecto que nace<br><em>de nuestra tierra</em></h2>
-    <p class="about-tagline">Donde el desperdicio se transforma en oportunidad.</p>
-    <p class="about-p">Makora nace al identificar una problemática que afecta tanto al medio ambiente como a los productores agrícolas: el desperdicio de frutas y verduras.</p>
-    <p class="about-p">En Chihuahua, una de las principales regiones productoras de manzana del país, miles de toneladas de fruta son descartadas cada año antes de llegar al consumidor. Aunque muchas de estas manzanas conservan sus propiedades, son rechazadas por cuestiones estéticas o de comercialización.</p>
-    <p class="about-p">Ante esta situación, desarrollamos una alternativa que permite aprovechar estos recursos y transformarlos en una solución natural que ayuda a conservar alimentos frescos durante más tiempo.</p>
-  </div>
-</section>
-
-<section id="beneficios">
-  <div class="sec-hdr reveal"><span class="sec-lbl">¿Por qué elegir Makora?</span><h2 class="sec-h2">Lo que nos hace <em>diferentes</em></h2></div>
-  <div class="ben-grid">
-    <div class="ben reveal"><span class="ben-num">01</span><div class="ben-bar"></div><h3 class="ben-h3">Innovación</h3><p class="ben-p">Buscamos constantemente nuevas formas de resolver problemas mediante soluciones sostenibles.</p></div>
-    <div class="ben reveal"><span class="ben-num">02</span><div class="ben-bar"></div><h3 class="ben-h3">Responsabilidad Ambiental</h3><p class="ben-p">Promovemos el aprovechamiento eficiente de los recursos y la reducción de residuos.</p></div>
-    <div class="ben reveal"><span class="ben-num">03</span><div class="ben-bar"></div><h3 class="ben-h3">Compromiso Social</h3><p class="ben-p">Trabajamos para generar beneficios para productores, trabajadores agrícolas y comunidades locales.</p></div>
-    <div class="ben reveal"><span class="ben-num">04</span><div class="ben-bar"></div><h3 class="ben-h3">Calidad</h3><p class="ben-p">Desarrollamos productos enfocados en ofrecer valor y confianza a nuestros clientes.</p></div>
-    <div class="ben reveal"><span class="ben-num">05</span><div class="ben-bar"></div><h3 class="ben-h3">Sostenibilidad</h3><p class="ben-p">Tomamos decisiones que permitan generar impacto positivo a largo plazo.</p></div>
-    <div class="ben reveal"><span class="ben-num">06</span><div class="ben-bar"></div><h3 class="ben-h3">Ideal para frutas y verduras</h3><p class="ben-p">Formulado especificamente para conservar frutas y verduras frescas, prolongando su vida util sin alterar sabor ni textura.</p></div>
-  </div>
-</section>
-
-<section id="proceso">
-  <div class="sec-hdr reveal"><span class="sec-lbl" style="color:var(--vc)">Como lo hacemos</span><h2 class="sec-h2" style="color:var(--crema)">De la huerta al frasco: <em style="color:var(--vc)">nuestro proceso</em></h2></div>
-  <div class="steps">
-    <div class="step reveal"><div class="step-circle">1</div><h3 class="step-title">Cosecha</h3><p class="step-desc">Seleccion de manzanas chihuahuenses de alta calidad, cosechadas en su punto optimo de madurez.</p></div>
-    <div class="step reveal"><div class="step-circle">2</div><h3 class="step-title">Extracción</h3><p class="step-desc">Proceso controlado para obtener los compuestos activos de la manzana mediante tecnicas naturales, sin quimicos artificiales.</p></div>
-    <div class="step reveal"><div class="step-circle">3</div><h3 class="step-title">Formulación</h3><p class="step-desc">Combinacion precisa de los extractos obtenidos para lograr la maxima actividad conservante, garantizando un producto natural y efectivo.</p></div>
-    <div class="step reveal"><div class="step-circle">4</div><h3 class="step-title">Envasado</h3><p class="step-desc">Envasado en condiciones de higiene y calidad. Cada frasco listo para llegar a tu mesa.</p></div>
-  </div>
-</section>
-
-<!-- FEATURE HIGHLIGHT -->
-<section class="fh-section">
-  <div class="fh-hdr reveal">
-  <span class="fh-lbl">Nuestras características</span>
-  <h2 class="fh-title">Lo que nos hace <em>diferentes</em></h2>
 </div>
-  <div class="fh-wrap">
 
-    <!-- IZQUIERDA -->
-    <div class="fh-col fh-left">
-      <div class="fh-item reveal">
-        <div class="fh-card">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2C8 2 5 5 5 9c0 5 7 13 7 13s7-8 7-13c0-4-3-7-7-7z"/><circle cx="12" cy="9" r="2.5"/></svg>
-          <span>Hecho en Chihuahua</span>
-        </div>
-      </div>
-      <div class="fh-item reveal">
-        <div class="fh-card">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22c4.5 0 7-3.5 7-7 0-4-3-8-7-13C8 7 5 11 5 15c0 3.5 2.5 7 7 7z"/></svg>
-          <span>100% Natural</span>
-        </div>
-      </div>
-      <div class="fh-item reveal">
-        <div class="fh-card">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
-          <span>Prolonga la vida útil</span>
-        </div>
-      </div>
-    </div>
-
-    <!-- CENTRO -->
-    <div class="fh-center">
-      <div class="fh-img-wrap">
-        <img src="imagen1.png" alt="Makora" class="fh-img"/>
-        <div class="fh-img-glow"></div>
-      </div>
-    </div>
-
-    <!-- DERECHA -->
-    <div class="fh-col fh-right">
-      <div class="fh-item reveal">
-        <div class="fh-card">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22V12m0 0C12 7 8 4 4 5m8 7c0-5 4-8 8-7"/><path d="M5 20c2-3 4-5 7-8m2 8c-2-3-4-5-7-8"/></svg>
-          <span>Sin químicos artificiales</span>
-        </div>
-      </div>
-      <div class="fh-item reveal">
-        <div class="fh-card">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="5" y="2" width="14" height="20" rx="2"/><path d="M12 6v4m0 4h.01"/><path d="M9 2v2m6-2v2"/></svg>
-          <span>Refrigerado o temperatura ambiente</span>
-        </div>
-      </div>
-      <div class="fh-item reveal">
-        <div class="fh-card">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3a4 4 0 0 1 0 8 4 4 0 0 1 0-8z"/><path d="M8 11c-3 1-5 3-5 5v1h18v-1c0-2-2-4-5-5"/><path d="M15 8c1.5 0 3 .5 4 2"/></svg>
-          <span>Ingrediente: manzana chihuahuense</span>
-        </div>
-      </div>
-    </div>
-
-  </div>
+<section class="relacionados" id="relacionados">
+  <h2 class="relacionados-titulo">También te podría interesar</h2>
+  <div class="relacionados-grid" id="relacionados-grid"></div>
 </section>
 
-<section id="resenas">
-  <div class="sec-hdr reveal"><span class="sec-lbl">Lo que dicen</span><h2 class="sec-h2">Opiniones de <em>nuestros clientes</em></h2></div>
-  <div class="resenas-grid" id="resenas-grid"><p style="grid-column:1/-1;text-align:center;color:var(--gc);padding:2rem;">Cargando opiniones...</p></div>
-  <div class="review-form-box reveal">
-    <p class="review-form-title">Deja tu opinion</p>
-    <p class="review-form-sub">Calificanos del 1 al 5. Tu experiencia ayuda a otros clientes.</p>
-    <div class="star-selector">
-      <button class="star-pick" onclick="pickStar(1)">&#127823;</button>
-      <button class="star-pick" onclick="pickStar(2)">&#127823;</button>
-      <button class="star-pick" onclick="pickStar(3)">&#127823;</button>
-      <button class="star-pick" onclick="pickStar(4)">&#127823;</button>
-      <button class="star-pick" onclick="pickStar(5)">&#127823;</button>
-    </div>
-    <div class="form-grid">
-      <div class="field"><label for="r-nombre">Tu nombre *</label><input type="text" id="r-nombre" placeholder="Ana Martinez"/></div>
-      <div class="field"><label for="r-ciudad">Ciudad</label><input type="text" id="r-ciudad" placeholder="Chihuahua"/></div>
-    </div>
-    <div class="form-grid full" style="margin-bottom:0;">
-      <div class="field"><label for="r-email">Correo electronico *</label><input type="email" id="r-email" placeholder="tu@correo.com"/></div>
-    </div>
-    <div class="form-grid full" style="margin-bottom:1rem;">
-      <div class="field"><label for="r-texto">Tu comentario *</label><textarea id="r-texto" rows="3" placeholder="Cuentanos tu experiencia con Makora..."></textarea></div>
-    </div>
-    <button class="btn-full" onclick="submitReview()" style="margin-top:0;">Publicar opinion</button>
-    <div id="review-result" style="display:none;margin-top:0.8rem;padding:0.8rem 1rem;font-size:0.85rem;font-weight:600;background:var(--menta);color:var(--vo);border-left:3px solid var(--vm);"></div>
-  </div>
-</section>
-
-<section id="contacto">
-  <div class="cta-bg-circle c1"></div><div class="cta-bg-circle c2"></div>
-  <p class="cta-label">Listo para probarlo</p>
-  <h2 class="cta-title">Puedes pedir más información sobre<br><em>Makora</em></h2>
-  <p class="cta-sub">Escribenos directamente por WhatsApp y te atendemos al momento para atender cualquier duda.</p>
-  <div class="contact-form">
-    <input type="text" id="cta-nombre" placeholder="Tu nombre"/>
-    <button class="btn-white" onclick="handleCTA()">Escribir por WhatsApp</button>
-  </div>
-</section>
-
-<footer>
-  <p class="footer-copy">© 2026 MAKORA — Hecho con orgullo en Chihuahua</p>
-  <ul class="footer-links">
-    <li><a href="#producto">Producto</a></li>
-    <li><a href="#nosotros">Nosotros</a></li>
-    <li><a href="#resenas">Reseñas</a></li>
-        <a href="https://www.facebook.com/profile.php?id=61588860333826" target="_blank" class="ig-link">
-        <svg class="ig-icon" viewBox="0 0 24 24" fill="currentColor"><path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"/></svg>
-        @makoramx
-      </a>
-    <li><a href="https://instagram.com/makora_mx" target="_blank" class="ig-link">
-      <svg class="ig-icon" viewBox="0 0 24 24"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/></svg>
-      @makora_mx
-    </a></li>
-    <li><a href="terminos-y-condiciones.html">Términos y Condiciones</a></li>
-    <li><a href="avisos-de-privacidad.html">Aviso de Privacidad</a></li>
-    <li><a href="politica-de-reembolsos.html">Política de Reembolsos</a></li>
-  </ul>
-</footer>
+<div class="legal-links">
+  <a href="terminos-y-condiciones.html">Términos y Condiciones</a>
+  <a href="avisos-de-privacidad.html">Aviso de Privacidad</a>
+  <a href="politica-de-reembolsos.html">Política de Reembolsos</a>
+</div>
+<div class="footer-line">© 2026 Makora — Conservador Natural de Manzana · Chihuahua, México</div>
 
 <script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-app-compat.js"></script>
 <script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-firestore-compat.js"></script>
@@ -973,10 +1084,22 @@
   var db = firebase.firestore();
 
   // PRECIOS (valores por defecto, se sobreescriben con lo guardado en admin.html)
-  window.PRECIOS_ACTUALES = { '1 Litro': 97, '5 Litros': 0, '10 Litros': 629, '20 Litros': 1124 };
+  window.PRECIOS_ACTUALES = { '1 Litro': 0, '5 Litros': 0, '10 Litros': 0, '20 Litros': 0, '200 Litros': 0 };
+
+  // STOCK DINAMICO (controlado desde admin.html)
+  db.collection('stock').doc('200litros').get().then(function(doc){
+    if (doc.exists && doc.data().enStock === false) {
+      var badge = document.querySelector('.stock-badge');
+      if (badge) { badge.textContent = 'Sin stock'; badge.classList.add('sin-stock'); }
+      document.querySelectorAll('.btn-comprar').forEach(function(btn){
+        btn.disabled = true;
+        btn.classList.add('btn-disabled');
+      });
+    }
+  }).catch(function(err){ console.error('Error leyendo stock:', err); });
 
   // PRECIOS DINAMICOS (controlados desde admin.html)
-  var PRECIO_IDS = { '1 Litro':'1litro', '5 Litros':'5litros', '10 Litros':'10litros', '20 Litros':'20litros' };
+  var PRECIO_IDS = { '1 Litro':'1litro', '5 Litros':'5litros', '10 Litros':'10litros', '20 Litros':'20litros', '200 Litros':'200litros' };
   db.collection('precios').get().then(function(snap){
     snap.forEach(function(doc){
       var nombre = null;
@@ -987,17 +1110,17 @@
         window.PRECIOS_ACTUALES[nombre] = data.precio;
         var texto = '$' + data.precio.toLocaleString('es-MX') + ' MXN';
         if (typeof pmData !== 'undefined' && pmData[nombre]) pmData[nombre].price = texto;
-        document.querySelectorAll('.pres-card[data-pres="' + nombre + '"]').forEach(function(card){
-          card.dataset.price = data.precio;
-          var p = card.querySelector('.pres-card-price');
-          if (p) p.textContent = texto;
-        });
+        if (nombre === '200 Litros') {
+          var mp = document.querySelector('.product-price');
+          if (mp) mp.textContent = texto;
+        }
         if (typeof pmPres !== 'undefined' && pmPres === nombre) {
           var pmP = document.getElementById('pm-price');
           if (pmP) pmP.textContent = texto;
         }
       }
     });
+    if (typeof renderRelacionados === 'function') renderRelacionados();
   }).catch(function(err){ console.error('Error leyendo precios:', err); });
 
   // ESTADO
@@ -1005,14 +1128,15 @@
   var wishlist = JSON.parse(localStorage.getItem('makora_wish') || '[]');
   updateCartBadge();
   updateWishBadge();
-  var currentPres = '1 Litro';
+  var currentPres = '200 Litros';
   var currentQty = 1;
   var currentReviewStars = 0;
   var mpLinks = {
     '1 Litro':   'https://mpago.la/2RG4YjF',
     '5 Litros':   'PENDIENTE',
     '10 Litros': 'https://mpago.la/2qBu9w2',
-    '20 Litros': 'https://mpago.la/25ZQAPh'
+    '20 Litros': 'https://mpago.la/25ZQAPh',
+    '200 Litros': 'PENDIENTE'
   };
 
   function saveStorage() {
@@ -1023,6 +1147,8 @@
   // NAV SCROLL
   window.addEventListener('scroll', function() {
     document.getElementById('main-nav').classList.toggle('scrolled', window.scrollY > 40);
+    const navH = document.getElementById('main-nav').offsetHeight;
+    document.documentElement.style.setProperty('--nav-h', navH + 'px');
   });
 
   //PRODUCTO
@@ -1037,6 +1163,44 @@
       var pres = b.closest('.pres-card').dataset.pres;
       b.classList.toggle('active', wishlist.indexOf(pres) !== -1);
     });
+  }
+
+  //COMPARTIR
+  function compartirProducto(tipo) {
+    var url = window.location.href;
+    var nombreEl = document.querySelector('.product-name');
+    var nombre = nombreEl ? nombreEl.textContent.trim() : 'Makora';
+    var texto = 'Mira este producto de Makora: ' + nombre;
+    if (tipo === 'whatsapp') {
+      window.open('https://api.whatsapp.com/send?text=' + encodeURIComponent(texto + ' ' + url), '_blank');
+    } else if (tipo === 'facebook') {
+      window.open('https://www.facebook.com/sharer/sharer.php?u=' + encodeURIComponent(url), '_blank', 'width=600,height=460');
+    } else if (tipo === 'instagram') {
+      if (navigator.share) {
+        navigator.share({ title: texto, url: url }).catch(function(){});
+      } else {
+        copiarEnlaceProducto();
+        showToast('Enlace copiado. Pegalo en tu historia o mensaje de Instagram.');
+      }
+    } else if (tipo === 'copiar') {
+      copiarEnlaceProducto();
+    }
+  }
+  function copiarEnlaceProducto() {
+    var url = window.location.href;
+    var mostrarMsg = function () {
+      var msg = document.getElementById('share-copiado');
+      if (!msg) return;
+      msg.classList.add('activo');
+      setTimeout(function () { msg.classList.remove('activo'); }, 2000);
+    };
+    if (navigator.clipboard && navigator.clipboard.writeText) {
+      navigator.clipboard.writeText(url).then(mostrarMsg).catch(function () {
+        window.prompt('Copia el enlace:', url);
+      });
+    } else {
+      window.prompt('Copia el enlace:', url);
+    }
   }
 
   //CARRITO
@@ -1150,7 +1314,7 @@
   }
 
   // PANELES
-  var STOCK_MAP = { '1 Litro':'1litro', '5 Litros':'5litros', '10 Litros':'10litros', '20 Litros':'20litros' };
+  var STOCK_MAP = { '5 Litros':'5litros', '1 Litro':'1litro', '10 Litros':'10litros', '20 Litros':'20litros', '200 Litros':'200litros' };
   function verificarStockCarrito() {
     var promesas = cart.map(function(item){
       var id = STOCK_MAP[item.pres];
@@ -1306,7 +1470,7 @@ fetch('/api/create-preference', {
   function loadReviews() {
     var grid = document.getElementById('resenas-grid');
     grid.innerHTML = '<p style="grid-column:1/-1;text-align:center;color:var(--gc);font-size:0.9rem;padding:2rem;">Cargando opiniones...</p>';
-    return db.collection('resenas').orderBy('timestamp','desc').get().then(function(snap) {
+    db.collection('resenas').orderBy('timestamp','desc').get().then(function(snap) {
       var data = [];
       snap.forEach(function(doc) { data.push(doc.data()); });
       renderReviews(data);
@@ -1324,7 +1488,7 @@ fetch('/api/create-preference', {
     var html = '';
     data.forEach(function(r) {
       var stars = '';
-      for (var i = 1; i <= 5; i++) { stars += '<span class="apple-star ' + (i<=r.estrellas?'filled':'') + '">&#127823;</span>'; }
+      for (var i = 1; i <= 5; i++) { stars += '<span class="apple-star ' + (i<=r.estrellas?'filled':'') + '">&#127822;</span>'; }
       html += '<div class="resena-card reveal"><div class="resena-stars">' + stars + '</div><p class="resena-text">"' + r.texto + '"</p><p class="resena-author">' + r.nombre + '</p><p class="resena-date">' + (r.ciudad ? r.ciudad + ' — ' : '') + r.fecha + '</p></div>';
     });
     grid.innerHTML = html;
@@ -1413,11 +1577,35 @@ fetch('/api/create-preference', {
   var pmPres = '';
   var pmQtyVal = 1;
   var pmData = {
-    '1 Litro':   { name:'Makora 1 Litro',   price:'$97 MXN',    cont:'1 Litro',   img:'1litro.png',   desc:'Para hogares con mayor consumo o pequenos negocios. Mayor rendimiento y ahorro. Formulado con ingredientes 100% naturales.' },
+    '1 Litro':   { name:'Makora 1 Litro',   price:'PENDIENTE',    cont:'1 Litro',   img:'1litro.png',   desc:'Para hogares con mayor consumo o pequenos negocios. Mayor rendimiento y ahorro. Formulado con ingredientes 100% naturales.' },
     '5 Litros':   { name:'Makora 5 Litros',   price:'PENDIENTE',    cont:'5 Litros',   img:'5litros.png',   desc:'Para hogares con mayor consumo o pequenos negocios. Mayor rendimiento y ahorro. Formulado con ingredientes 100% naturales.' },
-    '10 Litros': { name:'Makora 10 Litros', price:'$629 MXN',   cont:'10 Litros', img:'10litros.png', desc:'Ideal para distribuidores y comercializadores. Alta rentabilidad por volumen. Sin conservadores artificiales.' },
-    '20 Litros': { name:'Makora 20 Litros', price:'$1,124 MXN', cont:'20 Litros', img:'20litros.png', desc:'La presentacion mas completa para produccion a gran escala. Maximo rendimiento y sostenibilidad.' }
+    '10 Litros': { name:'Makora 10 Litros', price:'PENDIENTE',   cont:'10 Litros', img:'10litros.png', desc:'Ideal para distribuidores y comercializadores. Alta rentabilidad por volumen. Sin conservadores artificiales.' },
+    '20 Litros': { name:'Makora 20 Litros', price:'PENDIENTE', cont:'20 Litros', img:'20litros.png', desc:'La presentacion mas completa para produccion a gran escala. Maximo rendimiento y sostenibilidad.' },
+    '200 Litros': { name:'Makora 200 Litros', price:'PENDIENTE', cont:'200 Litros', img:'200litros.png', desc:'Presentacion industrial de 200 litros. Ideal para plantas de produccion, distribuidores mayoristas y uso continuo a gran escala. 100% natural, sin conservadores artificiales.' }
   };
+
+  //TAMBIEN TE PODRIA INTERESAR
+  var CURRENT_PRES = '200 Litros';
+  var relOrden = ['1 Litro','5 Litros','10 Litros','20 Litros','200 Litros'];
+  var relLinks = {'1 Litro':'1litro.html','5 Litros':'5litros.html','10 Litros':'10litros.html','20 Litros':'20litros.html','200 Litros':'200litros.html'};
+  function renderRelacionados() {
+    var grid = document.getElementById('relacionados-grid');
+    if (!grid) return;
+    var html = '';
+    relOrden.forEach(function(pres) {
+      if (pres === CURRENT_PRES) return;
+      var d = pmData[pres];
+      html += '<a class="relacionado-card" href="' + relLinks[pres] + '">' +
+        '<div class="relacionado-img-wrap"><img src="' + d.img + '" alt="' + d.name + '" loading="lazy"></div>' +
+        '<div class="relacionado-body">' +
+          '<div class="relacionado-nombre">' + d.name + '</div>' +
+          '<div class="relacionado-precio">' + d.price + '</div>' +
+        '</div>' +
+      '</a>';
+    });
+    grid.innerHTML = html;
+  }
+  renderRelacionados();
   function openPM(pres) {
     pmPres = pres; pmQtyVal = 1;
     var d = pmData[pres];
@@ -1470,40 +1658,133 @@ fetch('/api/create-preference', {
 
   // INIT
   renderCart(); renderWish(); updateWishBadge(); updateWishIcons(); loadReviews();
-  // SLIDER
-var sliderIdx = 0;
-var sliderSlides = document.querySelectorAll('.img-slide');
-var sliderDots   = document.querySelectorAll('.img-dot');
-var sliderTimer  = setInterval(function(){ moveSlide(1); }, 4500);
 
-function goSlide(n) {
-  sliderSlides[sliderIdx].classList.remove('active');
-  sliderDots[sliderIdx].classList.remove('active');
-  sliderIdx = (n + sliderSlides.length) % sliderSlides.length;
-  sliderSlides[sliderIdx].classList.add('active');
-  sliderDots[sliderIdx].classList.add('active');
-  clearInterval(sliderTimer);
-  sliderTimer = setInterval(function(){ moveSlide(1); }, 4500);
-}
-function moveSlide(dir) { goSlide(sliderIdx + dir); }
-
-window.addEventListener('scroll', function() {
-  var scrollY = window.scrollY;
-  var hero = document.getElementById('hero');
-  if (!hero) return;
-  var bottle = hero.querySelector('.product-bottle');
-  var heroText = hero.querySelector('h1');
-  if (bottle) bottle.style.transform = 'translateY(' + scrollY * 0.4 + 'px)';
-  if (heroText) heroText.style.transform = 'translateY(' + scrollY * 0.2 + 'px)';
-});
 </script>
 
 <!-- MODAL DETALLE PRODUCTO -->
-<div id="pm-overlay" onclick="if(event.target===this)closePM()" style="display:none;position:fixed;inset:0;background:rgba(0,0,0,0.55);z-index:700;align-items:center;justify-content:center;padding:1rem;">
-  <div style="background:#fff;max-width:820px;width:100%;display:flex;gap:2.5rem;padding:2.5rem;position:relative;max-height:90vh;overflow-y:auto;">
+<style>
+  #pm-overlay { display:none;position:fixed;inset:0;background:rgba(0,0,0,0.55);z-index:700;align-items:center;justify-content:center;padding:1rem; }
+  #pm-inner { background:#fff;max-width:820px;width:100%;display:flex;flex-wrap:wrap;gap:2rem;padding:2rem;position:relative;max-height:90vh;overflow-y:auto;border-radius:4px; }
+  #pm-img-wrap { flex:0 0 240px;background:var(--crema);border:1.5px solid var(--menta);display:flex;align-items:center;justify-content:center;min-height:240px; }
+  #pm-img { max-width:100%;max-height:260px;object-fit:contain;padding:1.2rem; }
+  #pm-info { flex:1;min-width:220px;display:flex;flex-direction:column;gap:0.75rem; }
+  @media(max-width:560px){
+    #pm-inner { flex-direction:column;gap:1rem;padding:1.2rem; }
+    #pm-img-wrap { flex:none;width:100%;min-height:180px; }
+    #pm-img { max-height:180px; }
+  }
+  .lightbox-modal {
+    display: none;
+    position: fixed;
+    z-index: 9999;
+    left: 0; top: 0;
+    width: 100%; height: 100%;
+    overflow: auto;
+    background-color: rgba(0, 0, 0, 0.85);
+    backdrop-filter: blur(5px);
+}
+
+.lightbox-content {
+    display: block;
+    margin: 80px auto 0;
+    max-width: 85%;
+    max-height: 75vh;
+    object-fit: contain;
+    border-radius: 8px;
+    animation: lb-zoom 0.3s ease;
+}
+@keyframes lb-zoom {
+    from { transform: scale(0.7); opacity: 0; }
+    to   { transform: scale(1);   opacity: 1; }
+}
+
+/* Contador píldora - arriba al centro */
+.lightbox-counter {
+    position: absolute;
+    top: 20px;
+    left: 50%;
+    transform: translateX(-50%);
+    z-index: 10010;
+    display: flex;
+    align-items: center;
+    gap: 7px;
+    background: rgba(99, 153, 34, 0.18);
+    border: 1.5px solid rgba(99, 153, 34, 0.5);
+    border-radius: 999px;
+    padding: 6px 20px;
+    font-size: 15px;
+    font-weight: 600;
+    color: #c0dd97;
+    font-family: sans-serif;
+    letter-spacing: 0.05em;
+    white-space: nowrap;
+}
+/* Botón cerrar - arriba a la derecha */
+.lightbox-close {
+    position: absolute;
+    top: 16px;
+    right: 24px;
+    z-index: 10010;
+    width: 42px; height: 42px;
+    border-radius: 50%;
+    border: 1.5px solid rgba(255,255,255,0.25);
+    background: rgba(255,255,255,0.08);
+    color: #fff;
+    font-size: 22px;
+    line-height: 1;
+    display: flex; align-items: center; justify-content: center;
+    cursor: pointer;
+    transition: background 0.2s, border-color 0.2s, transform 0.15s;
+}
+.lightbox-close:hover {
+    background: #639922;
+    border-color: #639922;
+    transform: scale(1.08);
+}
+
+/* Flechas prev / next */
+.lightbox-prev,
+.lightbox-next {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 52px; height: 52px;
+    border-radius: 50%;
+    border: 1.5px solid rgba(99, 153, 34, 0.6);
+    background: rgba(99, 153, 34, 0.12);
+    color: #c0dd97;
+    font-size: 24px;
+    display: flex; align-items: center; justify-content: center;
+    cursor: pointer;
+    transition: background 0.2s, color 0.2s, border-color 0.2s, transform 0.15s;
+    user-select: none;
+    z-index: 10000;
+}
+.lightbox-prev { left: 3%; }
+.lightbox-next { right: 3%; }
+
+.lightbox-prev:hover,
+.lightbox-next:hover {
+    background: #639922;
+    border-color: #639922;
+    color: #fff;
+    transform: translateY(-50%) scale(1.1);
+}
+
+@media (max-width: 768px) {
+    .lightbox-prev, .lightbox-next {
+        width: 40px; height: 40px;
+        font-size: 18px;
+    }
+    .lightbox-prev { left: 1.5%; }
+    .lightbox-next { right: 1.5%; }
+}
+</style>
+<div id="pm-overlay" onclick="if(event.target===this)closePM()">
+  <div id="pm-inner">
     <button onclick="closePM()" style="position:absolute;top:1rem;right:1.2rem;background:none;border:none;font-size:1.4rem;cursor:pointer;color:var(--gc);line-height:1;">&#x2715;</button>
-    <div style="flex:0 0 260px;background:var(--crema);border:1.5px solid var(--menta);display:flex;align-items:center;justify-content:center;min-height:300px;">
-      <img id="pm-img" src="" alt="" style="max-width:100%;max-height:300px;object-fit:contain;padding:1.5rem;">
+    <div id="pm-img-wrap">
+      <img id="pm-img" src="" alt="">
     </div>
     <div style="flex:1;display:flex;flex-direction:column;gap:0.75rem;">
       <p style="font-size:0.68rem;font-weight:700;text-transform:uppercase;letter-spacing:0.15em;color:var(--vm);margin:0;">Conservador Natural</p>
@@ -1522,6 +1803,86 @@ window.addEventListener('scroll', function() {
     </div>
   </div>
 </div>
+<div id="custom-lightbox" class="lightbox-modal">
+    <span class="lightbox-close">&times;</span>
+    <div id="lightbox-counter" class="lightbox-counter"></div>
+    <span class="lightbox-prev">&#10094;</span>
+    <img class="lightbox-content" id="lightbox-img" alt="Vista ampliada">
+    <span class="lightbox-next">&#10095;</span>
+</div>
+<script>
+(function() {
+    function inicializarLightbox() {
+        const lightbox = document.getElementById("custom-lightbox");
+        const lightboxImg = document.getElementById("lightbox-img");
+        const closeBtn = document.querySelector(".lightbox-close");
+        const prevBtn = document.querySelector(".lightbox-prev");
+        const nextBtn = document.querySelector(".lightbox-next");
+        const counter = document.getElementById("lightbox-counter");
+        
+        const imagenes = Array.from(document.querySelectorAll("img")).filter(img => img.id !== "lightbox-img" && img.offsetParent !== null && !img.closest(".relacionados"));
+        let indiceActual = 0;
+
+        if (!lightbox || !lightboxImg) return;
+
+        imagenes.forEach(function (imagen, indice) {
+            imagen.style.cursor = "zoom-in";
+            imagen.addEventListener("click", function () {
+                indiceActual = indice;
+                actualizarImagen();
+                lightbox.style.display = "block";
+                document.body.style.overflow = "hidden";
+            });
+        });
+
+        function actualizarImagen() {
+            if (imagenes[indiceActual]) {
+                lightboxImg.src = imagenes[indiceActual].src;
+                if (counter) {
+                    counter.textContent = (indiceActual + 1) + " / " + imagenes.length;
+                }
+            }
+        }
+
+        function mostrarSiguiente() {
+            indiceActual = (indiceActual + 1) % imagenes.length;
+            actualizarImagen();
+        }
+
+        function mostrarAnterior() {
+            indiceActual = (indiceActual - 1 + imagenes.length) % imagenes.length;
+            actualizarImagen();
+        }
+
+        function cerrarModal() {
+            lightbox.style.display = "none";
+            document.body.style.overflow = "auto";
+        }
+
+        if (closeBtn) closeBtn.addEventListener("click", cerrarModal);
+        if (nextBtn) nextBtn.addEventListener("click", mostrarSiguiente);
+        if (prevBtn) prevBtn.addEventListener("click", mostrarAnterior);
+        
+        lightbox.addEventListener("click", function (evento) {
+            if (evento.target === lightbox) cerrarModal();
+        });
+
+        document.addEventListener("keydown", function (evento) {
+            if (lightbox.style.display === "block") {
+                if (evento.key === "ArrowRight") mostrarSiguiente();
+                if (evento.key === "ArrowLeft") mostrarAnterior();
+                if (evento.key === "Escape") cerrarModal();
+            }
+        });
+    }
+
+    if (document.readyState === "loading") {
+        document.addEventListener("DOMContentLoaded", inicializarLightbox);
+    } else {
+        inicializarLightbox();
+    }
+})();
+</script>
 <script>
 async function buscarCP(cp) {
   if (cp.length !== 5) {
@@ -1560,6 +1921,13 @@ async function buscarCP(cp) {
     document.getElementById('cp-loading').style.display = 'none';
     document.getElementById('cp-error').style.display = 'block';
   }
+}
+function addToCartAndCheckout(pres) {
+  cart = [];
+  cart.push({ pres: pres, qty: 1 });
+  updateCartBadge();
+  saveStorage();
+  openCheckout();
 }
 </script>
 </body>

@@ -110,7 +110,7 @@
   }
 
   /* ---------- DASHBOARD ---------- */
-  #panel{ display:none; width:100%; max-width:460px; }
+  #panel{ display:none; width:100%; max-width:520px; }
   .dash-card{
     background:#fff;
     border-radius:14px;
@@ -155,11 +155,50 @@
     display:flex;
     align-items:center;
     justify-content:space-between;
+    gap:0.8rem;
     padding:0.95rem 0;
     border-bottom:1px solid var(--linea);
+    flex-wrap:wrap;
   }
   .producto-row:last-child{ border-bottom:none; }
   .producto-left{ display:flex; align-items:center; gap:0.8rem; }
+  .producto-right{ display:flex; align-items:center; gap:0.7rem; margin-left:auto; }
+
+  .precio-field{
+    display:flex;
+    align-items:center;
+    gap:0.25rem;
+    background:var(--fondo);
+    border:1.5px solid var(--linea);
+    border-radius:8px;
+    padding:0.4rem 0.6rem;
+    transition:border-color 0.15s;
+  }
+  .precio-field:focus-within{ border-color:var(--menta); }
+  .precio-prefix, .precio-suffix{
+    font-size:0.7rem;
+    font-weight:700;
+    color:var(--vc);
+  }
+  .precio-input{
+    width:60px;
+    border:none;
+    background:transparent;
+    padding:0;
+    margin:0;
+    font-size:0.85rem;
+    font-weight:700;
+    color:var(--vo);
+    text-align:right;
+    appearance:textfield;
+    -moz-appearance:textfield;
+  }
+  .precio-input::-webkit-outer-spin-button,
+  .precio-input::-webkit-inner-spin-button{
+    -webkit-appearance:none;
+    margin:0;
+  }
+  .precio-input:focus{ outline:none; }
   .dot{
     width:9px; height:9px; border-radius:50%;
     background:var(--rojo);
@@ -317,14 +356,52 @@
             '<div class="estado-label" id="label-' + p.id + '">Cargando...</div>' +
           '</div>' +
         '</div>' +
-        '<button type="button" class="toggle" id="toggle-' + p.id + '" aria-pressed="false" onclick="cambiarStock(\'' + p.id + '\')"></button>';
+        '<div class="producto-right">' +
+          '<div class="precio-field">' +
+            '<span class="precio-prefix">$</span>' +
+            '<input type="number" class="precio-input" id="precio-' + p.id + '" min="0" step="1" placeholder="0" ' +
+              'onblur="guardarPrecio(\'' + p.id + '\')" ' +
+              'onkeydown="if(event.key===\'Enter\'){this.blur();}">' +
+            '<span class="precio-suffix">MXN</span>' +
+          '</div>' +
+          '<button type="button" class="toggle" id="toggle-' + p.id + '" aria-pressed="false" onclick="cambiarStock(\'' + p.id + '\')"></button>' +
+        '</div>';
       list.appendChild(row);
 
       db.collection('stock').doc(p.id).get().then(function(doc){
         var enStock = !doc.exists || doc.data().enStock !== false;
         pintarEstado(p.id, enStock);
       });
+
+      db.collection('precios').doc(p.id).get().then(function(doc){
+        var input = document.getElementById('precio-' + p.id);
+        if (!input) return;
+        if (doc.exists && typeof doc.data().precio === 'number') {
+          input.value = doc.data().precio;
+        }
+      });
     });
+  }
+
+  function guardarPrecio(id) {
+    var input = document.getElementById('precio-' + id);
+    var statusEl = document.getElementById('status-msg');
+    var val = parseFloat(input.value);
+    if (input.value.trim() === '') return;
+    if (isNaN(val) || val < 0) {
+      statusEl.textContent = 'Precio inválido.';
+      setTimeout(function(){ statusEl.textContent = ''; }, 1800);
+      return;
+    }
+    statusEl.textContent = 'Guardando precio...';
+    db.collection('precios').doc(id).set({ precio: val }, { merge: true })
+      .then(function(){
+        statusEl.textContent = 'Precio guardado.';
+        setTimeout(function(){ statusEl.textContent = ''; }, 1500);
+      })
+      .catch(function(err){
+        statusEl.textContent = 'Error al guardar precio: ' + err.message;
+      });
   }
 
   function pintarEstado(id, enStock) {

@@ -1082,7 +1082,7 @@
   var db = firebase.firestore();
 
   // PRECIOS (valores por defecto, se sobreescriben con lo guardado en admin.html)
-  window.PRECIOS_ACTUALES = { '1 Litro': 97, '5 Litros': 0, '10 Litros': 629, '20 Litros': 1124 };
+  window.PRECIOS_ACTUALES = { '1 Litro': 0, '5 Litros': 0, '10 Litros': 0, '20 Litros': 0, '200 Litros': 0 };
 
   // STOCK DINAMICO (controlado desde admin.html)
   db.collection('stock').doc('5litros').get().then(function(doc){
@@ -1097,7 +1097,7 @@
   }).catch(function(err){ console.error('Error leyendo stock:', err); });
 
   // PRECIOS DINAMICOS (controlados desde admin.html)
-  var PRECIO_IDS = { '1 Litro':'1litro', '5 Litros':'5litros', '10 Litros':'10litros', '20 Litros':'20litros' };
+  var PRECIO_IDS = { '1 Litro':'1litro', '5 Litros':'5litros', '10 Litros':'10litros', '20 Litros':'20litros', '200 Litros':'200litros' };
   db.collection('precios').get().then(function(snap){
     snap.forEach(function(doc){
       var nombre = null;
@@ -1133,7 +1133,8 @@
     '1 Litro':   'https://mpago.la/2RG4YjF',
     '5 Litros':   'PENDIENTE',
     '10 Litros': 'https://mpago.la/2qBu9w2',
-    '20 Litros': 'https://mpago.la/25ZQAPh'
+    '20 Litros': 'https://mpago.la/25ZQAPh',
+    '200 Litros': 'PENDIENTE'
   };
 
   function saveStorage() {
@@ -1311,7 +1312,7 @@
   }
 
   // PANELES
-  var STOCK_MAP = { '5 Litros':'5litros', '1 Litro':'1litro', '10 Litros':'10litros', '20 Litros':'20litros' };
+  var STOCK_MAP = { '5 Litros':'5litros', '1 Litro':'1litro', '10 Litros':'10litros', '20 Litros':'20litros', '200 Litros':'200litros' };
   function verificarStockCarrito() {
     var promesas = cart.map(function(item){
       var id = STOCK_MAP[item.pres];
@@ -1574,16 +1575,17 @@ fetch('/api/create-preference', {
   var pmPres = '';
   var pmQtyVal = 1;
   var pmData = {
-    '1 Litro':   { name:'Makora 1 Litro',   price:'$97 MXN',    cont:'1 Litro',   img:'1litro.png',   desc:'Para hogares con mayor consumo o pequenos negocios. Mayor rendimiento y ahorro. Formulado con ingredientes 100% naturales.' },
+    '1 Litro':   { name:'Makora 1 Litro',   price:'PENDIENTE',    cont:'1 Litro',   img:'1litro.png',   desc:'Para hogares con mayor consumo o pequenos negocios. Mayor rendimiento y ahorro. Formulado con ingredientes 100% naturales.' },
     '5 Litros':   { name:'Makora 5 Litros',   price:'PENDIENTE',    cont:'5 Litros',   img:'5litros.png',   desc:'Para hogares con mayor consumo o pequenos negocios. Mayor rendimiento y ahorro. Formulado con ingredientes 100% naturales.' },
-    '10 Litros': { name:'Makora 10 Litros', price:'$629 MXN',   cont:'10 Litros', img:'10litros.png', desc:'Ideal para distribuidores y comercializadores. Alta rentabilidad por volumen. Sin conservadores artificiales.' },
-    '20 Litros': { name:'Makora 20 Litros', price:'$1,124 MXN', cont:'20 Litros', img:'20litros.png', desc:'La presentacion mas completa para produccion a gran escala. Maximo rendimiento y sostenibilidad.' }
+    '10 Litros': { name:'Makora 10 Litros', price:'PENDIENTE',   cont:'10 Litros', img:'10litros.png', desc:'Ideal para distribuidores y comercializadores. Alta rentabilidad por volumen. Sin conservadores artificiales.' },
+    '20 Litros': { name:'Makora 20 Litros', price:'PENDIENTE', cont:'20 Litros', img:'20litros.png', desc:'La presentacion mas completa para produccion a gran escala. Maximo rendimiento y sostenibilidad.' },
+    '200 Litros': { name:'Makora 200 Litros', price:'PENDIENTE', cont:'200 Litros', img:'200litros.png', desc:'Presentacion industrial de 200 litros. Ideal para plantas de produccion, distribuidores mayoristas y uso continuo a gran escala. 100% natural, sin conservadores artificiales.' }
   };
 
   //TAMBIEN TE PODRIA INTERESAR
   var CURRENT_PRES = '5 Litros';
-  var relOrden = ['1 Litro','5 Litros','10 Litros','20 Litros'];
-  var relLinks = {'1 Litro':'1litro.html','5 Litros':'5litros.html','10 Litros':'10litros.html','20 Litros':'20litros.html'};
+  var relOrden = ['1 Litro','5 Litros','10 Litros','20 Litros','200 Litros'];
+  var relLinks = {'1 Litro':'1litro.html','5 Litros':'5litros.html','10 Litros':'10litros.html','20 Litros':'20litros.html','200 Litros':'200litros.html'};
   function renderRelacionados() {
     var grid = document.getElementById('relacionados-grid');
     if (!grid) return;

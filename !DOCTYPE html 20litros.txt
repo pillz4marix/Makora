@@ -794,6 +794,16 @@
     }
     .btn-volver:hover{background:var(--vo);color:#fff;}
 
+    /* COMPARTIR */
+    .share-row{display:flex;align-items:center;gap:0.7rem;flex-wrap:wrap;position:relative;margin-bottom:1.6rem;}
+    .share-label{font-size:0.72rem;font-weight:700;text-transform:uppercase;letter-spacing:0.08em;color:var(--gc);}
+    .share-buttons{display:flex;gap:0.55rem;}
+    .share-btn{width:38px;height:38px;border-radius:50%;display:flex;align-items:center;justify-content:center;border:1.5px solid var(--menta);background:#fff;color:var(--vo);cursor:pointer;transition:all 0.2s;padding:0;}
+    .share-btn svg{width:17px;height:17px;stroke:currentColor;fill:none;stroke-width:2;stroke-linecap:round;stroke-linejoin:round;}
+    .share-btn:hover{background:var(--vo);color:#fff;border-color:var(--vo);transform:translateY(-2px);}
+    .share-copiado{position:absolute;left:0;bottom:-1.3rem;font-size:0.72rem;color:var(--vm);font-weight:600;opacity:0;transition:opacity 0.25s;}
+    .share-copiado.activo{opacity:1;}
+
     /* CARACTERÍSTICAS */
     .features-prod{
       display:grid;grid-template-columns:1fr 1fr;gap:0.8rem;
@@ -811,6 +821,18 @@
     }
 
     /* FOOTER LINE */
+    /* TAMBIEN TE PODRIA INTERESAR */
+    .relacionados{padding:4rem 5% 3rem;background:#fff;border-top:2px solid var(--menta);}
+    .relacionados-titulo{font-family:'Playfair Display',serif;font-weight:900;font-size:1.6rem;color:var(--vo);text-align:center;margin-bottom:2rem;}
+    .relacionados-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:1.2rem;max-width:900px;margin:0 auto;}
+    .relacionado-card{border:1px solid var(--menta);border-radius:12px;background:var(--crema);text-decoration:none;display:flex;flex-direction:column;overflow:hidden;transition:all 0.25s;box-shadow:0 2px 10px rgba(42,74,42,0.04);}
+    .relacionado-card:hover{transform:translateY(-4px);box-shadow:0 14px 32px rgba(42,74,42,0.12);border-color:var(--vc);}
+    .relacionado-img-wrap{aspect-ratio:3/4;background:#fff;display:flex;align-items:center;justify-content:center;padding:1.4rem;}
+    .relacionado-img-wrap img{width:100%;height:100%;object-fit:contain;cursor:pointer;}
+    .relacionado-body{padding:0.9rem 1rem 1.2rem;text-align:center;}
+    .relacionado-nombre{font-family:'Playfair Display',serif;font-weight:700;font-size:0.92rem;color:var(--vo);margin-bottom:0.3rem;}
+    .relacionado-precio{font-size:0.82rem;color:var(--gm);font-weight:600;}
+
     .footer-line{
       text-align:center;padding:2rem;
       font-size:0.75rem;color:var(--gc);
@@ -926,9 +948,9 @@
       
       <img src="20litros.png" alt="Makora — Vista Grande 1" class="product-bottle"/>
       <img src="20litros2.png"  alt="Makora — Chica Izquierda 1" class="product-bottle"/>
-      <img src="20litros-persona.png"  alt="Makora — Chica Derecha 1" class="product-bottle"/>
+      <img src="20litros3.png"  alt="Makora — Chica Derecha 1" class="product-bottle"/>
       
-      <img src="20litros3.png"  alt="Makora — Vista Grande 2" class="product-bottle"/>
+      <img src="20litros-persona.png"  alt="Makora — Vista Grande 2" class="product-bottle"/>
       <img src="20litros4.png"  alt="Makora — Chica Izquierda 2" class="product-bottle"/>
       <img src="20litros5.png"  alt="Makora — Chica Derecha 2" class="product-bottle"/>
       
@@ -986,6 +1008,26 @@
       Comprar ahora
     </button>
 
+    <!-- COMPARTIR -->
+    <div class="share-row">
+      <span class="share-label">Compartir</span>
+      <div class="share-buttons">
+        <button type="button" class="share-btn" onclick="compartirProducto('whatsapp')" aria-label="Compartir por WhatsApp">
+          <svg viewBox="0 0 24 24"><path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z"/></svg>
+        </button>
+        <button type="button" class="share-btn" onclick="compartirProducto('facebook')" aria-label="Compartir por Facebook">
+          <svg viewBox="0 0 24 24"><path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"/></svg>
+        </button>
+        <button type="button" class="share-btn" onclick="compartirProducto('instagram')" aria-label="Compartir por Instagram">
+          <svg viewBox="0 0 24 24"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"/><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"/></svg>
+        </button>
+        <button type="button" class="share-btn" onclick="compartirProducto('copiar')" aria-label="Copiar enlace">
+          <svg viewBox="0 0 24 24"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"/><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"/></svg>
+        </button>
+      </div>
+      <span class="share-copiado" id="share-copiado">¡Enlace copiado!</span>
+    </div>
+
     <a class="btn-volver" href="index.html">
       ← Ver todas las presentaciones
     </a>
@@ -1012,6 +1054,11 @@
   </div>
 
 </div>
+
+<section class="relacionados" id="relacionados">
+  <h2 class="relacionados-titulo">También te podría interesar</h2>
+  <div class="relacionados-grid" id="relacionados-grid"></div>
+</section>
 
 <div class="legal-links">
   <a href="terminos-y-condiciones.html">Términos y Condiciones</a>
@@ -1072,6 +1119,7 @@
         }
       }
     });
+    if (typeof renderRelacionados === 'function') renderRelacionados();
   }).catch(function(err){ console.error('Error leyendo precios:', err); });
 
   // ESTADO
@@ -1113,6 +1161,44 @@
       var pres = b.closest('.pres-card').dataset.pres;
       b.classList.toggle('active', wishlist.indexOf(pres) !== -1);
     });
+  }
+
+  //COMPARTIR
+  function compartirProducto(tipo) {
+    var url = window.location.href;
+    var nombreEl = document.querySelector('.product-name');
+    var nombre = nombreEl ? nombreEl.textContent.trim() : 'Makora';
+    var texto = 'Mira este producto de Makora: ' + nombre;
+    if (tipo === 'whatsapp') {
+      window.open('https://api.whatsapp.com/send?text=' + encodeURIComponent(texto + ' ' + url), '_blank');
+    } else if (tipo === 'facebook') {
+      window.open('https://www.facebook.com/sharer/sharer.php?u=' + encodeURIComponent(url), '_blank', 'width=600,height=460');
+    } else if (tipo === 'instagram') {
+      if (navigator.share) {
+        navigator.share({ title: texto, url: url }).catch(function(){});
+      } else {
+        copiarEnlaceProducto();
+        showToast('Enlace copiado. Pegalo en tu historia o mensaje de Instagram.');
+      }
+    } else if (tipo === 'copiar') {
+      copiarEnlaceProducto();
+    }
+  }
+  function copiarEnlaceProducto() {
+    var url = window.location.href;
+    var mostrarMsg = function () {
+      var msg = document.getElementById('share-copiado');
+      if (!msg) return;
+      msg.classList.add('activo');
+      setTimeout(function () { msg.classList.remove('activo'); }, 2000);
+    };
+    if (navigator.clipboard && navigator.clipboard.writeText) {
+      navigator.clipboard.writeText(url).then(mostrarMsg).catch(function () {
+        window.prompt('Copia el enlace:', url);
+      });
+    } else {
+      window.prompt('Copia el enlace:', url);
+    }
   }
 
   //CARRITO
@@ -1494,6 +1580,29 @@ fetch('/api/create-preference', {
     '10 Litros': { name:'Makora 10 Litros', price:'$629 MXN',   cont:'10 Litros', img:'10litros.png', desc:'Ideal para distribuidores y comercializadores. Alta rentabilidad por volumen. Sin conservadores artificiales.' },
     '20 Litros': { name:'Makora 20 Litros', price:'$1,124 MXN', cont:'20 Litros', img:'20litros.png', desc:'La presentacion mas completa para produccion a gran escala. Maximo rendimiento y sostenibilidad.' }
   };
+
+  //TAMBIEN TE PODRIA INTERESAR
+  var CURRENT_PRES = '20 Litros';
+  var relOrden = ['1 Litro','5 Litros','10 Litros','20 Litros'];
+  var relLinks = {'1 Litro':'1litro.html','5 Litros':'5litros.html','10 Litros':'10litros.html','20 Litros':'20litros.html'};
+  function renderRelacionados() {
+    var grid = document.getElementById('relacionados-grid');
+    if (!grid) return;
+    var html = '';
+    relOrden.forEach(function(pres) {
+      if (pres === CURRENT_PRES) return;
+      var d = pmData[pres];
+      html += '<a class="relacionado-card" href="' + relLinks[pres] + '">' +
+        '<div class="relacionado-img-wrap"><img src="' + d.img + '" alt="' + d.name + '" loading="lazy"></div>' +
+        '<div class="relacionado-body">' +
+          '<div class="relacionado-nombre">' + d.name + '</div>' +
+          '<div class="relacionado-precio">' + d.price + '</div>' +
+        '</div>' +
+      '</a>';
+    });
+    grid.innerHTML = html;
+  }
+  renderRelacionados();
   function openPM(pres) {
     pmPres = pres; pmQtyVal = 1;
     var d = pmData[pres];
@@ -1708,7 +1817,7 @@ fetch('/api/create-preference', {
         const nextBtn = document.querySelector(".lightbox-next");
         const counter = document.getElementById("lightbox-counter");
         
-        const imagenes = Array.from(document.querySelectorAll("img")).filter(img => img.id !== "lightbox-img" && img.offsetParent !== null);
+        const imagenes = Array.from(document.querySelectorAll("img")).filter(img => img.id !== "lightbox-img" && img.offsetParent !== null && !img.closest(".relacionados"));
         let indiceActual = 0;
 
         if (!lightbox || !lightboxImg) return;
