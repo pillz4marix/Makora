@@ -848,6 +848,14 @@
 
 </head>
 <body>
+<!-- PAGINA 404 PERSONALIZADA (se muestra si el producto fue descontinuado desde admin.html) -->
+<div id="discontinued-overlay" style="display:none;position:fixed;inset:0;z-index:99999;background:linear-gradient(135deg, var(--crema) 55%, #d8efd8 100%);flex-direction:column;align-items:center;justify-content:center;text-align:center;padding:2rem;">
+  <svg width="64" height="64" viewBox="0 0 24 24" fill="none" style="margin-bottom:1.4rem;"><path d="M12 21c-4.5 0-8-4-8-8.5C4 8.5 6.5 6 9.5 6c1.2 0 2 .4 2.5.8.5-.4 1.3-.8 2.5-.8 3 0 5.5 2.5 5.5 6.5 0 4.5-3.5 8.5-8 8.5z" stroke="#2a4a2a" stroke-width="1.4"/><path d="M12 6c0-1.5.8-2.7 2-3.3" stroke="#3a6b3a" stroke-width="1.4" stroke-linecap="round"/></svg>
+  <p style="font-family:'Playfair Display',serif;font-weight:900;font-size:clamp(3.5rem,10vw,5.5rem);line-height:1;color:var(--vo);margin:0 0 0.4rem;">404</p>
+  <h1 style="font-family:'Playfair Display',serif;font-weight:900;font-size:clamp(1.3rem,3vw,1.7rem);color:var(--vo);margin:0 0 0.8rem;">Este producto ya no está disponible</h1>
+  <p style="font-family:'Raleway',sans-serif;font-size:0.95rem;color:#556b55;max-width:420px;margin:0 0 2rem;line-height:1.65;">Puede que se haya descontinuado o que el enlace ya no exista. Pero tranquilo, seguimos teniendo Makora fresco esperándote.</p>
+  <a href="index.html" style="font-family:'Raleway',sans-serif;background:var(--vm);color:#fff;padding:0.95rem 2.2rem;border-radius:4px;font-weight:700;font-size:0.85rem;text-transform:uppercase;letter-spacing:0.08em;text-decoration:none;">Volver a la tienda</a>
+</div>
 <!-- TOAST + PANELS + NAV -->
 <div class="toast" id="toast"></div>
 <div class="panel-overlay" id="panel-overlay" onclick="closeAllPanels()"></div>
@@ -1104,12 +1112,12 @@
       if (doc.data().visible === false) window.PRODUCTOS_OCULTOS[doc.id] = true;
     });
     if (window.PRODUCTOS_OCULTOS['20litros']) {
-      var badge = document.querySelector('.stock-badge');
-      if (badge) { badge.textContent = 'Descontinuado'; badge.classList.add('sin-stock'); }
-      document.querySelectorAll('.btn-comprar').forEach(function(btn){
-        btn.disabled = true;
-        btn.classList.add('btn-disabled');
-      });
+      var overlay404 = document.getElementById('discontinued-overlay');
+      if (overlay404) {
+        overlay404.style.display = 'flex';
+        document.title = 'Producto no disponible — Makora';
+        document.body.style.overflow = 'hidden';
+      }
     }
     if (typeof renderRelacionados === 'function') renderRelacionados();
   }).catch(function(err){ console.error('Error leyendo visibilidad:', err); });
