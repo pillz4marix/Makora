@@ -313,6 +313,19 @@
     </div>
 
     <div id="productos-list"></div>
+
+    <div class="producto-row" id="row-resenas-seccion" style="margin-top:0.4rem;border-top:1.5px solid var(--linea);padding-top:1.1rem;">
+      <div class="producto-left">
+        <div>
+          <div class="producto-nombre">Sección de reseñas (sitio)</div>
+          <div class="estado-label" id="label-resenas-seccion">Cargando...</div>
+        </div>
+      </div>
+      <div class="producto-right">
+        <button type="button" class="toggle" id="toggle-resenas-seccion" aria-pressed="false" onclick="cambiarSeccionResenas()"></button>
+      </div>
+    </div>
+
     <p class="status-msg" id="status-msg"></p>
   </div>
 </div>
@@ -390,6 +403,7 @@
       document.getElementById('login-form').style.display = 'none';
       document.getElementById('panel').style.display = 'block';
       cargarProductos();
+      cargarSeccionResenas();
       reiniciarTimerInactividad();
     } else {
       document.getElementById('login-form').style.display = 'block';
@@ -530,6 +544,40 @@
         pintarEstado(id, nuevoEstado);
         statusEl.textContent = 'Guardado.';
         setTimeout(function(){ statusEl.textContent = ''; }, 1500);
+      })
+      .catch(function(err){
+        statusEl.textContent = 'Error al guardar: ' + err.message;
+      });
+  }
+
+  // ---------- SECCIÓN DE RESEÑAS (mostrar/ocultar en el sitio) ----------
+  function cargarSeccionResenas() {
+    db.collection('config').doc('resenas').get().then(function(doc){
+      var activa = !doc.exists || doc.data().activa !== false;
+      pintarSeccionResenas(activa);
+    });
+  }
+
+  function pintarSeccionResenas(activa) {
+    var toggle = document.getElementById('toggle-resenas-seccion');
+    var label = document.getElementById('label-resenas-seccion');
+    toggle.classList.toggle('activo', activa);
+    toggle.setAttribute('aria-pressed', String(activa));
+    toggle.dataset.activa = activa;
+    label.textContent = activa ? 'Visible en el sitio' : 'Oculta en el sitio';
+    label.className = 'estado-label ' + (activa ? 'si' : 'no');
+  }
+
+  function cambiarSeccionResenas() {
+    var toggle = document.getElementById('toggle-resenas-seccion');
+    var nuevoEstado = !(toggle.dataset.activa === 'true');
+    var statusEl = document.getElementById('status-msg');
+    statusEl.textContent = 'Guardando...';
+    db.collection('config').doc('resenas').set({ activa: nuevoEstado }, { merge: true })
+      .then(function(){
+        pintarSeccionResenas(nuevoEstado);
+        statusEl.textContent = nuevoEstado ? 'Sección de reseñas activada.' : 'Sección de reseñas ocultada.';
+        setTimeout(function(){ statusEl.textContent = ''; }, 1800);
       })
       .catch(function(err){
         statusEl.textContent = 'Error al guardar: ' + err.message;
