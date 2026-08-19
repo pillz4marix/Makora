@@ -317,7 +317,7 @@
     <div class="producto-row" id="row-resenas-seccion" style="margin-top:0.4rem;border-top:1.5px solid var(--linea);padding-top:1.1rem;">
       <div class="producto-left">
         <div>
-          <div class="producto-nombre">Sección de reseñas (sitio)</div>
+          <div class="producto-nombre">Comentarios en reseñas</div>
           <div class="estado-label" id="label-resenas-seccion">Cargando...</div>
         </div>
       </div>
@@ -564,7 +564,7 @@
     toggle.classList.toggle('activo', activa);
     toggle.setAttribute('aria-pressed', String(activa));
     toggle.dataset.activa = activa;
-    label.textContent = activa ? 'Visible en el sitio' : 'Oculta en el sitio';
+    label.textContent = activa ? 'Se puede comentar' : 'Comentarios cerrados';
     label.className = 'estado-label ' + (activa ? 'si' : 'no');
   }
 
@@ -576,7 +576,7 @@
     db.collection('config').doc('resenas').set({ activa: nuevoEstado }, { merge: true })
       .then(function(){
         pintarSeccionResenas(nuevoEstado);
-        statusEl.textContent = nuevoEstado ? 'Sección de reseñas activada.' : 'Sección de reseñas ocultada.';
+        statusEl.textContent = nuevoEstado ? 'Ya se pueden dejar comentarios.' : 'Comentarios cerrados (las reseñas siguen visibles).';
         setTimeout(function(){ statusEl.textContent = ''; }, 1800);
       })
       .catch(function(err){

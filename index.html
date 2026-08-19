@@ -909,11 +909,31 @@
 
 <section id="resenas">
   <div class="sec-hdr reveal"><span class="sec-lbl">Lo que dicen</span><h2 class="sec-h2">Opiniones de <em>nuestros clientes</em></h2></div>
-  <div class="resenas-grid" id="resenas-grid">
-    <div class="resena-card reveal"><div class="resena-stars"><span class="apple-star filled">&#127823;</span><span class="apple-star filled">&#127823;</span><span class="apple-star filled">&#127823;</span><span class="apple-star filled">&#127823;</span><span class="apple-star filled">&#127823;</span></div><p class="resena-text">"Excelente producto, notamos una gran diferencia en la vida util de nuestra fruta."</p><p class="resena-author">Ana Martinez</p><p class="resena-date">Chihuahua — Julio 2026</p></div>
-    <div class="resena-card reveal"><div class="resena-stars"><span class="apple-star filled">&#127823;</span><span class="apple-star filled">&#127823;</span><span class="apple-star filled">&#127823;</span><span class="apple-star filled">&#127823;</span><span class="apple-star filled">&#127823;</span></div><p class="resena-text">"Facil de aplicar y 100% natural, justo lo que buscabamos para nuestro negocio."</p><p class="resena-author">Carlos Reyes</p><p class="resena-date">Delicias — Junio 2026</p></div>
-    <div class="resena-card reveal"><div class="resena-stars"><span class="apple-star filled">&#127823;</span><span class="apple-star filled">&#127823;</span><span class="apple-star filled">&#127823;</span><span class="apple-star filled">&#127823;</span><span class="apple-star filled">&#127823;</span></div><p class="resena-text">"Nos ayudo a reducir perdidas de forma notable. Muy recomendable."</p><p class="resena-author">Marisol Duran</p><p class="resena-date">Cuauhtemoc — Junio 2026</p></div>
+  <div class="resenas-grid" id="resenas-grid"><p style="grid-column:1/-1;text-align:center;color:var(--gc);padding:2rem;">Cargando opiniones...</p></div>
+  <div class="review-form-box reveal" id="review-form-box">
+    <p class="review-form-title">Deja tu opinion</p>
+    <p class="review-form-sub">Calificanos del 1 al 5. Tu experiencia ayuda a otros clientes.</p>
+    <div class="star-selector">
+      <button class="star-pick" onclick="pickStar(1)">&#127823;</button>
+      <button class="star-pick" onclick="pickStar(2)">&#127823;</button>
+      <button class="star-pick" onclick="pickStar(3)">&#127823;</button>
+      <button class="star-pick" onclick="pickStar(4)">&#127823;</button>
+      <button class="star-pick" onclick="pickStar(5)">&#127823;</button>
+    </div>
+    <div class="form-grid">
+      <div class="field"><label for="r-nombre">Tu nombre *</label><input type="text" id="r-nombre" placeholder="Ana Martinez"/></div>
+      <div class="field"><label for="r-ciudad">Ciudad</label><input type="text" id="r-ciudad" placeholder="Chihuahua"/></div>
+    </div>
+    <div class="form-grid full" style="margin-bottom:0;">
+      <div class="field"><label for="r-email">Correo electronico *</label><input type="email" id="r-email" placeholder="tu@correo.com"/></div>
+    </div>
+    <div class="form-grid full" style="margin-bottom:1rem;">
+      <div class="field"><label for="r-texto">Tu comentario *</label><textarea id="r-texto" rows="3" placeholder="Cuentanos tu experiencia con Makora..."></textarea></div>
+    </div>
+    <button class="btn-full" onclick="submitReview()" style="margin-top:0;">Publicar opinion</button>
+    <div id="review-result" style="display:none;margin-top:0.8rem;padding:0.8rem 1rem;font-size:0.85rem;font-weight:600;background:var(--menta);color:var(--vo);border-left:3px solid var(--vm);"></div>
   </div>
+  <p class="review-form-cerrado reveal" id="review-form-cerrado" style="display:none;text-align:center;color:var(--gc);font-size:0.85rem;padding:1rem;">Por ahora no se estan aceptando nuevas opiniones. ¡Gracias por tu interes!</p>
 </section>
 
 <section id="contacto">
@@ -1475,12 +1495,15 @@ fetch('/api/create-preference', {
   }
 
   // INIT
-  renderCart(); renderWish(); updateWishBadge(); updateWishIcons();
-  document.querySelectorAll('#resenas-grid .reveal').forEach(function(el) { el.classList.remove('visible'); obs.observe(el); });
+  renderCart(); renderWish(); updateWishBadge(); updateWishIcons(); loadReviews();
   db.collection('config').doc('resenas').get().then(function(doc){
     var activa = !doc.exists || doc.data().activa !== false;
-    var seccion = document.getElementById('resenas');
-    if (seccion && !activa) seccion.style.display = 'none';
+    var formBox = document.getElementById('review-form-box');
+    var cerrado = document.getElementById('review-form-cerrado');
+    if (formBox && !activa) {
+      formBox.style.display = 'none';
+      if (cerrado) cerrado.style.display = 'block';
+    }
   });
   // SLIDER
 var sliderIdx = 0;
