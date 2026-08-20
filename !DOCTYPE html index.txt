@@ -910,7 +910,7 @@
 <section id="resenas">
   <div class="sec-hdr reveal"><span class="sec-lbl">Lo que dicen</span><h2 class="sec-h2">Opiniones de <em>nuestros clientes</em></h2></div>
   <div class="resenas-grid" id="resenas-grid"><p style="grid-column:1/-1;text-align:center;color:var(--gc);padding:2rem;">Cargando opiniones...</p></div>
-  <div class="review-form-box reveal">
+  <div class="review-form-box reveal" id="review-form-box">
     <p class="review-form-title">Deja tu opinion</p>
     <p class="review-form-sub">Calificanos del 1 al 5. Tu experiencia ayuda a otros clientes.</p>
     <div class="star-selector">
@@ -933,6 +933,7 @@
     <button class="btn-full" onclick="submitReview()" style="margin-top:0;">Publicar opinion</button>
     <div id="review-result" style="display:none;margin-top:0.8rem;padding:0.8rem 1rem;font-size:0.85rem;font-weight:600;background:var(--menta);color:var(--vo);border-left:3px solid var(--vm);"></div>
   </div>
+  <p class="review-form-cerrado reveal" id="review-form-cerrado" style="display:none;text-align:center;color:var(--gc);font-size:0.85rem;padding:1rem;">Por ahora nuestra sección de reseñas está en mantenimiento.</p>
 </section>
 
 <section id="contacto">
@@ -1495,6 +1496,15 @@ fetch('/api/create-preference', {
 
   // INIT
   renderCart(); renderWish(); updateWishBadge(); updateWishIcons(); loadReviews();
+  db.collection('config').doc('resenas').get().then(function(doc){
+    var activa = !doc.exists || doc.data().activa !== false;
+    var formBox = document.getElementById('review-form-box');
+    var cerrado = document.getElementById('review-form-cerrado');
+    if (formBox && !activa) {
+      formBox.style.display = 'none';
+      if (cerrado) cerrado.style.display = 'block';
+    }
+  });
   // SLIDER
 var sliderIdx = 0;
 var sliderSlides = document.querySelectorAll('.img-slide');
