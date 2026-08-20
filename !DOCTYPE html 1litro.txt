@@ -848,6 +848,14 @@
 
 </head>
 <body>
+<!-- PAGINA 404 PERSONALIZADA (se muestra si el producto fue descontinuado desde admin.html) -->
+<div id="discontinued-overlay" style="display:none;position:fixed;inset:0;z-index:99999;background:linear-gradient(135deg, var(--crema) 55%, #d8efd8 100%);flex-direction:column;align-items:center;justify-content:center;text-align:center;padding:2rem;">
+  <svg width="64" height="64" viewBox="0 0 24 24" fill="none" style="margin-bottom:1.4rem;"><path d="M12 21c-4.5 0-8-4-8-8.5C4 8.5 6.5 6 9.5 6c1.2 0 2 .4 2.5.8.5-.4 1.3-.8 2.5-.8 3 0 5.5 2.5 5.5 6.5 0 4.5-3.5 8.5-8 8.5z" stroke="#2a4a2a" stroke-width="1.4"/><path d="M12 6c0-1.5.8-2.7 2-3.3" stroke="#3a6b3a" stroke-width="1.4" stroke-linecap="round"/></svg>
+  <p style="font-family:'Playfair Display',serif;font-weight:900;font-size:clamp(3.5rem,10vw,5.5rem);line-height:1;color:var(--vo);margin:0 0 0.4rem;">404</p>
+  <h1 style="font-family:'Playfair Display',serif;font-weight:900;font-size:clamp(1.3rem,3vw,1.7rem);color:var(--vo);margin:0 0 0.8rem;">Este producto ya no está disponible</h1>
+  <p style="font-family:'Raleway',sans-serif;font-size:0.95rem;color:#556b55;max-width:420px;margin:0 0 2rem;line-height:1.65;">Puede que se haya descontinuado o que el enlace ya no exista. Pero tranquilo, seguimos teniendo Makora fresco esperándote.</p>
+  <a href="index.html" style="font-family:'Raleway',sans-serif;background:var(--vm);color:#fff;padding:0.95rem 2.2rem;border-radius:4px;font-weight:700;font-size:0.85rem;text-transform:uppercase;letter-spacing:0.08em;text-decoration:none;">Volver a la tienda</a>
+</div>
 <!-- TOAST + PANELS + NAV -->
 <div class="toast" id="toast"></div>
 <div class="panel-overlay" id="panel-overlay" onclick="closeAllPanels()"></div>
@@ -961,7 +969,7 @@
   <div class="product-info">
     <p class="product-kicker">Conservador Natural</p>
     <h1 class="product-name">Makora 1 Litro</h1>
-    <p class="product-price">$97 MXN</p>
+    <p class="product-price">PENDIENTE</p>
 
     <p class="product-desc">
       Para hogares con mayor consumo o pequenos negocios. Mayor rendimiento
@@ -1082,7 +1090,7 @@
   var db = firebase.firestore();
 
   // PRECIOS (valores por defecto, se sobreescriben con lo guardado en admin.html)
-  window.PRECIOS_ACTUALES = { '1 Litro': 97, '5 Litros': 0, '10 Litros': 629, '20 Litros': 1124 };
+  window.PRECIOS_ACTUALES = { '1 Litro': 0, '5 Litros': 0, '10 Litros': 0, '20 Litros': 0, '200 Litros': 0 };
 
   // STOCK DINAMICO (controlado desde admin.html)
   db.collection('stock').doc('1litro').get().then(function(doc){
@@ -1096,8 +1104,25 @@
     }
   }).catch(function(err){ console.error('Error leyendo stock:', err); });
 
+  // VISIBILIDAD DINAMICA (controlada desde admin.html)
+  window.PRODUCTOS_OCULTOS = {};
+  db.collection('visibilidad').get().then(function(snap){
+    snap.forEach(function(doc){
+      if (doc.data().visible === false) window.PRODUCTOS_OCULTOS[doc.id] = true;
+    });
+    if (window.PRODUCTOS_OCULTOS['1litro']) {
+      var overlay404 = document.getElementById('discontinued-overlay');
+      if (overlay404) {
+        overlay404.style.display = 'flex';
+        document.title = 'Producto no disponible — Makora';
+        document.body.style.overflow = 'hidden';
+      }
+    }
+    if (typeof renderRelacionados === 'function') renderRelacionados();
+  }).catch(function(err){ console.error('Error leyendo visibilidad:', err); });
+
   // PRECIOS DINAMICOS (controlados desde admin.html)
-  var PRECIO_IDS = { '1 Litro':'1litro', '5 Litros':'5litros', '10 Litros':'10litros', '20 Litros':'20litros' };
+  var PRECIO_IDS = { '1 Litro':'1litro', '5 Litros':'5litros', '10 Litros':'10litros', '20 Litros':'20litros', '200 Litros':'200litros' };
   db.collection('precios').get().then(function(snap){
     snap.forEach(function(doc){
       var nombre = null;
@@ -1133,7 +1158,8 @@
     '1 Litro':   'https://mpago.la/2RG4YjF',
     '5 Litros':   'PENDIENTE',
     '10 Litros': 'https://mpago.la/2qBu9w2',
-    '20 Litros': 'https://mpago.la/25ZQAPh'
+    '20 Litros': 'https://mpago.la/25ZQAPh',
+    '200 Litros': 'PENDIENTE'
   };
 
   function saveStorage() {
@@ -1311,7 +1337,7 @@
   }
 
   // PANELES
-  var STOCK_MAP = { '5 Litros':'5litros', '1 Litro':'1litro', '10 Litros':'10litros', '20 Litros':'20litros' };
+  var STOCK_MAP = { '5 Litros':'5litros', '1 Litro':'1litro', '10 Litros':'10litros', '20 Litros':'20litros', '200 Litros':'200litros' };
   function verificarStockCarrito() {
     var promesas = cart.map(function(item){
       var id = STOCK_MAP[item.pres];
@@ -1574,22 +1600,24 @@ fetch('/api/create-preference', {
   var pmPres = '';
   var pmQtyVal = 1;
   var pmData = {
-    '1 Litro':   { name:'Makora 1 Litro',   price:'$97 MXN',    cont:'1 Litro',   img:'1litro.png',   desc:'Para hogares con mayor consumo o pequenos negocios. Mayor rendimiento y ahorro. Formulado con ingredientes 100% naturales.' },
+    '1 Litro':   { name:'Makora 1 Litro',   price:'PENDIENTE',    cont:'1 Litro',   img:'1litro.png',   desc:'Para hogares con mayor consumo o pequenos negocios. Mayor rendimiento y ahorro. Formulado con ingredientes 100% naturales.' },
     '5 Litros':   { name:'Makora 5 Litros',   price:'PENDIENTE',    cont:'5 Litros',   img:'5litros.png',   desc:'Para hogares con mayor consumo o pequenos negocios. Mayor rendimiento y ahorro. Formulado con ingredientes 100% naturales.' },
-    '10 Litros': { name:'Makora 10 Litros', price:'$629 MXN',   cont:'10 Litros', img:'10litros.png', desc:'Ideal para distribuidores y comercializadores. Alta rentabilidad por volumen. Sin conservadores artificiales.' },
-    '20 Litros': { name:'Makora 20 Litros', price:'$1,124 MXN', cont:'20 Litros', img:'20litros.png', desc:'La presentacion mas completa para produccion a gran escala. Maximo rendimiento y sostenibilidad.' }
+    '10 Litros': { name:'Makora 10 Litros', price:'PENDIENTE',   cont:'10 Litros', img:'10litros.png', desc:'Ideal para distribuidores y comercializadores. Alta rentabilidad por volumen. Sin conservadores artificiales.' },
+    '20 Litros': { name:'Makora 20 Litros', price:'PENDIENTE', cont:'20 Litros', img:'20litros.png', desc:'La presentacion mas completa para produccion a gran escala. Maximo rendimiento y sostenibilidad.' },
+    '200 Litros': { name:'Makora 200 Litros', price:'PENDIENTE', cont:'200 Litros', img:'200litros.png', desc:'Presentacion industrial de 200 litros. Ideal para plantas de produccion, distribuidores mayoristas y uso continuo a gran escala. 100% natural, sin conservadores artificiales.' }
   };
 
   //TAMBIEN TE PODRIA INTERESAR
   var CURRENT_PRES = '1 Litro';
-  var relOrden = ['1 Litro','5 Litros','10 Litros','20 Litros'];
-  var relLinks = {'1 Litro':'1litro.html','5 Litros':'5litros.html','10 Litros':'10litros.html','20 Litros':'20litros.html'};
+  var relOrden = ['1 Litro','5 Litros','10 Litros','20 Litros','200 Litros'];
+  var relLinks = {'1 Litro':'1litro.html','5 Litros':'5litros.html','10 Litros':'10litros.html','20 Litros':'20litros.html','200 Litros':'200litros.html'};
   function renderRelacionados() {
     var grid = document.getElementById('relacionados-grid');
     if (!grid) return;
     var html = '';
     relOrden.forEach(function(pres) {
       if (pres === CURRENT_PRES) return;
+      if (window.PRODUCTOS_OCULTOS && window.PRODUCTOS_OCULTOS[PRECIO_IDS[pres]]) return;
       var d = pmData[pres];
       html += '<a class="relacionado-card" href="' + relLinks[pres] + '">' +
         '<div class="relacionado-img-wrap"><img src="' + d.img + '" alt="' + d.name + '" loading="lazy"></div>' +

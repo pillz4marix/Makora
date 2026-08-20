@@ -1157,9 +1157,9 @@
   var currentReviewStars = 0;
   var mpLinks = {
     '1 Litro':   'https://mpago.la/2RG4YjF',
-    '5 Litros':   'PENDIENTE',
+    '5 Litros':   'https://mpago.la/25ZQAPh',
     '10 Litros': 'https://mpago.la/2qBu9w2',
-    '20 Litros': 'https://mpago.la/25ZQAPh',
+    '20 Litros': 'PENDIENTE',
     '200 Litros': 'PENDIENTE'
   };
 
@@ -1452,32 +1452,22 @@ var totalStr = totalNum > 0 ? '$' + totalNum.toLocaleString('es-MX') + ' MXN' : 
       to_email: params.email
 });
 
-      // Redirigir a Mercado Pago segun presentación
-var items = cart.map(function(i) {
-  return {
-    title: 'Makora ' + i.pres,
-    quantity: i.qty,
-    unit_price: precios[i.pres],
-    currency_id: 'MXN'
-  };
+      // Redirigir a Mercado Pago segun presentación (links de pago directos)
+var sinLink = [];
+cart.forEach(function(i) {
+  var link = mpLinks[i.pres];
+  if (link && link !== 'PENDIENTE') {
+    window.open(link, '_blank');
+  } else {
+    sinLink.push(i.pres);
+  }
 });
-showResult('success', 'Pedido registrado. Redirigiendo al pago...');
-fetch('/api/create-preference', {
-  method: 'POST',
-  headers: { 'Content-Type': 'application/json' },
-  body: JSON.stringify({ items: items })
-})
-.then(function(r) { return r.json(); })
-.then(function(data) {
-  if (data.url) {
-  cart = []; updateCartBadge(); renderCart(); saveStorage();
-  window.open(data.url, '_blank');
+cart = []; updateCartBadge(); renderCart(); saveStorage();
+if (sinLink.length > 0) {
+  showResult('error', 'Pedido registrado. Para pagar ' + sinLink.join(', ') + ' contáctanos por WhatsApp, aún no tenemos link de pago para esa presentación.');
+} else {
+  showResult('success', 'Pedido registrado. Se abrió la página de pago en una nueva pestaña.');
 }
-  else showResult('error', 'Error al procesar el pago. Intenta de nuevo.');
-})
-.catch(function() {
-  showResult('error', 'Error al procesar el pago. Intenta de nuevo.');
-});
     }).catch(function(e) {
       console.error(e);
       showResult('error', 'Ocurrio un error. Por favor intenta de nuevo.');
